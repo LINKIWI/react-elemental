@@ -50,8 +50,12 @@ SelectListPlaceholder.propTypes = {
   label: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
   arrowDirection: PropTypes.oneOf(['up', 'down']).isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
   onClick: PropTypes.func.isRequired,
+};
+
+SelectListPlaceholder.defaultProps = {
+  error: null,
 };
 
 export default SelectListPlaceholder;
