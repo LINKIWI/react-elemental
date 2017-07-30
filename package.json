@@ -13,7 +13,7 @@
     "test": "jest --verbose test",
     "cover": "npm run test -- --coverage",
     "coveralls": "npm run cover && cat coverage/lcov.info | coveralls",
-    "prepublish": "NODE_ENV=production npm run build && derive-pkg -d dist"
+    "prepublish": "rm -rf dist && NODE_ENV=production npm run build && derive-pkg -d dist"
   },
   "repository": {
     "type": "git",
