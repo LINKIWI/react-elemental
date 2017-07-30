@@ -1,5 +1,6 @@
 export const spacing = {
   default: '24px',
+  micro: '4px',
   tiny: '6px',
   small: '12px',
   large: '36px',

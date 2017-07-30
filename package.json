@@ -20,7 +20,8 @@
   "author": "Kevin Lin <developer@kevinlin.info>",
   "license": "MIT",
   "dependencies": {
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "radium": "^0.19.4"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
