@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Spacing, Text, sizes } from 'react-elemental';
 
 const Sizes = ({ secondary = false }) => (
@@ -21,61 +22,63 @@ const Sizes = ({ secondary = false }) => (
   </div>
 );
 
-const SampleText = () => {
-  return (
-    <div>
-      <Spacing size="huge" bottom>
-        <Text size="gamma" color="primary" uppercase>
-          Typography
-        </Text>
-        <Text>
-          The Elemental typeface is Karla (primary), and Source Code Pro (secondary). There are
-          eight standard sizes.
-        </Text>
-      </Spacing>
-
-      <Spacing size="huge" bottom>
-        <Spacing bottom>
-          <Text size="iota" color="gray70" uppercase bold>
-            Primary typeface
-          </Text>
-        </Spacing>
-
-        <Sizes />
-      </Spacing>
-
-      <Spacing size="huge" bottom>
-        <Spacing bottom>
-          <Text size="iota" color="gray70" uppercase bold>
-            Secondary typeface
-          </Text>
-        </Spacing>
-
-        <Sizes secondary />
-      </Spacing>
-
-      <Spacing size="huge" bottom>
-        <Spacing bottom>
-          <Text size="iota" color="gray70" uppercase bold>
-            Styles
-          </Text>
-        </Spacing>
-
-        <Text bold>
-          Primary boldface
-        </Text>
-        <Text>
-          Primary regular
-        </Text>
-        <Text secondary bold>
-          Secondary boldface
-        </Text>
-        <Text secondary>
-          Secondary regular
-        </Text>
-      </Spacing>
-    </div>
-  );
+Sizes.propTypes = {
+  secondary: PropTypes.bool.isRequired,
 };
+
+const SampleText = () => (
+  <div>
+    <Spacing size="huge" bottom>
+      <Text size="gamma" color="primary" uppercase>
+        Typography
+      </Text>
+      <Text>
+        The Elemental typeface is Karla (primary), and Source Code Pro (secondary). There are
+        eight standard sizes.
+      </Text>
+    </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Primary typeface
+        </Text>
+      </Spacing>
+
+      <Sizes />
+    </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Secondary typeface
+        </Text>
+      </Spacing>
+
+      <Sizes secondary />
+    </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Styles
+        </Text>
+      </Spacing>
+
+      <Text bold>
+        Primary boldface
+      </Text>
+      <Text>
+        Primary regular
+      </Text>
+      <Text secondary bold>
+        Secondary boldface
+      </Text>
+      <Text secondary>
+        Secondary regular
+      </Text>
+    </Spacing>
+  </div>
+);
 
 export default SampleText;

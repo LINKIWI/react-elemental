@@ -8,10 +8,11 @@ const gray = {
   // Shades of gray for each fifth percentage
   ...range(5, 100, 5).reduce((grayShades, shadePercent) => {
     const calcGrayRGB = (percentage) => 255 - Math.round(255 * (percentage / 100));
-
     const grayShade = calcGrayRGB(shadePercent);
-    grayShades[`gray${shadePercent}`] = `rgb(${grayShade}, ${grayShade}, ${grayShade})`;
-    return grayShades;
+
+    return Object.assign({}, grayShades, {
+      [`gray${shadePercent}`]: `rgb(${grayShade}, ${grayShade}, ${grayShade})`,
+    });
   }, {}),
 };
 
