@@ -1,6 +1,7 @@
 {
   "parser": "babel-eslint",
   "plugins": [
+    "disable",
     "jest"
   ],
   "env": {
@@ -9,17 +10,17 @@
   "rules": {
     "arrow-parens": ["error", "always"],
     "import/extensions": ["error", "never"],
-    "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/anchor-is-valid": ["warn", {
-      "aspects": ["invalidHref"]
-    }],
     "react/jsx-filename-extension": "off",
     "react/forbid-prop-types": "off"
   },
   "settings": {
     "import/resolver": {
       "babel-module": {}
+    },
+    "eslint-plugin-disable": {
+      "paths": {
+        "jsx-a11y": ["*"]
+      }
     }
   },
   "extends": [
