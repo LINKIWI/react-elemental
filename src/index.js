@@ -6,6 +6,7 @@ import SelectList from 'components/select-list';
 import Spacing from 'components/spacing';
 import Tag from 'components/tag';
 import Text from 'components/text';
+import TextArea from 'components/text-area';
 import TextField from 'components/text-field';
 import bootstrap from 'bootstrap';
 import { colors } from 'styles/color';
@@ -21,6 +22,7 @@ export {
   Spacing,
   Tag,
   Text,
+  TextArea,
   TextField,
   // Style constants
   colors,

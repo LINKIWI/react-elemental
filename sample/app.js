@@ -7,12 +7,14 @@ import SampleLoadingBar from './components/loading-bar';
 import SampleSelectList from './components/select-list';
 import SampleTag from './components/tag';
 import SampleText from './components/text';
+import SampleTextArea from './components/text-area';
 import SampleTextField from './components/text-field';
 
 bootstrap();
 
 const App = () => (
   <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+    <SampleTextArea />
     <SampleAlert />
     <SampleCheckbox />
     <SampleLoadingBar />
