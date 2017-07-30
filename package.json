@@ -2,7 +2,7 @@
   "name": "react-elemental",
   "version": "0.0.1",
   "description": "Flat UI library for React",
-  "main": "dist/react-elemental.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --config config/webpack-lib.js",
     "build-watch": "npm run build -- --watch",
@@ -12,7 +12,7 @@
     "test": "jest test",
     "cover": "jest --coverage test",
     "coveralls": "npm run cover && cat coverage/lcov.info | coveralls",
-    "prepublish": "npm run build"
+    "prepublish": "NODE_ENV=production npm run build && derive-pkg -d dist"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "babel-register": "^6.24.1",
     "concurrently": "^3.5.0",
     "coveralls": "^2.13.1",
+    "derive-pkg-cli": "^1.0.0",
     "eslint": "^4.2.0",
     "eslint-config-airbnb": "^15.0.2",
     "eslint-import-resolver-babel-module": "^3.0.0",
