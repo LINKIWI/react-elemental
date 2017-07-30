@@ -1,4 +1,5 @@
 import Button from 'components/button';
+import SelectList from 'components/select-list';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import TextField from 'components/text-field';
@@ -9,6 +10,7 @@ import { sizes } from 'styles/font';
 export {
   // Elemental UI components
   Button,
+  SelectList,
   Spacing,
   Text,
   TextField,
