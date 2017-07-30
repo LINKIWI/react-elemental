@@ -22,7 +22,7 @@ git reset --hard origin/gh-pages
 mv /tmp/react-elemental-sample index.html
 cp index.html 404.html
 
-git add -u
+git add index.html 404.html
 git status
 git commit -m "${BRANCH}:${GIT_SHA}" || :
 git push origin HEAD

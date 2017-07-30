@@ -10,8 +10,8 @@
     "start": "webpack-dev-server --content-base sample/ --config config/webpack-sample.js --watch",
     "dev": "concurrently --kill-others --prefix name --prefix-colors cyan.bold,yellow.bold --names HTTP,JS 'npm run start' 'npm run build-watch'",
     "lint": "eslint src test sample config",
-    "test": "jest test",
-    "cover": "jest --coverage test",
+    "test": "jest --verbose test",
+    "cover": "npm run test -- --coverage",
     "coveralls": "npm run cover && cat coverage/lcov.info | coveralls",
     "prepublish": "NODE_ENV=production npm run build && derive-pkg -d dist"
   },
@@ -39,8 +39,9 @@
     "concurrently": "^3.5.0",
     "coveralls": "^2.13.1",
     "derive-pkg-cli": "^1.0.0",
-    "eslint": "^4.2.0",
-    "eslint-config-airbnb": "^15.0.2",
+    "enzyme": "^2.9.1",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
     "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-plugin-disable": "^0.3.0",
     "eslint-plugin-import": "^2.7.0",
@@ -55,7 +56,8 @@
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "webpack": "^3.2.0",
+    "react-test-renderer": "^15.6.1",
+    "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
   },
   "peerDependencies": {
