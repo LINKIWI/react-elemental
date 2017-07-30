@@ -7,6 +7,7 @@
     "build": "webpack --config config/webpack-lib.js",
     "build-watch": "npm run build -- --watch",
     "start": "webpack-dev-server --content-base sample/ --config config/webpack-sample.js --watch",
+    "dev": "concurrently --kill-others --prefix name --prefix-colors cyan.bold,yellow.bold --names HTTP,JS 'npm run start' 'npm run build-watch'",
     "lint": "eslint src test sample config",
     "test": "jest test",
     "cover": "jest --coverage test",
