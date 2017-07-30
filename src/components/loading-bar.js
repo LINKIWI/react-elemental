@@ -4,7 +4,7 @@ import { colors } from 'styles/color';
 
 export const POSITION_LEFT = 0;
 export const POSITION_RIGHT = 100;
-export const BOUNCE_INTERVAL = 1200;
+export const BOUNCE_INTERVAL = 1100;
 
 /**
  * Indeterminate loading bar component.
