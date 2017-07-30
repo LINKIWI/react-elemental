@@ -33,6 +33,7 @@ class TextArea extends Component {
 
     const style = {
       border: `1px solid ${error ? colors.redLight : colors.gray10}`,
+      borderRadius: 0,
       height,
       padding: '6px 6px',
       width,
