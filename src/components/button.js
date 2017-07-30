@@ -47,22 +47,24 @@ const paddingMap = {
  */
 class Button extends Component {
   static propTypes = {
-    onClick: PropTypes.func,
     color: PropTypes.string,
     size: PropTypes.string,
     text: PropTypes.string,
     disabled: PropTypes.bool,
+    secondary: PropTypes.bool,
     style: PropTypes.object,
+    onClick: PropTypes.func,
     children: PropTypes.any,
   };
 
   static defaultProps = {
-    onClick: noop,
     color: colors.primary,
     size: 'beta',
     text: null,
     disabled: false,
+    secondary: false,
     style: {},
+    onClick: noop,
     children: null,
   };
 
@@ -123,18 +125,17 @@ class Button extends Component {
   handleMouseUp = () => this.setState({ color: this.hoverColor });
 
   render() {
-    const { onClick, size, text, disabled, style: overrides, children } = this.props;
+    const { onClick, size, text, disabled, secondary, style: overrides, children } = this.props;
     const { color } = this.state;
 
     const style = {
-      backgroundColor: color,
-      border: 'none',
+      backgroundColor: secondary ? 'white' : color,
+      border: secondary ? `1px solid ${color}` : 'none',
       cursor: 'pointer',
       opacity: disabled ? 0.4 : 1,
       padding: paddingMap[size],
       pointerEvents: disabled ? 'none' : 'inherit',
       textDecoration: 'none',
-      textTransform: 'uppercase',
       transition: 'all 0.15s ease-out',
       ...overrides,
     };
@@ -151,7 +152,7 @@ class Button extends Component {
       >
         {
           text && (
-            <Text size={textSizeMap[size]} color="white" uppercase bold>
+            <Text size={textSizeMap[size]} color={secondary ? color : 'gray5'} uppercase bold>
               {text}
             </Text>
           )

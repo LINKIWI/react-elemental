@@ -45,7 +45,7 @@ const SampleText = () => (
         </Text>
       </Spacing>
 
-      <Sizes />
+      <Sizes secondary={false} />
     </Spacing>
 
     <Spacing size="huge" bottom>

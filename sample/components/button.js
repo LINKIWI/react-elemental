@@ -88,6 +88,32 @@ const SampleButton = () => (
         </Text>
       </Button>
     </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Disabled state
+        </Text>
+      </Spacing>
+
+      <Button
+        text="I'm a disabled button"
+        disabled
+      />
+    </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Secondary style
+        </Text>
+      </Spacing>
+
+      <Spacing size="small" bottom>
+        <Button text="Secondary" secondary />
+      </Spacing>
+      <Button color={colors.green} text="Colors!" secondary />
+    </Spacing>
   </div>
 );
 
