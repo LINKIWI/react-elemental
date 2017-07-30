@@ -1,0 +1,27 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "jest"
+  ],
+  "env": {
+    "jest/globals": true
+  },
+  "rules": {
+    "arrow-parens": ["error", "always"],
+    "import/extensions": ["error", "never"],
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", {
+      "aspects": ["invalidHref"]
+    }],
+    "react/jsx-filename-extension": "off",
+    "react/forbid-prop-types": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "extends": [
+    "airbnb"
+  ]
+}
