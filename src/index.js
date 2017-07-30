@@ -1,3 +1,4 @@
+import Alert from 'components/alert';
 import Button from 'components/button';
 import Checkbox from 'components/checkbox';
 import LoadingBar from 'components/loading-bar';
@@ -12,6 +13,7 @@ import { sizes } from 'styles/font';
 
 export {
   // Elemental UI components
+  Alert,
   Button,
   Checkbox,
   LoadingBar,

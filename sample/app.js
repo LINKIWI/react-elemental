@@ -1,5 +1,6 @@
 import React from 'react';
 import { Spacing, bootstrap } from 'react-elemental';
+import SampleAlert from './components/alert';
 import SampleButton from './components/button';
 import SampleCheckbox from './components/checkbox';
 import SampleLoadingBar from './components/loading-bar';
@@ -12,6 +13,7 @@ bootstrap();
 
 const App = () => (
   <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+    <SampleAlert />
     <SampleCheckbox />
     <SampleLoadingBar />
     <SampleTag />
