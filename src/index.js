@@ -1,4 +1,5 @@
 import Button from 'components/button';
+import Checkbox from 'components/checkbox';
 import LoadingBar from 'components/loading-bar';
 import SelectList from 'components/select-list';
 import Spacing from 'components/spacing';
@@ -12,6 +13,7 @@ import { sizes } from 'styles/font';
 export {
   // Elemental UI components
   Button,
+  Checkbox,
   LoadingBar,
   SelectList,
   Spacing,
