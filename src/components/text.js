@@ -6,7 +6,17 @@ import { primaryFontStyle, secondaryFontStyle } from 'styles/font';
  * Text component with automatic typeface formatting.
  */
 const Text = (props) => {
-  const { secondary, size, color, bold, inline, uppercase, style: overrides, children } = props;
+  const {
+    secondary,
+    size,
+    color,
+    bold,
+    inline,
+    uppercase,
+    style: overrides,
+    children,
+    ...proxyProps
+  } = props;
 
   const styleFactory = secondary ? secondaryFontStyle : primaryFontStyle;
   const style = {
@@ -17,14 +27,14 @@ const Text = (props) => {
 
   if (inline) {
     return (
-      <span style={style}>
+      <span style={style} {...proxyProps}>
         {children}
       </span>
     );
   }
 
   return (
-    <p style={style}>
+    <p style={style} {...proxyProps}>
       {children}
     </p>
   );
