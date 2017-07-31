@@ -30,8 +30,16 @@ module.exports = {
       },
     ],
   },
+  externals: {
+    react: 'react',
+  },
   plugins: [
     new webpack.ProgressPlugin(),
+    isProduction && new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
     isProduction && new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),

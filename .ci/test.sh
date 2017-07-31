@@ -2,7 +2,7 @@
 
 set -ex
 
-npm install
+npm-s3 install
 
 npm run build
 npm run build-sample
