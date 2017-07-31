@@ -48,7 +48,7 @@ const paddingMap = {
 class Button extends Component {
   static propTypes = {
     color: PropTypes.string,
-    size: PropTypes.string,
+    size: PropTypes.oneOf(['gamma', 'beta', 'alpha']),
     text: PropTypes.string,
     disabled: PropTypes.bool,
     secondary: PropTypes.bool,
