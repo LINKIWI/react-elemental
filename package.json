@@ -11,6 +11,7 @@
     "dev": "concurrently --kill-others --prefix name --prefix-colors cyan.bold,yellow.bold --names HTTP,JS 'npm run start' 'npm run build-watch'",
     "lint": "eslint src test sample config",
     "test": "jest --verbose test",
+    "test-watch": "npm run test -- --watch",
     "cover": "npm run test -- --coverage",
     "coveralls": "npm run cover && cat coverage/lcov.info | coveralls",
     "prepublish": "rm -rf dist && NODE_ENV=production npm run build && derive-pkg -d dist"
