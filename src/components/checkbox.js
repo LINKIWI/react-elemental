@@ -24,6 +24,7 @@ class Checkbox extends Component {
     onCheck: PropTypes.func,
     onUncheck: PropTypes.func,
   };
+
   static defaultProps = {
     isChecked: false,
     label: null,
