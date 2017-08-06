@@ -1,6 +1,7 @@
 import Alert from 'components/alert';
 import Button from 'components/button';
 import Checkbox from 'components/checkbox';
+import Link from 'components/link';
 import LoadingBar from 'components/loading-bar';
 import SelectList from 'components/select-list';
 import Spacing from 'components/spacing';
@@ -17,6 +18,7 @@ export {
   Alert,
   Button,
   Checkbox,
+  Link,
   LoadingBar,
   SelectList,
   Spacing,
