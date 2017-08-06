@@ -7,7 +7,7 @@ import { primaryFontStyle } from 'styles/font';
 const textColorMap = {
   light: colors.gray10,
   dark: colors.gray80,
-  primary: colors.primary,
+  primary: undefined,
 };
 
 const activeColorMap = {
@@ -35,7 +35,7 @@ const Link = ({ type, href, style: overrides, children, ...proxyProps }) => {
       borderBottom: `2px solid ${activeColorMap[type]}`,
       color: activeColorMap[type],
     },
-    ...primaryFontStyle('iota', textColorMap[type], false),
+    ...primaryFontStyle('iota', textColorMap[type] || colors.primary, false),
     ...overrides,
   };
 

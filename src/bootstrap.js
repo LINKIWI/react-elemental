@@ -54,7 +54,7 @@ const injectCSS = (css) => {
 const bootstrap = (colorOpts = {}) => {
   const bootstrapColors = {
     ...DEFAULT_COLORS,
-    colorOpts,
+    ...colorOpts,
   };
 
   colors.primary = bootstrapColors.primary;

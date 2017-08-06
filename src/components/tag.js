@@ -34,8 +34,8 @@ class Tag extends Component {
   };
 
   static defaultProps = {
-    outlineColor: colors.primary,
-    backgroundColor: colors.primaryLight,
+    outlineColor: undefined,
+    backgroundColor: undefined,
     size: 'beta',
     dismissable: false,
     style: {},
@@ -49,8 +49,8 @@ class Tag extends Component {
 
   render() {
     const {
-      outlineColor,
-      backgroundColor,
+      outlineColor = colors.primary,
+      backgroundColor = colors.primaryLight,
       size,
       text,
       dismissable,

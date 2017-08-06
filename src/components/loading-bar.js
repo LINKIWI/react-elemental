@@ -22,7 +22,7 @@ export default class LoadingBar extends Component {
   };
 
   static defaultProps = {
-    color: colors.primary,
+    color: undefined,
     thickness: 4,
     width: '100%',
     position: 'relative',
@@ -61,7 +61,13 @@ export default class LoadingBar extends Component {
   }
 
   render() {
-    const { color, thickness, width, position: positionStyle, style: overrides } = this.props;
+    const {
+      color = colors.primary,
+      thickness,
+      width,
+      position: positionStyle,
+      style: overrides,
+    } = this.props;
     const { position } = this.state;
     const offset = position === POSITION_LEFT ? -POSITION_RIGHT : POSITION_LEFT;
 

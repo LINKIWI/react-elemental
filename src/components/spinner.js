@@ -22,7 +22,7 @@ export default class Spinner extends Component {
   };
 
   static defaultProps = {
-    color: colors.primary,
+    color: undefined,
     size: 'beta',
     style: {},
   };
@@ -40,7 +40,7 @@ export default class Spinner extends Component {
   }
 
   tick = () => {
-    const { color: pulseColor } = this.props;
+    const { color: pulseColor = colors.primary } = this.props;
 
     this.setState(({ color }) => ({
       color: (color === pulseColor) ? COLOR_IDLE : pulseColor,

@@ -58,7 +58,7 @@ class Button extends Component {
   };
 
   static defaultProps = {
-    color: colors.primary,
+    color: undefined,
     size: 'beta',
     text: null,
     disabled: false,
@@ -71,7 +71,7 @@ class Button extends Component {
   constructor(props) {
     super(props);
 
-    const { color } = props;
+    const { color = colors.primary } = props;
 
     const rgb = parseHexToRGB(color);
 
