@@ -72,7 +72,6 @@ class Tag extends Component {
       cursor: 'pointer',
       float: 'right',
       marginLeft: spacing.tiny,
-      width: clearSizeMap[size],
     };
 
     if (!isVisible) {
@@ -85,7 +84,14 @@ class Tag extends Component {
           {text}
         </Text>
 
-        {dismissable && <Clear style={clearStyle} onClick={this.handleDismiss} />}
+        {dismissable && (
+          <Clear
+            width={clearSizeMap[size]}
+            height={clearSizeMap[size]}
+            style={clearStyle}
+            onClick={this.handleDismiss}
+          />
+        )}
       </div>
     );
   }

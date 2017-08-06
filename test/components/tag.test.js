@@ -25,4 +25,18 @@ describe('Tag', () => {
     expect(tag.state().isVisible).toBe(false);
     expect(tag.find(Text).length).toBe(0);
   });
+
+  test('Clear icon size', () => {
+    const alphaTag = shallow(
+      <Tag size="alpha" text="text" dismissable />,
+    );
+    expect(alphaTag.find(Clear).props().width).toBe('14px');
+    expect(alphaTag.find(Clear).props().height).toBe('14px');
+
+    const betaTag = shallow(
+      <Tag size="beta" text="text" dismissable />,
+    );
+    expect(betaTag.find(Clear).props().width).toBe('12px');
+    expect(betaTag.find(Clear).props().height).toBe('12px');
+  });
 });
