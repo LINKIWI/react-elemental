@@ -102,6 +102,11 @@ export default class SelectList extends Component {
     const { keyCode } = evt;
     const { options } = this.props;
 
+    const withDefaultPrevented = (func) => () => {
+      evt.preventDefault();
+      return func();
+    };
+
     const selectHandler = () => {
       const { highlightedIdx } = this.state;
 
@@ -146,11 +151,11 @@ export default class SelectList extends Component {
     };
 
     const keyHandlers = {
-      [KEY_CODES.SPACE]: selectHandler,
-      [KEY_CODES.ENTER]: selectHandler,
-      [KEY_CODES.ESC]: escapeHandler,
-      [KEY_CODES.UP]: upHandler,
-      [KEY_CODES.DOWN]: downHandler,
+      [KEY_CODES.SPACE]: withDefaultPrevented(selectHandler),
+      [KEY_CODES.ENTER]: withDefaultPrevented(selectHandler),
+      [KEY_CODES.ESC]: withDefaultPrevented(escapeHandler),
+      [KEY_CODES.UP]: withDefaultPrevented(upHandler),
+      [KEY_CODES.DOWN]: withDefaultPrevented(downHandler),
     };
 
     return (keyHandlers[keyCode] || characterSearchHandler)();
