@@ -64,6 +64,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
+    "sinon": "^3.0.0",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
   },
