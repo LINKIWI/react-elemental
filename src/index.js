@@ -5,6 +5,7 @@ import Link from 'components/link';
 import LoadingBar from 'components/loading-bar';
 import SelectList from 'components/select-list';
 import Spacing from 'components/spacing';
+import Spinner from 'components/spinner';
 import Tag from 'components/tag';
 import Text from 'components/text';
 import TextArea from 'components/text-area';
@@ -22,6 +23,7 @@ export {
   LoadingBar,
   SelectList,
   Spacing,
+  Spinner,
   Tag,
   Text,
   TextArea,
