@@ -4,8 +4,8 @@ import Text from 'components/text';
 import { colors } from 'styles/color';
 
 const paddingMap = {
-  alpha: '4px 14px',
-  beta: '3px 10px',
+  alpha: '4px 10px',
+  beta: '3px 8px',
 };
 
 const textSizeMap = {
