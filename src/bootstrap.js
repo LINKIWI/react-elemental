@@ -1,5 +1,3 @@
-/* global document */
-
 import { colors } from 'styles/color';
 import karlaBold from 'resources/fonts/karla-bold.txt';
 import karlaRegular from 'resources/fonts/karla-regular.txt';

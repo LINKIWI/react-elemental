@@ -24,7 +24,7 @@ cp index.html 404.html
 
 git add index.html 404.html
 git status
-git commit -m "${BRANCH}:${GIT_SHA}" || :
+git commit -m "[automatic commit] ${BRANCH}:${GIT_SHA}" || :
 git push origin HEAD
 git push github HEAD
 
