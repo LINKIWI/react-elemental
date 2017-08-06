@@ -179,12 +179,12 @@ export default class SelectList extends Component {
 
     const outlineColor = (() => {
       if (isExpanded) {
-        return colors.primary;
+        return error ? colors.red : colors.primary;
       }
       if (isFocused) {
-        return colors.gray35;
+        return error ? colors.red : colors.gray35;
       }
-      return colors.gray10;
+      return error ? colors.redLight : colors.gray10;
     })();
 
     return (

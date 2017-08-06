@@ -10,11 +10,11 @@ import { colors } from 'styles/color';
  * whether the dropdown is currently expanded.
  */
 const SelectListPlaceholder = (props) => {
-  const { label, color, width, arrowDirection, error, onClick } = props;
+  const { label, color, width, arrowDirection, onClick } = props;
 
   const style = {
     backgroundColor: 'white',
-    border: `1px solid ${error ? colors.red : color}`,
+    border: `1px solid ${color}`,
     cursor: 'pointer',
     display: 'flex',
     padding: '8px 10px',
@@ -53,13 +53,11 @@ SelectListPlaceholder.propTypes = {
   color: PropTypes.string,
   width: PropTypes.number.isRequired,
   arrowDirection: PropTypes.oneOf(['up', 'down']).isRequired,
-  error: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };
 
 SelectListPlaceholder.defaultProps = {
   color: colors.gray10,
-  error: null,
 };
 
 export default SelectListPlaceholder;
