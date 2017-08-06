@@ -11,7 +11,12 @@ export default class SelectListItem extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
+    isSelected: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    isSelected: false,
   };
 
   state = {
@@ -21,11 +26,11 @@ export default class SelectListItem extends Component {
   handleHoverStateChange = (isHover) => () => this.setState({ isHover });
 
   render() {
-    const { label, width, onClick } = this.props;
+    const { label, width, isSelected, onClick } = this.props;
     const { isHover } = this.state;
 
     const style = {
-      backgroundColor: isHover ? colors.primaryLight : 'white',
+      backgroundColor: (isHover || isSelected) ? colors.primaryLight : 'white',
       border: `1px solid ${colors.gray10}`,
       borderTop: 'none',
       cursor: 'pointer',
