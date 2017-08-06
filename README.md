@@ -13,16 +13,86 @@ See [linkiwi.github.io/react-elemental](https://linkiwi.github.io/react-elementa
 
 ## Components
 
-* `Alert`
-* `Button`
-* `Checkbox`
-* `LoadingBar`
-* `SelectList`
-* `Spacing`
-* `Tag`
-* `TextArea`
-* `TextField`
-* `Text`
+#### `Alert`
+
+Alerts are used to educate the user about the current state of the application.
+
+![Info alert](https://linkiwi.github.io/react-elemental/images/alert/info.png)
+
+![Success alert](https://linkiwi.github.io/react-elemental/images/alert/success.png)
+
+![Warn alert](https://linkiwi.github.io/react-elemental/images/alert/warn.png)
+
+![Error alert](https://linkiwi.github.io/react-elemental/images/alert/error.png)
+
+#### `Button`
+
+Buttons convey user actionability.
+
+![Button](https://linkiwi.github.io/react-elemental/images/button/beta.png)
+
+#### `Checkbox`
+
+Checkboxes denote opt-in choices controlled by the user.
+
+![Unchecked](https://linkiwi.github.io/react-elemental/images/checkbox/unchecked.png)
+
+![Checked](https://linkiwi.github.io/react-elemental/images/checkbox/checked.png)
+
+#### `Link`
+
+Links are textual prompts for navigation events.
+
+![Primary](https://linkiwi.github.io/react-elemental/images/link/primary.png)
+
+#### `LoadingBar`
+
+Animated component to indicate indeterminate progress.
+
+#### `SelectList`
+
+Select lists are used to allow users to choose one item from a dropdown menu of items.
+
+![Idle](https://linkiwi.github.io/react-elemental/images/select-list/idle.png)
+
+![Error](https://linkiwi.github.io/react-elemental/images/select-list/error.png)
+
+#### `Spacing`
+
+Spacing elements are used as containers to add margins and padding.
+
+#### `Tag`
+
+Tags serve as simple, textual status indicators.
+
+![Primary](https://linkiwi.github.io/react-elemental/images/tag/primary.png)
+
+![Red](https://linkiwi.github.io/react-elemental/images/tag/red.png)
+
+![Green](https://linkiwi.github.io/react-elemental/images/tag/green.png)
+
+![Dismissable](https://linkiwi.github.io/react-elemental/images/tag/dismissable.png)
+
+#### `Text`
+
+Text elements automatically apply font styles and sizes. The Elemental typeface is Karla (primary),
+and Source Code Pro (secondary).
+
+![Primary](https://linkiwi.github.io/react-elemental/images/text/primary.png)
+
+![Secondary](https://linkiwi.github.io/react-elemental/images/text/secondary.png)
+
+#### `TextArea`
+
+Allow the user to enter an arbitrary-length text blob.
+
+![Idle](https://linkiwi.github.io/react-elemental/images/text-area/idle.png)
+
+#### `TextField`
+
+Text fields are used for accepting user text input.
+
+![Idle](https://linkiwi.github.io/react-elemental/images/text-field/idle.png)
 
 ## Installation and Usage
 
@@ -89,6 +159,3 @@ All respected override options are as follows:
 
 * Only inline styles, and no CSS (or at least as little CSS as possible)
 * Minimalistic, simple design language
-
-## Known Issues, Bugs, TODOs
-* No consideration has been given to a11y.
