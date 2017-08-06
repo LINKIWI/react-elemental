@@ -14,15 +14,17 @@ npm install --production=false
 npm run build
 npm run build-sample
 
+cp dist/index.js /tmp/react-elemental-bundle
 cp dist/index.html /tmp/react-elemental-sample
 
 git checkout gh-pages
 git reset --hard origin/gh-pages
 
+mv /tmp/react-elemental-bundle react-elemental.js
 mv /tmp/react-elemental-sample index.html
 cp index.html 404.html
 
-git add index.html 404.html
+git add index.html 404.html react-elemental.js
 git status
 git commit -m "[automatic commit] ${BRANCH}:${GIT_SHA}" || :
 git push origin HEAD
