@@ -23,6 +23,7 @@
   "author": "Kevin Lin <developer@kevinlin.info>",
   "license": "MIT",
   "dependencies": {
+    "inline-style-prefixer": "^3.0.7",
     "prop-types": "^15.5.10",
     "radium": "^0.19.4",
     "react-icons": "^2.2.5"

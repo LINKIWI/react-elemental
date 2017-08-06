@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import prefixAll from 'inline-style-prefixer/static';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
@@ -9,11 +10,11 @@ import { colors } from 'styles/color';
  * whether the dropdown is currently expanded.
  */
 const SelectListPlaceholder = (props) => {
-  const { label, width, arrowDirection, error, onClick } = props;
+  const { label, color, width, arrowDirection, error, onClick } = props;
 
   const style = {
     backgroundColor: 'white',
-    border: `1px solid ${error ? colors.red : colors.gray10}`,
+    border: `1px solid ${error ? colors.red : color}`,
     cursor: 'pointer',
     display: 'flex',
     padding: '8px 10px',
@@ -21,12 +22,13 @@ const SelectListPlaceholder = (props) => {
     transition: 'all 0.15s ease',
   };
 
-  const arrowStyle = {
+  const arrowStyle = prefixAll({
     alignSelf: 'center',
     marginLeft: 'auto',
     transform: `${arrowDirection === 'up' ? 'rotate(180deg)' : 'rotate(0deg)'}`,
     transition: 'all 0.2s ease',
-  };
+    userSelect: 'none',
+  });
 
   return (
     <div
@@ -48,6 +50,7 @@ const SelectListPlaceholder = (props) => {
 
 SelectListPlaceholder.propTypes = {
   label: PropTypes.string.isRequired,
+  color: PropTypes.string,
   width: PropTypes.number.isRequired,
   arrowDirection: PropTypes.oneOf(['up', 'down']).isRequired,
   error: PropTypes.string,
@@ -55,6 +58,7 @@ SelectListPlaceholder.propTypes = {
 };
 
 SelectListPlaceholder.defaultProps = {
+  color: colors.gray10,
   error: null,
 };
 

@@ -4,6 +4,7 @@ import SelectListItem from 'components/select-list/select-list-item';
 import SelectListPlaceholder from 'components/select-list/select-list-placeholder';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
+import { colors } from 'styles/color';
 
 const noop = () => {};
 
@@ -118,6 +119,7 @@ export default class SelectList extends Component {
           width={width}
           error={error}
           onClick={this.onChange(selectedOption)}
+          {...isExpanded && { color: colors.primary }}
         />
 
         {
