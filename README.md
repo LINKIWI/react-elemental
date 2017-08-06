@@ -3,7 +3,9 @@
 [![npm version](https://badge.fury.io/js/react-elemental.svg)](https://badge.fury.io/js/react-elemental)
 [![Build Status](https://travis-ci.org/LINKIWI/react-elemental.svg?branch=master)](https://travis-ci.org/LINKIWI/react-elemental)
 [![Coverage Status](https://coveralls.io/repos/github/LINKIWI/react-elemental/badge.svg?branch=master)](https://coveralls.io/github/LINKIWI/react-elemental?branch=master)
-[![Greenkeeper badge](https://badges.greenkeeper.io/LINKIWI/react-elemental.svg)](https://greenkeeper.io/)
+[![Size](http://img.badgesize.io/LINKIWI/react-elemental/gh-pages/react-elemental.js.svg)](https://github.com/LINKIWI/react-elemental/blob/gh-pages/react-elemental.js)
+[![Gzip Size](http://img.badgesize.io/LINKIWI/react-elemental/gh-pages/react-elemental.js.svg?compression=gzip)](https://github.com/LINKIWI/react-elemental/blob/gh-pages/react-elemental.js)
+[![Dependencies](https://david-dm.org/LINKIWI/react-elemental.svg)](https://david-dm.org/LINKIWI/react-elemental)
 
 Flat UI component library for React
 
