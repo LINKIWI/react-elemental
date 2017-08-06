@@ -82,6 +82,33 @@ const SampleTag = () => (
         />
       </Spacing>
     </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Dismissable tags
+        </Text>
+      </Spacing>
+
+      <Spacing size="small" bottom>
+        <Text>
+          You can optionally specify that the tag is dismissable. When the user clicks the clear
+          icon, the tag will be permanently hidden.
+        </Text>
+      </Spacing>
+
+      <Spacing size="tiny" right inline>
+        <Tag text="Dismiss me" dismissable />
+      </Spacing>
+      <Spacing size="tiny" right inline>
+        <Tag
+          text="Dismiss me again"
+          outlineColor={colors.green}
+          backgroundColor={colors.greenLight}
+          dismissable
+        />
+      </Spacing>
+    </Spacing>
   </div>
 );
 

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Clear from 'react-icons/lib/md/clear';
 import Text from 'components/text';
 import { colors } from 'styles/color';
+import { spacing } from 'styles/spacing';
 
 const paddingMap = {
   alpha: '4px 10px',
@@ -13,44 +15,80 @@ const textSizeMap = {
   beta: '11px',
 };
 
+const clearSizeMap = {
+  alpha: '14px',
+  beta: '12px',
+};
+
 /**
  * Textual status indicators.
  */
-const Tag = ({ outlineColor, backgroundColor, size, text, style: overrides }) => {
-  const style = {
-    backgroundColor,
-    border: `1px solid ${outlineColor}`,
-    display: 'inline-block',
-    padding: paddingMap[size],
-    ...overrides,
+class Tag extends Component {
+  static propTypes = {
+    outlineColor: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    text: PropTypes.string.isRequired,
+    size: PropTypes.oneOf(['alpha', 'beta']),
+    dismissable: PropTypes.bool,
+    style: PropTypes.object,
   };
 
-  const textStyle = {
-    display: 'flex',
+  static defaultProps = {
+    outlineColor: colors.primary,
+    backgroundColor: colors.primaryLight,
+    size: 'beta',
+    dismissable: false,
+    style: {},
   };
 
-  return (
-    <div style={style}>
-      <Text size={textSizeMap[size]} color={outlineColor} style={textStyle} uppercase bold inline>
-        {text}
-      </Text>
-    </div>
-  );
-};
+  state = {
+    isVisible: true,
+  };
 
-Tag.propTypes = {
-  outlineColor: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  text: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['alpha', 'beta']),
-  style: PropTypes.object,
-};
+  handleDismiss = () => this.setState({ isVisible: false });
 
-Tag.defaultProps = {
-  outlineColor: colors.primary,
-  backgroundColor: colors.primaryLight,
-  size: 'beta',
-  style: {},
-};
+  render() {
+    const {
+      outlineColor,
+      backgroundColor,
+      size,
+      text,
+      dismissable,
+      style: overrides,
+    } = this.props;
+    const { isVisible } = this.state;
+
+    const style = {
+      alignItems: 'center',
+      backgroundColor,
+      border: `1px solid ${outlineColor}`,
+      display: 'inline-flex',
+      padding: paddingMap[size],
+      ...overrides,
+    };
+
+    const clearStyle = {
+      color: colors.gray20,
+      cursor: 'pointer',
+      float: 'right',
+      marginLeft: spacing.tiny,
+      width: clearSizeMap[size],
+    };
+
+    if (!isVisible) {
+      return null;
+    }
+
+    return (
+      <div style={style}>
+        <Text size={textSizeMap[size]} color={outlineColor} uppercase bold inline>
+          {text}
+        </Text>
+
+        {dismissable && <Clear style={clearStyle} onClick={this.handleDismiss} />}
+      </div>
+    );
+  }
+}
 
 export default Tag;
