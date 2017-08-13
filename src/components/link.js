@@ -21,18 +21,19 @@ const activeColorMap = {
  *
  * @constructor
  */
-const Link = ({ type, href, style: overrides, children, ...proxyProps }) => {
+export const BaseLink = ({ type, href, plain, style: overrides, children, ...proxyProps }) => {
+  const borderSize = plain ? '0' : '2px';
   const style = {
     color: colors.primary,
     opacity: 0.8,
     textDecoration: 'none',
     transition: '0.15s all ease',
     ':hover': {
-      borderBottom: `2px solid ${colors.primary}`,
+      borderBottom: `${borderSize} solid ${colors.primary}`,
       opacity: '1.0',
     },
     ':active': {
-      borderBottom: `2px solid ${activeColorMap[type]}`,
+      borderBottom: `${borderSize} solid ${activeColorMap[type]}`,
       color: activeColorMap[type],
     },
     ...primaryFontStyle('iota', textColorMap[type] || colors.primary, false),
@@ -46,17 +47,19 @@ const Link = ({ type, href, style: overrides, children, ...proxyProps }) => {
   );
 };
 
-Link.propTypes = {
+BaseLink.propTypes = {
   type: PropTypes.oneOf(['light', 'dark', 'primary']),
   href: PropTypes.string.isRequired,
+  plain: PropTypes.bool,
   style: PropTypes.object,
   children: PropTypes.any,
 };
 
-Link.defaultProps = {
+BaseLink.defaultProps = {
   type: 'primary',
+  plain: false,
   style: {},
   children: null,
 };
 
-export default Radium(Link);
+export default Radium(BaseLink);

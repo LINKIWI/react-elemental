@@ -58,6 +58,18 @@ const SampleLink = () => (
           Use primary links in most scenarios
         </Link>
       </Spacing>
+
+      <Spacing bottom>
+        <Spacing size="micro" bottom>
+          <Text size="kilo" color="gray30" uppercase bold>
+            Plain
+          </Text>
+        </Spacing>
+
+        <Link type="primary" href="" plain>
+          Use plain links to disable the underline on hover
+        </Link>
+      </Spacing>
     </Spacing>
   </div>
 );
