@@ -100,6 +100,23 @@ const SampleSpinner = () => (
         </Text>
       </Spacing>
     </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Pulsation state
+        </Text>
+      </Spacing>
+
+      <Spacing size="small" bottom>
+        <Spacing size="small" right inline>
+          <Spinner size="delta" color={colors.green} pulsate={false} />
+        </Spacing>
+        <Text color="gray50" size="kilo" uppercase bold inline>
+          Disabled pulsation
+        </Text>
+      </Spacing>
+    </Spacing>
   </div>
 );
 

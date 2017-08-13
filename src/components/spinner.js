@@ -18,21 +18,33 @@ export default class Spinner extends Component {
   static propTypes = {
     color: PropTypes.string,
     size: PropTypes.oneOf(['alpha', 'beta', 'gamma', 'delta']),
+    pulsate: PropTypes.bool,
     style: PropTypes.object,
   };
 
   static defaultProps = {
     color: undefined,
     size: 'beta',
+    pulsate: true,
     style: {},
   };
 
-  state = {
-    color: COLOR_IDLE,
-  };
+  constructor(props) {
+    super(props);
+
+    const { pulsate, color = colors.primary } = this.props;
+
+    this.state = {
+      color: pulsate ? COLOR_IDLE : color,
+    };
+  }
 
   componentDidMount() {
-    this.interval = setInterval(this.tick, 600);
+    const { pulsate } = this.props;
+
+    if (pulsate) {
+      this.interval = setInterval(this.tick, 600);
+    }
   }
 
   componentWillUnmount() {

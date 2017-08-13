@@ -35,4 +35,20 @@ describe('Spinner', () => {
     spinner.unmount();
     clock.restore();
   });
+
+  test('Optional pulsation disable', () => {
+    const clock = sinon.useFakeTimers();
+    const spinner = mount(
+      <Spinner color={colors.primary} pulsate={false} />,
+    );
+
+    expect(spinner.state().color).toBe(colors.primary);
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.primary);
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.primary);
+
+    spinner.unmount();
+    clock.restore();
+  });
 });
