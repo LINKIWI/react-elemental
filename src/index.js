@@ -13,6 +13,7 @@ import TextField from 'components/text-field';
 import bootstrap from 'bootstrap';
 import { colors } from 'styles/color';
 import { sizes } from 'styles/font';
+import { spacing } from 'styles/spacing';
 
 export {
   // Elemental UI components
@@ -31,6 +32,7 @@ export {
   // Style constants
   colors,
   sizes,
+  spacing,
   // Global bootstrapping/initialization function
   bootstrap,
 };
