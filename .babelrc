@@ -5,6 +5,9 @@
         ["es2015", {"modules": false}],
         "react",
         "stage-0"
+      ],
+      "plugins": [
+        ["transform-react-remove-prop-types", {"removeImports": true}]
       ]
     }
   },
