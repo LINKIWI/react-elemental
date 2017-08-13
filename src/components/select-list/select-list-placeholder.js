@@ -51,7 +51,10 @@ const SelectListPlaceholder = (props) => {
 SelectListPlaceholder.propTypes = {
   label: PropTypes.string.isRequired,
   color: PropTypes.string,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
   arrowDirection: PropTypes.oneOf(['up', 'down']).isRequired,
   onClick: PropTypes.func.isRequired,
 };

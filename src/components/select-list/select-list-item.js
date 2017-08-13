@@ -10,7 +10,10 @@ import { colors } from 'styles/color';
 export default class SelectListItem extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
-    width: PropTypes.number.isRequired,
+    width: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]).isRequired,
     isSelected: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
   };
