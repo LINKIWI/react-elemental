@@ -6,7 +6,18 @@ import { marginStyle } from 'styles/spacing';
  * Spacing component to add padding and margins.
  */
 const Spacing = (props) => {
-  const { padding, size, top, right, bottom, left, inline, style: overrides, children } = props;
+  const {
+    padding,
+    size,
+    top,
+    right,
+    bottom,
+    left,
+    inline,
+    style: overrides,
+    children,
+    ...proxyProps
+  } = props;
 
   const property = padding ? 'padding' : 'margin';
   const dimensions = [
@@ -22,14 +33,14 @@ const Spacing = (props) => {
 
   if (inline) {
     return (
-      <span style={style}>
+      <span style={style} {...proxyProps}>
         {children}
       </span>
     );
   }
 
   return (
-    <div style={style}>
+    <div style={style} {...proxyProps}>
       {children}
     </div>
   );

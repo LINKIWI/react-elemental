@@ -19,6 +19,18 @@ describe('Select list', () => {
     onChange: () => {},
   };
 
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const selectList = shallow(
+      <SelectList
+        onClick={onClick}
+        {...defaultProps}
+      />,
+    );
+
+    expect(selectList.at(0).props().onClick).toBe(onClick);
+  });
+
   test('SelectListPlaceholder rendering', () => {
     const selectList = shallow(
       <SelectList {...defaultProps} />,

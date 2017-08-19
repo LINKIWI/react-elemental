@@ -1,8 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Spacing from 'components/spacing';
 
 describe('Spacing', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const spacing = mount(
+      <Spacing
+        onClick={onClick}
+      />,
+    );
+
+    expect(spacing.at(0).props().onClick).toBe(onClick);
+  });
+
   test('Inline and block variants', () => {
     const inlineSpacing = shallow(
       <Spacing inline />,

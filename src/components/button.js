@@ -125,7 +125,16 @@ class Button extends Component {
   handleMouseUp = () => this.setState({ color: this.hoverColor });
 
   render() {
-    const { onClick, size, text, disabled, secondary, style: overrides, children } = this.props;
+    const {
+      onClick,
+      size,
+      text,
+      disabled,
+      secondary,
+      style: overrides,
+      children,
+      ...proxyProps
+    } = this.props;
     const { color } = this.state;
 
     const style = {
@@ -150,6 +159,7 @@ class Button extends Component {
         onMouseOut={this.handleMouseOut}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
+        {...proxyProps}
       >
         {
           text && (

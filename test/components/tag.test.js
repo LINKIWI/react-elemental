@@ -1,10 +1,22 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Clear from 'react-icons/lib/md/clear';
 import Text from 'components/text';
 import Tag from 'components/tag';
 
 describe('Tag', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const tag = mount(
+      <Tag
+        text="text"
+        onClick={onClick}
+      />,
+    );
+
+    expect(tag.at(0).props().onClick).toBe(onClick);
+  });
+
   test('Basic rendering', () => {
     const tag = shallow(
       <Tag text="text" />,

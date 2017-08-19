@@ -67,7 +67,7 @@ class Alert extends Component {
   handleDismiss = () => this.setState({ isVisible: false });
 
   render() {
-    const { type, size, title, message, dismissable, style: overrides } = this.props;
+    const { type, size, title, message, dismissable, style: overrides, ...proxyProps } = this.props;
     const { isVisible } = this.state;
     const { color, background } = typeColorMap[type];
 
@@ -87,7 +87,7 @@ class Alert extends Component {
     }
 
     return (
-      <Spacing size="large" style={style} bottom>
+      <Spacing size="large" style={style} bottom {...proxyProps}>
         {
           dismissable && (
             <Text color="gray15" style={clearStyle} onClick={this.handleDismiss} inline>

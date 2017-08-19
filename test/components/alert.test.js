@@ -1,10 +1,24 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Alert from 'components/alert';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 
 describe('Alert', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const alert = mount(
+      <Alert
+        type="info"
+        title="title"
+        message="message"
+        onClick={onClick}
+      />,
+    );
+
+    expect(alert.at(0).props().onClick).toBe(onClick);
+  });
+
   test('Standard alert rendering', () => {
     const alert = shallow(
       <Alert

@@ -5,6 +5,17 @@ import Spinner from 'components/spinner';
 import { colors } from 'styles/color';
 
 describe('Spinner', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const spinner = mount(
+      <Spinner
+        onClick={onClick}
+      />,
+    );
+
+    expect(spinner.at(0).props().onClick).toBe(onClick);
+  });
+
   test('Standard rendering', () => {
     const clock = sinon.useFakeTimers();
     const spinner = mount(

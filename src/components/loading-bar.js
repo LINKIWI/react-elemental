@@ -63,6 +63,7 @@ export default class LoadingBar extends Component {
       width,
       position: positionStyle,
       style: overrides,
+      ...proxyProps
     } = this.props;
     const { position } = this.state;
     const offset = position === POSITION_LEFT ? -POSITION_RIGHT : POSITION_LEFT;
@@ -84,7 +85,7 @@ export default class LoadingBar extends Component {
     };
 
     return (
-      <div style={containerStyle}>
+      <div style={containerStyle} {...proxyProps}>
         <div style={loadingBarStyle} />
       </div>
     );

@@ -4,6 +4,17 @@ import { mount } from 'enzyme';
 import LoadingBar, { POSITION_LEFT, POSITION_RIGHT, BOUNCE_INTERVAL } from 'components/loading-bar';
 
 describe('Loading bar', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const loadingBar = mount(
+      <LoadingBar
+        onClick={onClick}
+      />,
+    );
+
+    expect(loadingBar.at(0).props().onClick).toBe(onClick);
+  });
+
   test('Standard rendering', () => {
     const loadingBar = mount(
       <LoadingBar

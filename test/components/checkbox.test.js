@@ -5,6 +5,17 @@ import Checkbox from 'components/checkbox';
 import Text from 'components/text';
 
 describe('Checkbox', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const checkbox = mount(
+      <Checkbox
+        onClick={onClick}
+      />,
+    );
+
+    expect(checkbox.at(0).props().onClick).toBe(onClick);
+  });
+
   test('Setting ref in state', () => {
     const checkbox = mount(
       <Checkbox />,
@@ -28,13 +39,13 @@ describe('Checkbox', () => {
       <Checkbox />,
     );
 
-    expect(checkbox.state().isChecked).toBe(false);
+    expect(checkbox.state().isCurrentlyChecked).toBe(false);
     expect(checkbox.instance().isChecked()).toBe(false);
     checkbox.childAt(0).simulate('click');
-    expect(checkbox.state().isChecked).toBe(true);
+    expect(checkbox.state().isCurrentlyChecked).toBe(true);
     expect(checkbox.instance().isChecked()).toBe(true);
     checkbox.childAt(0).simulate('click');
-    expect(checkbox.state().isChecked).toBe(false);
+    expect(checkbox.state().isCurrentlyChecked).toBe(false);
     expect(checkbox.instance().isChecked()).toBe(false);
   });
 

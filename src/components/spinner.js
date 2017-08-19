@@ -60,7 +60,7 @@ export default class Spinner extends Component {
   };
 
   render() {
-    const { size, style: overrides } = this.props;
+    const { size, style: overrides, pulsate, ...proxyProps } = this.props;
     const { color } = this.state;
 
     const style = {
@@ -74,7 +74,7 @@ export default class Spinner extends Component {
     };
 
     return (
-      <div style={style} />
+      <div style={style} {...proxyProps} />
     );
   }
 }

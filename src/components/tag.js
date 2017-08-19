@@ -55,6 +55,7 @@ class Tag extends Component {
       text,
       dismissable,
       style: overrides,
+      ...proxyProps
     } = this.props;
     const { isVisible } = this.state;
 
@@ -79,7 +80,7 @@ class Tag extends Component {
     }
 
     return (
-      <div style={style}>
+      <div style={style} {...proxyProps}>
         <Text size={textSizeMap[size]} color={outlineColor} uppercase bold inline>
           {text}
         </Text>

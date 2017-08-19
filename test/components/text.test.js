@@ -3,6 +3,17 @@ import { shallow } from 'enzyme';
 import Text from 'components/text';
 
 describe('Text', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
+    const text = shallow(
+      <Text onClick={onClick}>
+        text
+      </Text>,
+    );
+
+    expect(text.at(0).props().onClick).toBe(onClick);
+  });
+
   test('Standard rendering', () => {
     const text = shallow(
       <Text>

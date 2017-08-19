@@ -4,6 +4,16 @@ import Button from 'components/button';
 import Text from 'components/text';
 
 describe('Button', () => {
+  test('Accepts proxy props', () => {
+    const button = mount(
+      <Button
+        type="submit"
+      />,
+    );
+
+    expect(button.at(0).props().type).toBe('submit');
+  });
+
   test('Setting ref in state', () => {
     const button = mount(
       <Button />,

@@ -38,7 +38,7 @@ class Checkbox extends Component {
     super(props);
 
     this.state = {
-      isChecked: props.isChecked,
+      isCurrentlyChecked: props.isChecked,
       ref: null,
     };
   }
@@ -82,7 +82,7 @@ class Checkbox extends Component {
       case KEY_CODE_ENTER:
         return this.toggleCheckState();
       case KEY_CODE_ESCAPE:
-        this.setState({ isChecked: false });
+        this.setState({ isCurrentlyChecked: false });
         return onUncheck();
       default:
         return null;
@@ -99,16 +99,17 @@ class Checkbox extends Component {
    * callbacks as appropriate.
    */
   toggleCheckState = () => {
-    const { isChecked } = this.state;
     const { disabled, onCheck, onUncheck } = this.props;
 
     if (disabled) {
       return;
     }
 
-    this.setState({ isChecked: !isChecked });
+    this.setState(({ isCurrentlyChecked }) => {
+      (isCurrentlyChecked ? onUncheck : onCheck)();
 
-    (isChecked ? onUncheck : onCheck)();
+      return { isCurrentlyChecked: !isCurrentlyChecked };
+    });
   };
 
   /**
@@ -116,11 +117,19 @@ class Checkbox extends Component {
    *
    * @returns {Boolean} True if the checkbox is currently checked; false otherwise.
    */
-  isChecked = () => this.state.isChecked;
+  isChecked = () => this.state.isCurrentlyChecked;
 
   render() {
-    const { label, disabled, style: overrides } = this.props;
-    const { isChecked } = this.state;
+    const {
+      label,
+      disabled,
+      style: overrides,
+      isChecked,
+      onCheck,
+      onUncheck,
+      ...proxyProps
+    } = this.props;
+    const { isCurrentlyChecked } = this.state;
 
     const containerStyle = {
       cursor: 'pointer',
@@ -139,7 +148,7 @@ class Checkbox extends Component {
 
     const checkboxStyle = {
       backgroundColor: colors.gray5,
-      color: isChecked ? colors.primary : colors.primaryLight,
+      color: isCurrentlyChecked ? colors.primary : colors.primaryLight,
       display: 'flex',
       height: '18px',
       margin: 'auto',
@@ -153,7 +162,7 @@ class Checkbox extends Component {
     };
 
     return (
-      <div style={containerStyle} key="elemental-checkbox">
+      <div style={containerStyle} key="elemental-checkbox" {...proxyProps}>
         <span
           style={containerStyle}
           onClick={this.handleClick}

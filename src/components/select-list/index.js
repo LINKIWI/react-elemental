@@ -164,7 +164,16 @@ export default class SelectList extends Component {
   toggleExpand = () => this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }));
 
   render() {
-    const { label, sublabel, options, width, height, error, style: overrides } = this.props;
+    const {
+      label,
+      sublabel,
+      options,
+      width,
+      height,
+      error,
+      style: overrides,
+      ...proxyProps
+    } = this.props;
     const { isExpanded, isFocused, selectedOption, highlightedIdx } = this.state;
 
     const dropdownElementsStyle = {
@@ -194,6 +203,7 @@ export default class SelectList extends Component {
         onBlur={this.handleBlur}
         tabIndex={0}
         style={overrides}
+        {...proxyProps}
       >
         {
           (label || sublabel) && (

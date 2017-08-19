@@ -79,7 +79,7 @@ const SampleButton = () => (
         />
       </Spacing>
 
-      <Button colors={colors.green}>
+      <Button color={colors.greenLight}>
         <Text bold inline>
           hello
         </Text>
