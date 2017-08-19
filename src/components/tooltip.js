@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
 
-const GRACE_TIMEOUT_INTERVAL = 150;
+export const GRACE_TIMEOUT_INTERVAL = 150;
 
 /**
  * Wrap an arbitrary element with a tooltip next to the element on hover.
