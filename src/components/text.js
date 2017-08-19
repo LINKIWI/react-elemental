@@ -13,15 +13,27 @@ const Text = (props) => {
     bold,
     inline,
     uppercase,
+    center,
+    right,
     style: overrides,
     children,
     ...proxyProps
   } = props;
 
-  const styleFactory = secondary ? secondaryFontStyle : primaryFontStyle;
+  const fontStyleFactory = secondary ? secondaryFontStyle : primaryFontStyle;
+  const textAlign = (() => {
+    if (center) {
+      return 'center';
+    }
+    if (right) {
+      return 'right';
+    }
+    return 'unset';
+  })();
   const style = {
-    ...styleFactory(size, color, bold),
+    ...fontStyleFactory(size, color, bold),
     textTransform: uppercase ? 'uppercase' : 'none',
+    textAlign,
     ...overrides,
   };
 
@@ -47,6 +59,8 @@ Text.propTypes = {
   bold: PropTypes.bool,
   inline: PropTypes.bool,
   uppercase: PropTypes.bool,
+  center: PropTypes.bool,
+  right: PropTypes.bool,
   style: PropTypes.object,
   children: PropTypes.any,
 };
@@ -58,6 +72,8 @@ Text.defaultProps = {
   bold: false,
   inline: false,
   uppercase: false,
+  center: false,
+  right: false,
   style: {},
   children: null,
 };

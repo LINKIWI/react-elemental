@@ -47,6 +47,22 @@ describe('Text', () => {
     expect(text.find('p').props().style.textTransform).toBe('uppercase');
   });
 
+  test('Alignment modifiers', () => {
+    const centerText = shallow(
+      <Text center>
+        text
+      </Text>,
+    );
+    expect(centerText.find('p').props().style.textAlign).toBe('center');
+
+    const rightText = shallow(
+      <Text right>
+        text
+      </Text>,
+    );
+    expect(rightText.find('p').props().style.textAlign).toBe('right');
+  });
+
   test('Primary/secondary font style', () => {
     const primaryText = shallow(
       <Text>
