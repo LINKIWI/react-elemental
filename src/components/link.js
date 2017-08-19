@@ -21,7 +21,9 @@ const activeColorMap = {
  *
  * @constructor
  */
-export const BaseLink = ({ type, href, plain, style: overrides, children, ...proxyProps }) => {
+export const BaseLink = (props) => {
+  const { type, href, plain, underline, style: overrides, children, ...proxyProps } = props;
+
   const borderSize = plain ? '0' : '2px';
   const style = {
     color: colors.primary,
@@ -36,6 +38,7 @@ export const BaseLink = ({ type, href, plain, style: overrides, children, ...pro
       borderBottom: `${borderSize} solid ${activeColorMap[type]}`,
       color: activeColorMap[type],
     },
+    ...underline && { borderBottom: `2px solid ${colors.primary}` },
     ...primaryFontStyle('iota', textColorMap[type] || colors.primary, false),
     ...overrides,
   };
@@ -51,6 +54,7 @@ BaseLink.propTypes = {
   type: PropTypes.oneOf(['light', 'dark', 'primary']),
   href: PropTypes.string.isRequired,
   plain: PropTypes.bool,
+  underline: PropTypes.bool,
   style: PropTypes.object,
   children: PropTypes.any,
 };
@@ -58,6 +62,7 @@ BaseLink.propTypes = {
 BaseLink.defaultProps = {
   type: 'primary',
   plain: false,
+  underline: false,
   style: {},
   children: null,
 };

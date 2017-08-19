@@ -70,6 +70,18 @@ const SampleLink = () => (
           Use plain links to disable the underline on hover
         </Link>
       </Spacing>
+
+      <Spacing bottom>
+        <Spacing size="micro" bottom>
+          <Text size="kilo" color="gray30" uppercase bold>
+            Underline
+          </Text>
+        </Spacing>
+
+        <Link type="primary" href="" underline>
+          Use underline links to always show the underline
+        </Link>
+      </Spacing>
     </Spacing>
   </div>
 );

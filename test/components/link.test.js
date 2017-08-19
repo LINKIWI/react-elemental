@@ -56,7 +56,20 @@ describe('Link', () => {
 
     const linkStyle = link.at(0).props().style;
 
+    expect(linkStyle.borderBottom).toBeUndefined();
     expect(linkStyle[':hover'].borderBottom.startsWith('0 solid')).toBe(true);
     expect(linkStyle[':active'].borderBottom.startsWith('0 solid')).toBe(true);
+  });
+
+  test('Underline modifier', () => {
+    const link = shallow(
+      <Link href="href" underline>
+        link
+      </Link>,
+    );
+
+    const linkStyle = link.at(0).props().style;
+
+    expect(linkStyle.borderBottom).toBeDefined();
   });
 });
