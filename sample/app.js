@@ -11,11 +11,13 @@ import SampleTag from './components/tag';
 import SampleText from './components/text';
 import SampleTextArea from './components/text-area';
 import SampleTextField from './components/text-field';
+import SampleTooltip from './components/tooltip';
 
 bootstrap();
 
 const App = () => (
   <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+    <SampleTooltip />
     <SampleSpinner />
     <SampleLink />
     <SampleTextArea />

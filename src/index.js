@@ -10,6 +10,7 @@ import Tag from 'components/tag';
 import Text from 'components/text';
 import TextArea from 'components/text-area';
 import TextField from 'components/text-field';
+import Tooltip from 'components/tooltip';
 import bootstrap from 'bootstrap';
 import { colors } from 'styles/color';
 import { sizes } from 'styles/font';
@@ -29,6 +30,7 @@ export {
   Text,
   TextArea,
   TextField,
+  Tooltip,
   // Style constants
   colors,
   sizes,
