@@ -82,6 +82,18 @@ const SampleLink = () => (
           Use underline links to always show the underline
         </Link>
       </Spacing>
+
+      <Spacing bottom>
+        <Spacing size="micro" bottom>
+          <Text size="kilo" color="gray30" uppercase bold>
+            Fake
+          </Text>
+        </Spacing>
+
+        <Link type="primary" fake>
+          Give the element the responsibility of an anchor tag, without actually navigating on click
+        </Link>
+      </Spacing>
     </Spacing>
   </div>
 );

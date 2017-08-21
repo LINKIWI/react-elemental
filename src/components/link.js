@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
@@ -18,53 +18,73 @@ const activeColorMap = {
 
 /**
  * Styled link element.
- *
- * @constructor
  */
-export const BaseLink = (props) => {
-  const { type, href, plain, underline, style: overrides, children, ...proxyProps } = props;
-
-  const borderSize = plain ? '0' : '2px';
-  const style = {
-    color: colors.primary,
-    opacity: 0.8,
-    textDecoration: 'none',
-    transition: '0.15s all ease',
-    ':hover': {
-      borderBottom: `${borderSize} solid ${colors.primary}`,
-      opacity: '1.0',
-    },
-    ':active': {
-      borderBottom: `${borderSize} solid ${activeColorMap[type]}`,
-      color: activeColorMap[type],
-    },
-    ...underline && { borderBottom: `2px solid ${colors.primary}` },
-    ...primaryFontStyle('iota', textColorMap[type] || colors.primary, false),
-    ...overrides,
+export class BaseLink extends Component {
+  static propTypes = {
+    type: PropTypes.oneOf(['light', 'dark', 'primary']),
+    href: PropTypes.string,
+    plain: PropTypes.bool,
+    underline: PropTypes.bool,
+    fake: PropTypes.bool,
+    style: PropTypes.object,
+    children: PropTypes.any,
   };
 
-  return (
-    <a href={href} style={style} {...proxyProps}>
-      {children}
-    </a>
-  );
-};
+  static defaultProps = {
+    type: 'primary',
+    href: '#',
+    plain: false,
+    underline: false,
+    fake: false,
+    style: {},
+    children: null,
+  };
 
-BaseLink.propTypes = {
-  type: PropTypes.oneOf(['light', 'dark', 'primary']),
-  href: PropTypes.string.isRequired,
-  plain: PropTypes.bool,
-  underline: PropTypes.bool,
-  style: PropTypes.object,
-  children: PropTypes.any,
-};
+  handleClick = (evt) => {
+    const { fake } = this.props;
 
-BaseLink.defaultProps = {
-  type: 'primary',
-  plain: false,
-  underline: false,
-  style: {},
-  children: null,
-};
+    if (fake) {
+      evt.preventDefault();
+    }
+  };
+
+  render() {
+    const {
+      type,
+      href,
+      plain,
+      underline,
+      fake,
+      style: overrides,
+      children,
+      ...proxyProps
+    } = this.props;
+
+    const borderSize = plain ? '0' : '2px';
+    const style = {
+      color: colors.primary,
+      opacity: 0.8,
+      textDecoration: 'none',
+      transition: '0.15s all ease',
+      ':hover': {
+        borderBottom: `${borderSize} solid ${colors.primary}`,
+        opacity: '1.0',
+      },
+      ':active': {
+        borderBottom: `${borderSize} solid ${activeColorMap[type]}`,
+        color: activeColorMap[type],
+      },
+      ...underline && { borderBottom: `2px solid ${colors.primary}` },
+      ...primaryFontStyle('iota', textColorMap[type] || colors.primary, false),
+      ...overrides,
+    };
+
+    return (
+      <a href={href} style={style} onClick={this.handleClick} {...proxyProps}>
+        {children}
+      </a>
+    );
+  }
+}
 
 export default Radium(BaseLink);

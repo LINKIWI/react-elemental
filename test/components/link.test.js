@@ -72,4 +72,32 @@ describe('Link', () => {
 
     expect(linkStyle.borderBottom).toBeDefined();
   });
+
+  test('Non-fake links don\'t attempt to prevent default behavior', () => {
+    const link = shallow(
+      <Link href="">
+        link
+      </Link>,
+    );
+    const mockEvt = { preventDefault: jest.fn() };
+
+    link.find('a').simulate('click', mockEvt);
+
+    expect(link.find('a').props().onClick).toBeDefined();
+    expect(mockEvt.preventDefault.mock.calls.length).toBe(0);
+  });
+
+  test('Fake modifier', () => {
+    const link = shallow(
+      <Link fake>
+        link
+      </Link>,
+    );
+    const mockEvt = { preventDefault: jest.fn() };
+
+    link.find('a').simulate('click', mockEvt);
+
+    expect(link.find('a').props().onClick).toBeDefined();
+    expect(mockEvt.preventDefault).toBeCalled();
+  });
 });
