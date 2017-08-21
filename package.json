@@ -14,7 +14,8 @@
     "test-watch": "npm run test -- --watch",
     "cover": "npm run test -- --coverage",
     "coveralls": "npm run cover && cat coverage/lcov.info | coveralls",
-    "prepublish": "rm -rf dist && NODE_ENV=production npm run build && derive-pkg -d dist"
+    "prepublish": "rm -rf dist && NODE_ENV=production npm run build && derive-pkg -d dist",
+    "publish": "npm publish dist"
   },
   "repository": {
     "type": "git",
