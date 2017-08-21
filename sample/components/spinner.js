@@ -99,6 +99,15 @@ const SampleSpinner = () => (
           Why not orange?
         </Text>
       </Spacing>
+
+      <Spacing size="small" bottom>
+        <Spacing size="small" right inline>
+          <Spinner size="delta" color={colors.purple} transparent />
+        </Spacing>
+        <Text color="gray50" size="kilo" uppercase bold inline>
+          Transparent background
+        </Text>
+      </Spacing>
     </Spacing>
 
     <Spacing size="huge" bottom>

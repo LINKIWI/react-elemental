@@ -62,4 +62,20 @@ describe('Spinner', () => {
     spinner.unmount();
     clock.restore();
   });
+
+  test('Transparent modifier', () => {
+    const clock = sinon.useFakeTimers();
+    const spinner = mount(
+      <Spinner color={colors.primary} transparent />,
+    );
+
+    expect(spinner.state().color).toBe('unset');
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.primary);
+    clock.tick(600);
+    expect(spinner.state().color).toBe('unset');
+
+    spinner.unmount();
+    clock.restore();
+  });
 });

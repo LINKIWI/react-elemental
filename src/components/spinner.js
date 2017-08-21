@@ -9,7 +9,7 @@ const sizeMap = {
   delta: '8px',
 };
 
-const COLOR_IDLE = colors.gray5;
+const DEFAULT_IDLE_COLOR = colors.gray5;
 
 /**
  * Indeterminate progress indication spinner.
@@ -19,6 +19,7 @@ export default class Spinner extends Component {
     color: PropTypes.string,
     size: PropTypes.oneOf(['alpha', 'beta', 'gamma', 'delta']),
     pulsate: PropTypes.bool,
+    transparent: PropTypes.bool,
     style: PropTypes.object,
   };
 
@@ -26,16 +27,19 @@ export default class Spinner extends Component {
     color: undefined,
     size: 'beta',
     pulsate: true,
+    transparent: false,
     style: {},
   };
 
   constructor(props) {
     super(props);
 
-    const { pulsate, color = colors.primary } = this.props;
+    const { pulsate, transparent, color = colors.primary } = this.props;
+
+    this.idleColor = transparent ? 'unset' : DEFAULT_IDLE_COLOR;
 
     this.state = {
-      color: pulsate ? COLOR_IDLE : color,
+      color: pulsate ? this.idleColor : color,
     };
   }
 
@@ -55,12 +59,12 @@ export default class Spinner extends Component {
     const { color: pulseColor = colors.primary } = this.props;
 
     this.setState(({ color }) => ({
-      color: (color === pulseColor) ? COLOR_IDLE : pulseColor,
+      color: (color === pulseColor) ? this.idleColor : pulseColor,
     }));
   };
 
   render() {
-    const { size, style: overrides, pulsate, ...proxyProps } = this.props;
+    const { size, style: overrides, pulsate, transparent, ...proxyProps } = this.props;
     const { color } = this.state;
 
     const style = {
