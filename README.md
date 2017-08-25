@@ -51,6 +51,12 @@ Links are textual prompts for navigation events.
 
 Animated component to indicate indeterminate progress.
 
+#### `Modal`
+
+Modals are used to present temporarily-relevant UI elements in a overlayed dialog.
+
+![Beta](https://linkiwi.github.io/react-elemental/images/modal/beta.png)
+
 #### `SelectList`
 
 Select lists are used to allow users to choose one item from a dropdown menu of items.
