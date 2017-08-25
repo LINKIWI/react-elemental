@@ -22,9 +22,13 @@ const widthMap = {
 class Modal extends Component {
   static propTypes = {
     size: PropTypes.oneOf(['alpha', 'beta', 'gamma']),
-    dismissable: PropTypes.bool,
+    persistent: PropTypes.bool,
     onHide: PropTypes.func,
     win: PropTypes.shape({
+      width: PropTypes.number,
+      height: PropTypes.number,
+    }).isRequired,
+    doc: PropTypes.shape({
       width: PropTypes.number,
       height: PropTypes.number,
     }).isRequired,
@@ -34,7 +38,7 @@ class Modal extends Component {
 
   static defaultProps = {
     size: 'beta',
-    dismissable: true,
+    persistent: false,
     onHide: noop,
     style: {},
     children: null,
@@ -59,22 +63,31 @@ class Modal extends Component {
   };
 
   handleBackdropClick = ({ target }) => {
-    const { onHide } = this.props;
+    const { persistent, onHide } = this.props;
     const { modal } = this.state;
 
-    const func = (!modal || modal.contains(target)) ? noop : onHide;
+    const func = (!modal || modal.contains(target) || persistent) ? noop : onHide;
     return func();
   };
 
   handleKeyDown = ({ keyCode }) => {
-    const { onHide } = this.props;
+    const { persistent, onHide } = this.props;
 
-    const func = (keyCode === KEY_CODE_ESC) ? onHide : noop;
+    const func = (keyCode === KEY_CODE_ESC && !persistent) ? onHide : noop;
     return func();
   };
 
   render() {
-    const { size, dismissable, onHide, win, style: overrides, children } = this.props;
+    const {
+      size,
+      persistent,
+      onHide,
+      win,
+      doc,
+      style: overrides,
+      children,
+      ...proxyProps
+    } = this.props;
     const { modal } = this.state;
 
     const modalHeight = modal ? modal.scrollHeight : 0;
@@ -134,9 +147,10 @@ class Modal extends Component {
           style={modalStyle}
           onKeyDown={this.handleKeyDown}
           tabIndex={0}
+          {...proxyProps}
         >
           <Spacing size="large" padding top right bottom left>
-            {dismissable && (
+            {!persistent && (
               <div style={closeStyle} onClick={onHide}>
                 <Close style={closeIconStyle} />
               </div>

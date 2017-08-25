@@ -33,6 +33,7 @@ export default class SampleModal extends Component {
       alpha: false,
       beta: false,
       gamma: false,
+      persistent: false,
     },
   };
 
@@ -44,7 +45,7 @@ export default class SampleModal extends Component {
   }));
 
   render() {
-    const { isVisible: { alpha, beta, gamma } } = this.state;
+    const { isVisible: { alpha, beta, gamma, persistent } } = this.state;
 
     return (
       <div>
@@ -130,6 +131,34 @@ export default class SampleModal extends Component {
             <Button
               text="Show modal"
               onClick={this.setVisibility('gamma', true)}
+            />
+          </Spacing>
+        </Spacing>
+
+        <Spacing size="huge" bottom>
+          <Spacing bottom>
+            <Text size="iota" color="gray70" uppercase bold>
+              Persistence
+            </Text>
+          </Spacing>
+
+          <Spacing bottom>
+            <Spacing size="tiny" bottom>
+              <Text size="kilo" color="gray30" uppercase bold>
+                Persistent modal
+              </Text>
+            </Spacing>
+
+            {
+              persistent && (
+                <Modal persistent>
+                  {<ModalContents />}
+                </Modal>
+              )
+            }
+            <Button
+              text="Show modal"
+              onClick={this.setVisibility('persistent', true)}
             />
           </Spacing>
         </Spacing>

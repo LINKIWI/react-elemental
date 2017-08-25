@@ -17,13 +17,31 @@ describe('Modal', () => {
     expect(modal.find(Spacing).at(0).text()).toBe('children');
   });
 
-  test('Non-dismissable modal', () => {
+  test('Accepts proxy props', () => {
+    const onClick = jest.fn();
     const modal = mount(
-      <Modal dismissable={false}>
+      <Modal onClick={onClick}>
         children
       </Modal>,
     );
 
+    modal.childAt(0).simulate('click');
+
+    expect(onClick).toBeCalled();
+  });
+
+  test('Persistent modal', () => {
+    const onHide = jest.fn();
+    const modal = mount(
+      <Modal onHide={onHide} persistent>
+        children
+      </Modal>,
+    );
+
+    modal.at(0).simulate('click');
+    modal.childAt(0).simulate('keydown', { keyCode: 27 });
+
+    expect(onHide.mock.calls.length).toBe(0);
     expect(modal.find(Close).length).toBe(0);
   });
 
