@@ -5,6 +5,7 @@ import SampleButton from './components/button';
 import SampleCheckbox from './components/checkbox';
 import SampleLink from './components/link';
 import SampleLoadingBar from './components/loading-bar';
+import SampleModal from './components/modal';
 import SampleSelectList from './components/select-list';
 import SampleSpinner from './components/spinner';
 import SampleTag from './components/tag';
@@ -17,6 +18,7 @@ bootstrap();
 
 const App = () => (
   <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+    <SampleModal />
     <SampleTooltip />
     <SampleSpinner />
     <SampleLink />
