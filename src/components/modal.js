@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
 import Close from 'react-icons/lib/md/close';
-import { withWindowState } from 'react-window-state';
+import { withWindowState } from '@linkiwi/react-window-state';
 import Spacing from 'components/spacing';
 import { colors } from 'styles/color';
 
