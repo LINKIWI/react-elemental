@@ -102,6 +102,12 @@ Text fields are used for accepting user text input.
 
 ![Idle](https://linkiwi.github.io/react-elemental/images/text-field/idle.png)
 
+#### `Toast`
+
+Toasts are used to present temporary notification alerts.
+
+![Idle](https://linkiwi.github.io/react-elemental/images/toast/idle.png)
+
 #### `Tooltip`
 
 Tooltips are used to provide contextual information on specific elements for purposes of user
