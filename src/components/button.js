@@ -192,7 +192,13 @@ class Button extends Component {
       >
         {
           text && (
-            <Text size={textSizeMap[size]} color={secondary ? color : 'gray5'} uppercase bold>
+            <Text
+              size={textSizeMap[size]}
+              color={secondary ? color : 'gray5'}
+              uppercase
+              bold
+              inline
+            >
               {text}
             </Text>
           )
