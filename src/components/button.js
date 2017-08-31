@@ -5,6 +5,13 @@ import { colors } from 'styles/color';
 
 const noop = () => {};
 
+const HOVER_INTENSITY_RATIO = 1.05;
+const ACTIVE_INTENSITY_RATIO = 0.95;
+
+const STATE_IDLE = 'idle';
+const STATE_HOVER = 'hover';
+const STATE_ACTIVE = 'active';
+
 /**
  * Parse an RGB hex string into individual red, green, and blue components.
  *
@@ -75,14 +82,35 @@ class Button extends Component {
 
     const rgb = parseHexToRGB(color);
 
-    this.idleColor = color;
-    this.hoverColor = rgbToHex(rgb.map((component) => Math.min(Math.round(component * 1.05), 255)));
-    this.activeColor = rgbToHex(rgb.map((component) => Math.round(component * 0.95)));
-
     this.state = {
       ref: null,
-      color: this.idleColor,
+      buttonState: STATE_IDLE,
+      buttonColors: {
+        [STATE_IDLE]: color,
+        [STATE_HOVER]: rgbToHex(rgb.map((component) =>
+          Math.min(Math.round(component * HOVER_INTENSITY_RATIO), 255))),
+        [STATE_ACTIVE]: rgbToHex(rgb.map((component) =>
+          Math.round(component * ACTIVE_INTENSITY_RATIO))),
+      },
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Need to ensure that the idle, hover, and active colors are appropriately updated if the
+    // button's base color changes.
+    if (this.props.color !== nextProps.color) {
+      const rgb = parseHexToRGB(nextProps.color);
+
+      this.setState({
+        buttonColors: {
+          [STATE_IDLE]: nextProps.color,
+          [STATE_HOVER]: rgbToHex(rgb.map((component) =>
+            Math.min(Math.round(component * HOVER_INTENSITY_RATIO), 255))),
+          [STATE_ACTIVE]: rgbToHex(rgb.map((component) =>
+            Math.round(component * ACTIVE_INTENSITY_RATIO))),
+        },
+      });
+    }
   }
 
   /**
@@ -99,7 +127,7 @@ class Button extends Component {
   /**
    * Set the hover background color when moving the mouse into the button.
    */
-  handleMouseEnter = () => this.setState({ color: this.hoverColor });
+  handleMouseEnter = () => this.setState({ buttonState: STATE_HOVER });
 
   /**
    * Blur the button element and set the idle color when the mouse leaves the button.
@@ -111,18 +139,18 @@ class Button extends Component {
       ref.blur();
     }
 
-    this.setState({ color: this.idleColor });
+    this.setState({ buttonState: STATE_IDLE });
   };
 
   /**
    * Set the active color when the button is depressed.
    */
-  handleMouseDown = () => this.setState({ color: this.activeColor });
+  handleMouseDown = () => this.setState({ buttonState: STATE_ACTIVE });
 
   /**
    * Set the hover color when the button is released.
    */
-  handleMouseUp = () => this.setState({ color: this.hoverColor });
+  handleMouseUp = () => this.setState({ buttonState: STATE_HOVER });
 
   render() {
     const {
@@ -135,8 +163,9 @@ class Button extends Component {
       children,
       ...proxyProps
     } = this.props;
-    const { color } = this.state;
+    const { buttonState, buttonColors } = this.state;
 
+    const color = buttonColors[buttonState];
     const style = {
       backgroundColor: secondary ? 'white' : color,
       border: secondary ? `2px solid ${color}` : 'none',

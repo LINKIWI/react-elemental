@@ -43,15 +43,15 @@ describe('Button', () => {
       <Button color={idleColor} />,
     );
 
-    expect(button.state().color).toBe(idleColor);
+    expect(button.state().buttonState).toBe('idle');
     expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
 
     button.simulate('mouseenter');
-    expect(button.state().color).toBe(hoverColor);
+    expect(button.state().buttonState).toBe('hover');
     expect(button.find('button').props().style.backgroundColor).toBe(hoverColor);
 
     button.simulate('mouseout');
-    expect(button.state().color).toBe(idleColor);
+    expect(button.state().buttonState).toBe('idle');
     expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
   });
 
@@ -64,15 +64,15 @@ describe('Button', () => {
     );
 
     button.simulate('mousedown');
-    expect(button.state().color).toBe(activeColor);
+    expect(button.state().buttonState).toBe('active');
     expect(button.find('button').props().style.backgroundColor).toBe(activeColor);
 
     button.simulate('mouseup');
-    expect(button.state().color).toBe(hoverColor);
+    expect(button.state().buttonState).toBe('hover');
     expect(button.find('button').props().style.backgroundColor).toBe(hoverColor);
 
     button.simulate('mouseout');
-    expect(button.state().color).toBe(idleColor);
+    expect(button.state().buttonState).toBe('idle');
     expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
   });
 
@@ -107,5 +107,19 @@ describe('Button', () => {
 
       expect(button.find('button').text()).toBe('children');
     });
+  });
+
+  test('Color props change', () => {
+    const initialColor = '#3eb8f0';
+    const nextColor = '#d32f2f';
+    const button = shallow(
+      <Button color={initialColor}>
+        children
+      </Button>,
+    );
+
+    button.setProps({ color: nextColor });
+
+    expect(button.find('button').props().style.backgroundColor).toBe(nextColor);
   });
 });
