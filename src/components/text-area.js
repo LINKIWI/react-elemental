@@ -13,8 +13,6 @@ class TextArea extends Component {
   static propTypes = {
     label: PropTypes.string,
     sublabel: PropTypes.string,
-    width: PropTypes.number,
-    height: PropTypes.number,
     error: PropTypes.string,
     style: PropTypes.object,
   };
@@ -22,21 +20,18 @@ class TextArea extends Component {
   static defaultProps = {
     label: null,
     sublabel: null,
-    width: null,
-    height: null,
     error: null,
     style: {},
   };
 
   render() {
-    const { label, sublabel, width, height, error, style: overrides, ...props } = this.props;
+    const { label, sublabel, error, style: overrides, ...props } = this.props;
 
     const style = {
       border: `1px solid ${error ? colors.redLight : colors.gray10}`,
       borderRadius: 0,
-      height,
+      boxSizing: 'border-box',
       padding: '6px 6px',
-      width,
       transition: 'border 0.15s ease',
       ...secondaryFontStyle('kilo', 'gray80', false),
       ':focus': {

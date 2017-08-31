@@ -35,4 +35,18 @@ describe('Text area', () => {
     expect(textArea.find(Text).length).toBe(1);
     expect(textArea.find(Text).at(0).children().text()).toBe('error');
   });
+
+  test('Width and height are set via style', () => {
+    const textArea = shallow(
+      <TextArea
+        style={{
+          height: '10px',
+          width: '20px',
+        }}
+      />,
+    );
+
+    expect(textArea.find('textarea').props().style.height).toBe('10px');
+    expect(textArea.find('textarea').props().style.width).toBe('20px');
+  });
 });
