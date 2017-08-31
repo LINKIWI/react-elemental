@@ -139,7 +139,7 @@ class Button extends Component {
 
     const style = {
       backgroundColor: secondary ? 'white' : color,
-      border: secondary ? `1px solid ${color}` : 'none',
+      border: secondary ? `2px solid ${color}` : 'none',
       borderRadius: 0,
       cursor: 'pointer',
       opacity: disabled ? 0.4 : 1,
