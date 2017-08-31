@@ -23,8 +23,10 @@ const SampleTextArea = () => (
         label="Text area"
         sublabel="Type some monospaced text in here."
         placeholder="Type away"
-        height={100}
-        width={600}
+        style={{
+          height: '100px',
+          width: '600px',
+        }}
       />
     </Spacing>
 
@@ -39,8 +41,10 @@ const SampleTextArea = () => (
         label="Oh noes"
         error="Some error message here"
         value="Bad text"
-        height={100}
-        width={600}
+        style={{
+          height: '100px',
+          width: '600px',
+        }}
       />
     </Spacing>
   </div>
