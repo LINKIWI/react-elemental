@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Color from 'color';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-import { colorRatio } from 'util/color';
 
 const noop = () => {};
 
-const HOVER_INTENSITY_RATIO = 1.05;
-const ACTIVE_INTENSITY_RATIO = 0.95;
+const COLOR_INTENSITY_RATIO = 0.08;
 
 const STATE_IDLE = 'idle';
 const STATE_HOVER = 'hover';
@@ -63,8 +62,8 @@ class Button extends Component {
       buttonState: STATE_IDLE,
       buttonColors: {
         [STATE_IDLE]: color,
-        [STATE_HOVER]: colorRatio(color, HOVER_INTENSITY_RATIO),
-        [STATE_ACTIVE]: colorRatio(color, ACTIVE_INTENSITY_RATIO),
+        [STATE_HOVER]: new Color(color).lighten(COLOR_INTENSITY_RATIO).string(),
+        [STATE_ACTIVE]: new Color(color).darken(COLOR_INTENSITY_RATIO).string(),
       },
     };
   }
@@ -76,8 +75,8 @@ class Button extends Component {
       this.setState({
         buttonColors: {
           [STATE_IDLE]: nextProps.color,
-          [STATE_HOVER]: colorRatio(nextProps.color, HOVER_INTENSITY_RATIO),
-          [STATE_ACTIVE]: colorRatio(nextProps.color, ACTIVE_INTENSITY_RATIO),
+          [STATE_HOVER]: new Color(nextProps.color).lighten(COLOR_INTENSITY_RATIO).string(),
+          [STATE_ACTIVE]: new Color(nextProps.color).darken(COLOR_INTENSITY_RATIO).string(),
         },
       });
     }

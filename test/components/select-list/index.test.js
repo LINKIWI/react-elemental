@@ -1,4 +1,5 @@
 import React from 'react';
+import Color from 'color';
 import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import SelectList from 'components/select-list';
@@ -93,16 +94,40 @@ describe('Select list', () => {
     expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.red);
   });
 
-  test('Hover state change', () => {
+  test('Hover state change, regular', () => {
     const selectList = mount(
       <SelectList {...defaultProps} />,
     );
 
     expect(selectList.state().isHovered).toBe(false);
+    expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.gray10);
     selectList.find(SelectListPlaceholder).simulate('mouseenter');
     expect(selectList.state().isHovered).toBe(true);
+    expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.gray20);
     selectList.find(SelectListPlaceholder).simulate('mouseleave');
     expect(selectList.state().isHovered).toBe(false);
+    expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.gray10);
+  });
+
+  test('Hover state change, error state', () => {
+    const hoverRed = new Color(colors.red).lighten(0.7).string();
+    const props = {
+      ...defaultProps,
+      error: 'error',
+    };
+
+    const selectList = mount(
+      <SelectList {...props} />,
+    );
+
+    expect(selectList.state().isHovered).toBe(false);
+    expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.redLight);
+    selectList.find(SelectListPlaceholder).simulate('mouseenter');
+    expect(selectList.state().isHovered).toBe(true);
+    expect(selectList.find(SelectListPlaceholder).props().color).toBe(hoverRed);
+    selectList.find(SelectListPlaceholder).simulate('mouseleave');
+    expect(selectList.state().isHovered).toBe(false);
+    expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.redLight);
   });
 
   test('Focus state change', () => {
