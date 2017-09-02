@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spacing, Text, TextField } from 'react-elemental';
+import { Button, SelectList, Spacing, Text, TextField } from 'react-elemental';
 
 const SampleTextField = () => (
   <div>
@@ -41,6 +41,29 @@ const SampleTextField = () => (
           value="Some invalid user input"
           error="That's not a number."
         />
+      </Spacing>
+
+      <Spacing style={{ display: 'flex' }} bottom>
+        <Spacing size="tiny" right inline>
+          <TextField
+            placeholder="Name"
+            style={{
+              width: '400px',
+            }}
+          />
+        </Spacing>
+
+        <Spacing size="tiny" right inline>
+          <SelectList
+            width="150px"
+            options={[
+              { label: 'Option 1', value: '1' },
+              { label: 'Option 2', value: '2' },
+            ]}
+          />
+        </Spacing>
+
+        <Button text="Submit" />
       </Spacing>
     </Spacing>
 

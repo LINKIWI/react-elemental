@@ -45,7 +45,7 @@ class TextField extends Component {
     const primaryStyle = {
       border: `1px solid ${primaryIdleColor}`,
       boxSizing: 'border-box',
-      padding: '8px',
+      padding: '10px',
       ':hover': {
         border: `1px solid ${primaryHoverColor}`,
       },
