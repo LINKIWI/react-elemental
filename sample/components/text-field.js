@@ -15,7 +15,7 @@ const SampleTextField = () => (
     <Spacing size="huge" bottom>
       <Spacing bottom>
         <Text size="iota" color="gray70" uppercase bold>
-          Generic
+          Primary
         </Text>
       </Spacing>
 
@@ -33,13 +33,38 @@ const SampleTextField = () => (
           sublabel="This is a sublabel, usually used for providing instructions text"
         />
       </Spacing>
+
+      <Spacing bottom>
+        <TextField
+          label="Number"
+          sublabel="Enter any number"
+          value="Some invalid user input"
+          error="That's not a number."
+        />
+      </Spacing>
     </Spacing>
 
     <Spacing size="huge" bottom>
       <Spacing bottom>
         <Text size="iota" color="gray70" uppercase bold>
-          Error state
+          Secondary
         </Text>
+      </Spacing>
+
+      <Spacing bottom>
+        <TextField placeholder="Placeholder text" secondary />
+      </Spacing>
+
+      <Spacing bottom>
+        <TextField label="This is a label" secondary />
+      </Spacing>
+
+      <Spacing bottom>
+        <TextField
+          label="This is a label"
+          sublabel="This is a sublabel, usually used for providing instructions text"
+          secondary
+        />
       </Spacing>
 
       <Spacing bottom>
@@ -48,6 +73,7 @@ const SampleTextField = () => (
           sublabel="Enter any number"
           value="Some invalid user input"
           error="That's not a number."
+          secondary
         />
       </Spacing>
     </Spacing>

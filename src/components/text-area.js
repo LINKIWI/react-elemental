@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-import { secondaryFontStyle } from '../styles/font';
+import { secondaryFontStyle } from 'styles/font';
 
 /**
  * Styled textarea element for blobs of text input.
