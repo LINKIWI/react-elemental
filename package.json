@@ -2,20 +2,22 @@
   "name": "react-elemental",
   "version": "0.0.4",
   "description": "Flat UI library for React",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "webpack --config config/webpack-lib.js",
-    "build-watch": "npm run build -- --watch",
+    "clean": "rm -rf dist && rm -rf lib",
+    "build": "babel src/ -d lib/",
+    "build-dist": "webpack --config config/webpack-lib.js",
+    "build-dist-watch": "npm run build-dist -- --watch",
     "build-sample": "npm run build && webpack --config config/webpack-sample.js",
     "start": "webpack-dev-server --content-base sample/ --config config/webpack-sample.js --watch",
-    "dev": "concurrently --kill-others --prefix name --prefix-colors cyan.bold,yellow.bold --names HTTP,JS 'npm run start' 'npm run build-watch'",
+    "dev": "concurrently --kill-others --prefix name --prefix-colors cyan.bold,yellow.bold --names HTTP,JS 'npm run start' 'npm run build-dist-watch'",
     "lint": "eslint src test sample config",
     "test": "jest --verbose test",
     "test-watch": "npm run test -- --watch",
     "cover": "npm run test -- --coverage",
     "coveralls": "npm run cover && cat coverage/lcov.info | coveralls",
-    "prepublish": "rm -rf dist && NODE_ENV=production npm run build && derive-pkg -d dist",
-    "publish": "npm publish dist"
+    "prepublish": "npm run clean && npm run build && derive-pkg -d lib",
+    "publish": "npm publish lib"
   },
   "repository": {
     "type": "git",

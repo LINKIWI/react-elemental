@@ -11,7 +11,7 @@ git reset --hard origin/${BRANCH}
 GIT_SHA=$(git sha)
 
 npm install --production=false
-npm run build
+npm run build-dist
 npm run build-sample
 
 cp dist/index.js /tmp/react-elemental-bundle
