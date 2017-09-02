@@ -3,8 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 module.exports = {
   entry: {
     index: './src/index.js',
@@ -23,11 +21,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
-      {
-        test: /\.txt$/,
-        exclude: /node_modules/,
-        loader: 'raw-loader',
-      },
     ],
   },
   externals: {
@@ -35,15 +28,15 @@ module.exports = {
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    isProduction && new webpack.DefinePlugin({
+    new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    isProduction && new webpack.LoaderOptionsPlugin({
+    new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
-    isProduction && new webpack.optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       comments: false,
     }),
   ].filter(Boolean),

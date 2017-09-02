@@ -1,8 +1,8 @@
 import { colors } from 'styles/color';
-import karlaBold from 'resources/fonts/karla-bold.txt';
-import karlaRegular from 'resources/fonts/karla-regular.txt';
-import sourceCodeProMedium from 'resources/fonts/source-code-pro-medium.txt';
-import sourceCodeProRegular from 'resources/fonts/source-code-pro-regular.txt';
+import karlaBold from 'resources/fonts/karla-bold';
+import karlaRegular from 'resources/fonts/karla-regular';
+import sourceCodeProMedium from 'resources/fonts/source-code-pro-medium';
+import sourceCodeProRegular from 'resources/fonts/source-code-pro-regular';
 
 const DEFAULT_COLORS = {
   primary: colors.blue,
