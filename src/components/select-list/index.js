@@ -81,7 +81,7 @@ export default class SelectList extends Component {
     };
   }
 
-  onChange = (selectedOption) => () => {
+  handleChange = (selectedOption) => () => {
     this.props.onChange(selectedOption.value);
     this.setState({ selectedOption });
     this.toggleExpand();
@@ -100,7 +100,7 @@ export default class SelectList extends Component {
       isFocused: false,
       highlightedIdx: null,
     });
-  }, 50);
+  }, 100);
 
   handleKeyDown = (evt) => {
     const { keyCode } = evt;
@@ -115,7 +115,7 @@ export default class SelectList extends Component {
       const { highlightedIdx } = this.state;
 
       if (highlightedIdx !== null) {
-        return this.onChange(options[modulo(highlightedIdx, options.length)])();
+        return this.handleChange(options[modulo(highlightedIdx, options.length)])();
       }
 
       return this.toggleExpand();
@@ -239,7 +239,7 @@ export default class SelectList extends Component {
           arrowDirection={isExpanded ? 'up' : 'down'}
           width={width}
           error={error}
-          onClick={this.onChange(selectedOption)}
+          onClick={this.handleChange(selectedOption)}
           onHoverStateChange={this.handleHoverStateChange}
         />
 
@@ -254,7 +254,7 @@ export default class SelectList extends Component {
                   isSelected={
                     (highlightedIdx !== null) && modulo(highlightedIdx, options.length) === idx
                   }
-                  onClick={this.onChange(option)}
+                  onClick={this.handleChange(option)}
                 />
               ))}
             </div>
