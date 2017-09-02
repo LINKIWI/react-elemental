@@ -13,11 +13,12 @@ const SelectListPlaceholder = (props) => {
   const { label, color, width, arrowDirection, onClick, onHoverStateChange } = props;
 
   const style = {
+    alignItems: 'center',
     backgroundColor: 'white',
     border: `1px solid ${color}`,
     cursor: 'pointer',
     display: 'flex',
-    padding: '8px 10px',
+    padding: '10px',
     width,
     transition: 'all 0.15s ease',
   };
@@ -38,7 +39,7 @@ const SelectListPlaceholder = (props) => {
       onMouseLeave={onHoverStateChange(false)}
     >
       <Spacing size="small" padding right>
-        <Text size="kilo" inline>
+        <Text size="kilo" style={{ display: 'block' }} inline>
           {label}
         </Text>
       </Spacing>

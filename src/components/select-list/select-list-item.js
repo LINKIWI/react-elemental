@@ -33,12 +33,13 @@ export default class SelectListItem extends Component {
     const { isHover } = this.state;
 
     const style = {
+      alignItems: 'center',
       backgroundColor: (isHover || isSelected) ? colors.primaryLight : 'white',
       border: `1px solid ${colors.gray10}`,
       borderTop: 'none',
       cursor: 'pointer',
       display: 'flex',
-      padding: '8px 10px',
+      padding: '10px',
       transition: 'all 0.15s ease',
       width,
     };
@@ -51,7 +52,7 @@ export default class SelectListItem extends Component {
         onMouseLeave={this.handleHoverStateChange(false)}
       >
         <Spacing size="small" padding right>
-          <Text size="kilo" inline>
+          <Text size="kilo" style={{ display: 'block' }} inline>
             {label}
           </Text>
         </Spacing>
