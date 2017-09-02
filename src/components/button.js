@@ -164,6 +164,7 @@ class Button extends Component {
             <Text
               size={textSizeMap[size]}
               color={secondary ? color : 'gray5'}
+              style={{ pointerEvents: 'none' }}
               uppercase
               bold
               inline
