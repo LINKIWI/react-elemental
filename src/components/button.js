@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-import { hexToRGB, rgbToHex } from 'util/color';
+import { colorRatio } from 'util/color';
 
 const noop = () => {};
 
@@ -58,17 +58,13 @@ class Button extends Component {
 
     const { color = colors.primary } = props;
 
-    const rgb = hexToRGB(color);
-
     this.state = {
       ref: null,
       buttonState: STATE_IDLE,
       buttonColors: {
         [STATE_IDLE]: color,
-        [STATE_HOVER]: rgbToHex(rgb.map((component) =>
-          Math.min(Math.round(component * HOVER_INTENSITY_RATIO), 255))),
-        [STATE_ACTIVE]: rgbToHex(rgb.map((component) =>
-          Math.round(component * ACTIVE_INTENSITY_RATIO))),
+        [STATE_HOVER]: colorRatio(color, HOVER_INTENSITY_RATIO),
+        [STATE_ACTIVE]: colorRatio(color, ACTIVE_INTENSITY_RATIO),
       },
     };
   }
@@ -77,15 +73,11 @@ class Button extends Component {
     // Need to ensure that the idle, hover, and active colors are appropriately updated if the
     // button's base color changes.
     if (this.props.color !== nextProps.color) {
-      const rgb = hexToRGB(nextProps.color);
-
       this.setState({
         buttonColors: {
           [STATE_IDLE]: nextProps.color,
-          [STATE_HOVER]: rgbToHex(rgb.map((component) =>
-            Math.min(Math.round(component * HOVER_INTENSITY_RATIO), 255))),
-          [STATE_ACTIVE]: rgbToHex(rgb.map((component) =>
-            Math.round(component * ACTIVE_INTENSITY_RATIO))),
+          [STATE_HOVER]: colorRatio(nextProps.color, HOVER_INTENSITY_RATIO),
+          [STATE_ACTIVE]: colorRatio(nextProps.color, ACTIVE_INTENSITY_RATIO),
         },
       });
     }
