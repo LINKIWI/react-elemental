@@ -51,7 +51,7 @@ export default class SelectListItem extends Component {
         onMouseLeave={this.handleHoverStateChange(false)}
       >
         <Spacing size="small" padding right>
-          <Text size="iota" inline>
+          <Text size="kilo" inline>
             {label}
           </Text>
         </Spacing>

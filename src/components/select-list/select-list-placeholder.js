@@ -36,7 +36,7 @@ const SelectListPlaceholder = (props) => {
       onClick={onClick}
     >
       <Spacing size="small" padding right>
-        <Text size="iota" inline>
+        <Text size="kilo" inline>
           {label}
         </Text>
       </Spacing>
