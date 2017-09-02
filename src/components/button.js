@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-import { parseHexToRGB, rgbToHex } from 'util/color';
+import { hexToRGB, rgbToHex } from 'util/color';
 
 const noop = () => {};
 
@@ -58,7 +58,7 @@ class Button extends Component {
 
     const { color = colors.primary } = props;
 
-    const rgb = parseHexToRGB(color);
+    const rgb = hexToRGB(color);
 
     this.state = {
       ref: null,
@@ -77,7 +77,7 @@ class Button extends Component {
     // Need to ensure that the idle, hover, and active colors are appropriately updated if the
     // button's base color changes.
     if (this.props.color !== nextProps.color) {
-      const rgb = parseHexToRGB(nextProps.color);
+      const rgb = hexToRGB(nextProps.color);
 
       this.setState({
         buttonColors: {

@@ -4,7 +4,7 @@
  * @param {string} hex Color hex string, e.g. '#aabbcc'
  * @returns {Array} Array of [red, green, blue] integers in the range [0, 255].
  */
-export const parseHexToRGB = (hex) => {
+export const hexToRGB = (hex) => {
   const red = hex.substring(1, 3);
   const green = hex.substring(3, 5);
   const blue = hex.substring(5, 7);
