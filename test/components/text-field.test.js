@@ -35,4 +35,21 @@ describe('Text field', () => {
     expect(textField.find(Text).length).toBe(1);
     expect(textField.find(Text).at(0).children().text()).toBe('error');
   });
+
+  test('Primary style', () => {
+    const textField = shallow(
+      <TextField />,
+    );
+
+    expect(textField.find('input').props().style.border).toBeDefined();
+  });
+
+  test('Secondary style', () => {
+    const textField = shallow(
+      <TextField secondary />,
+    );
+
+    expect(textField.find('input').props().style.border).toBe(undefined);
+    expect(textField.find('input').props().style.borderBottom).toBeDefined();
+  });
 });
