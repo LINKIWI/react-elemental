@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import SelectList from 'components/select-list';
 import SelectListItem from 'components/select-list/select-list-item';
 import SelectListPlaceholder from 'components/select-list/select-list-placeholder';
@@ -91,6 +91,18 @@ describe('Select list', () => {
     expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.red);
     selectList.setState({ isFocused: false, isExpanded: true });
     expect(selectList.find(SelectListPlaceholder).props().color).toBe(colors.red);
+  });
+
+  test('Hover state change', () => {
+    const selectList = mount(
+      <SelectList {...defaultProps} />,
+    );
+
+    expect(selectList.state().isHovered).toBe(false);
+    selectList.find(SelectListPlaceholder).simulate('mouseenter');
+    expect(selectList.state().isHovered).toBe(true);
+    selectList.find(SelectListPlaceholder).simulate('mouseleave');
+    expect(selectList.state().isHovered).toBe(false);
   });
 
   test('Focus state change', () => {

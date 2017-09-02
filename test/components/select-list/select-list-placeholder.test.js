@@ -9,6 +9,7 @@ describe('Select list placeholder', () => {
     width: 400,
     arrowDirection: 'up',
     onClick: () => {},
+    onHoverStateChange: () => () => {},
   };
 
   test('Basic rendering', () => {
@@ -35,6 +36,25 @@ describe('Select list placeholder', () => {
     expect(onClick.mock.calls.length).toBe(0);
     selectListPlaceholder.at(0).simulate('click');
     expect(onClick).toBeCalled();
+  });
+
+  test('Hover state handler', () => {
+    const cb = jest.fn();
+    const onHoverStateChange = (isHovered) => () => cb(isHovered);
+    const props = {
+      ...defaultProps,
+      onHoverStateChange,
+    };
+
+    const selectListPlaceholder = shallow(
+      <SelectListPlaceholder {...props} />,
+    );
+
+    expect(cb.mock.calls.length).toBe(0);
+    selectListPlaceholder.at(0).simulate('mouseenter');
+    expect(cb).toBeCalledWith(true);
+    selectListPlaceholder.at(0).simulate('mouseleave');
+    expect(cb).toBeCalledWith(false);
   });
 
   test('Expanded placeholder style', () => {

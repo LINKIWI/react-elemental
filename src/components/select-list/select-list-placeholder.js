@@ -10,7 +10,7 @@ import { colors } from 'styles/color';
  * whether the dropdown is currently expanded.
  */
 const SelectListPlaceholder = (props) => {
-  const { label, color, width, arrowDirection, onClick } = props;
+  const { label, color, width, arrowDirection, onClick, onHoverStateChange } = props;
 
   const style = {
     backgroundColor: 'white',
@@ -34,6 +34,8 @@ const SelectListPlaceholder = (props) => {
     <div
       style={style}
       onClick={onClick}
+      onMouseEnter={onHoverStateChange(true)}
+      onMouseLeave={onHoverStateChange(false)}
     >
       <Spacing size="small" padding right>
         <Text size="kilo" inline>
@@ -57,6 +59,7 @@ SelectListPlaceholder.propTypes = {
   ]).isRequired,
   arrowDirection: PropTypes.oneOf(['up', 'down']).isRequired,
   onClick: PropTypes.func.isRequired,
+  onHoverStateChange: PropTypes.func.isRequired,
 };
 
 SelectListPlaceholder.defaultProps = {

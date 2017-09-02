@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Color from 'color';
 import Radium from 'radium';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
@@ -28,12 +29,11 @@ class TextField extends Component {
   render() {
     const { label, sublabel, error, secondary, style: overrides, ...props } = this.props;
 
-    const hoverRed = '#ffbabc';
-    const hoverBlue = '#a4d9f5';
+    const hoverRed = new Color(colors.red).lighten(0.7).string();
     const primaryIdleColor = error ? colors.redLight : colors.gray10;
     const secondaryIdleColor = error ? colors.redLight : colors.primaryLight;
     const primaryHoverColor = error ? hoverRed : colors.gray20;
-    const secondaryHoverColor = error ? hoverRed : hoverBlue;
+    const secondaryHoverColor = error ? hoverRed : new Color(colors.primary).lighten(0.4).string();
     const focusColor = error ? colors.red : colors.primary;
 
     const baseStyle = {

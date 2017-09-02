@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Color from 'color';
 import SelectListItem from 'components/select-list/select-list-item';
 import SelectListPlaceholder from 'components/select-list/select-list-placeholder';
 import Spacing from 'components/spacing';
@@ -71,6 +72,7 @@ export default class SelectList extends Component {
     this.state = {
       isExpanded: false,
       isFocused: false,
+      isHovered: false,
       selectedOption: {
         label: placeholder,
         value: PLACEHOLDER_VALUE,
@@ -84,6 +86,8 @@ export default class SelectList extends Component {
     this.setState({ selectedOption });
     this.toggleExpand();
   };
+
+  handleHoverStateChange = (isHovered) => () => this.setState({ isHovered });
 
   handleFocus = () => this.setState({ isFocused: true });
 
@@ -174,7 +178,7 @@ export default class SelectList extends Component {
       style: overrides,
       ...proxyProps
     } = this.props;
-    const { isExpanded, isFocused, selectedOption, highlightedIdx } = this.state;
+    const { isExpanded, isFocused, isHovered, selectedOption, highlightedIdx } = this.state;
 
     const dropdownElementsStyle = {
       position: 'absolute',
@@ -192,6 +196,9 @@ export default class SelectList extends Component {
       }
       if (isFocused) {
         return error ? colors.red : colors.gray35;
+      }
+      if (isHovered) {
+        return error ? new Color(colors.red).lighten(0.7).string() : colors.gray20;
       }
       return error ? colors.redLight : colors.gray10;
     })();
@@ -233,6 +240,7 @@ export default class SelectList extends Component {
           width={width}
           error={error}
           onClick={this.onChange(selectedOption)}
+          onHoverStateChange={this.handleHoverStateChange}
         />
 
         {
