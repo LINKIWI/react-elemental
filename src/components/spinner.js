@@ -54,7 +54,7 @@ export default class Spinner extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { color = colors.primary } = this.props;
+    const { color = colors.primary } = nextProps;
 
     if (!this.props.pulsate && nextProps.pulsate) {
       this.setState({ color: this.idleColor });
@@ -65,6 +65,10 @@ export default class Spinner extends Component {
       // If turning off pulsation, we should also reset the color back to the prop-specified color.
       this.setState({ color });
       clearInterval(this.interval);
+    }
+
+    if (this.props.color !== color) {
+      this.setState({ color });
     }
   }
 

@@ -123,10 +123,23 @@ describe('Spinner', () => {
     clock.tick(600);
     expect(spinner.state().color).toBe('unset');
     spinner.setProps({ color: colors.green });
-    clock.tick(600);
     expect(spinner.state().color).toBe(colors.green);
+    clock.tick(600);
+    expect(spinner.state().color).toBe('unset');
 
     spinner.unmount();
     clock.restore();
+  });
+
+  test('Changes in color prop with pulsation disabled', () => {
+    const spinner = mount(
+      <Spinner color={colors.green} pulsate={false} transparent />,
+    );
+
+    expect(spinner.state().color).toBe(colors.green);
+    spinner.setProps({ color: undefined });
+    expect(spinner.state().color).toBe(colors.primary);
+
+    spinner.unmount();
   });
 });
