@@ -59,7 +59,7 @@ export default class Spinner extends Component {
     const { color: pulseColor = colors.primary } = this.props;
 
     this.setState(({ color }) => ({
-      color: (color === pulseColor) ? this.idleColor : pulseColor,
+      color: (color === this.idleColor) ? pulseColor : this.idleColor,
     }));
   };
 
