@@ -11,6 +11,8 @@ const sizeMap = {
 
 const DEFAULT_IDLE_COLOR = colors.gray5;
 
+const PULSATION_INTERVAL = 600;
+
 /**
  * Indeterminate progress indication spinner.
  */
@@ -47,13 +49,32 @@ export default class Spinner extends Component {
     const { pulsate } = this.props;
 
     if (pulsate) {
-      this.interval = setInterval(this.tick, 600);
+      this.startPulsation();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { color = colors.primary } = this.props;
+
+    if (!this.props.pulsate && nextProps.pulsate) {
+      this.setState({ color: this.idleColor });
+      this.startPulsation();
+    }
+
+    if (this.props.pulsate && !nextProps.pulsate) {
+      // If turning off pulsation, we should also reset the color back to the prop-specified color.
+      this.setState({ color });
+      clearInterval(this.interval);
     }
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
+  startPulsation = () => {
+    this.interval = setInterval(this.tick, PULSATION_INTERVAL);
+  };
 
   tick = () => {
     const { color: pulseColor = colors.primary } = this.props;

@@ -78,4 +78,55 @@ describe('Spinner', () => {
     spinner.unmount();
     clock.restore();
   });
+
+  test('Changes in pulsation prop', () => {
+    const clock = sinon.useFakeTimers();
+    const spinner = mount(
+      <Spinner
+        color={colors.primary}
+        pulsate={false}
+        transparent
+      />,
+    );
+
+    expect(spinner.state().color).toBe(colors.primary);
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.primary);
+
+    spinner.setProps({ pulsate: true });
+
+    expect(spinner.state().color).toBe('unset');
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.primary);
+    clock.tick(600);
+    expect(spinner.state().color).toBe('unset');
+
+    spinner.setProps({ pulsate: false });
+
+    expect(spinner.state().color).toBe(colors.primary);
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.primary);
+
+    spinner.unmount();
+    clock.restore();
+  });
+
+  test('Changes in color prop', () => {
+    const clock = sinon.useFakeTimers();
+    const spinner = mount(
+      <Spinner transparent />,
+    );
+
+    expect(spinner.state().color).toBe('unset');
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.primary);
+    clock.tick(600);
+    expect(spinner.state().color).toBe('unset');
+    spinner.setProps({ color: colors.green });
+    clock.tick(600);
+    expect(spinner.state().color).toBe(colors.green);
+
+    spinner.unmount();
+    clock.restore();
+  });
 });
