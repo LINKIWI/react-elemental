@@ -68,7 +68,7 @@
     "pre-commit": "^1.2.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1",
+    "react-test-renderer": "^16.1.0",
     "sinon": "^4.0.0",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
