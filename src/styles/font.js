@@ -1,5 +1,16 @@
 import { colors } from 'styles/color';
 
+export const fonts = {
+  primary: {
+    regular: '',
+    bold: '',
+  },
+  secondary: {
+    regular: '',
+    bold: '',
+  },
+};
+
 export const sizes = {
   alpha: '60px',
   beta: '54px',
@@ -12,15 +23,13 @@ export const sizes = {
 };
 
 export const primaryFontStyle = (size, color, bold) => ({
-  fontFamily: bold ? 'karla--bold' : 'karla--regular',
+  fontFamily: bold ? 'primary--bold' : 'primary--regular',
   fontSize: sizes[size] || size,
   color: colors[color] || color,
 });
 
 export const secondaryFontStyle = (size, color, bold) => ({
-  fontFamily: bold ? 'source-code-pro--medium' : 'source-code-pro--regular',
+  fontFamily: bold ? 'secondary--bold' : 'secondary--regular',
   fontSize: sizes[size] || size,
   color: colors[color] || color,
-  letterSpacing: '-0.03em',
-  lineHeight: '1.2em',
 });

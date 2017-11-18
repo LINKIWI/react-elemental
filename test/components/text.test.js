@@ -69,13 +69,13 @@ describe('Text', () => {
         text
       </Text>,
     );
-    expect(primaryText.find('p').props().style.fontFamily).toBe('karla--regular');
+    expect(primaryText.find('p').props().style.fontFamily).toBe('primary--regular');
 
     const secondaryText = shallow(
       <Text secondary>
         text
       </Text>,
     );
-    expect(secondaryText.find('p').props().style.fontFamily).toBe('source-code-pro--regular');
+    expect(secondaryText.find('p').props().style.fontFamily).toBe('secondary--regular');
   });
 });

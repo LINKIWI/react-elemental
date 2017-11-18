@@ -1,8 +1,5 @@
 import { colors } from 'styles/color';
-import karlaBold from 'resources/fonts/karla-bold';
-import karlaRegular from 'resources/fonts/karla-regular';
-import sourceCodeProMedium from 'resources/fonts/source-code-pro-medium';
-import sourceCodeProRegular from 'resources/fonts/source-code-pro-regular';
+import { fonts } from 'styles/font';
 
 const DEFAULT_COLORS = {
   primary: colors.blue,
@@ -11,15 +8,15 @@ const DEFAULT_COLORS = {
 };
 
 /**
- * Generate a font-face CSS style declaration.
+ * Generate a font-face CSS declaration.
  *
  * @param {string} name Name of the font.
- * @param {string} data Base64-encoded font data.
+ * @param {string} src Font src. May be URL or base64-encoded font data.
  */
-const fontFaceStyle = (name, data) => `
+const fontFaceStyle = (name, src) => `
   @font-face {
     font-family: '${name}';
-    src: url(data:application/x-font-ttf;base64,${data});
+    src: ${src};
   }
 `;
 
@@ -49,22 +46,29 @@ const injectCSS = (css) => {
  * Bootstrap Elemental. This will inject all necessary global CSS declarations and initialize custom
  * style overrides passed in as options.
  *
+ * @param {Object} fontOpts Describes the primary and secondary fonts.
  * @param {Object} colorOpts Optional color overrides for the library's default primary colors.
  */
-const bootstrap = (colorOpts = {}) => {
+const bootstrap = (fontOpts = {}, colorOpts = {}) => {
+  const { primary = {}, secondary = {} } = fontOpts;
   const bootstrapColors = {
     ...DEFAULT_COLORS,
     ...colorOpts,
   };
 
+  fonts.primary.regular = primary.regular || '';
+  fonts.primary.bold = primary.bold || '';
+  fonts.secondary.regular = secondary.regular || '';
+  fonts.secondary.bold = secondary.bold || '';
+
   colors.primary = bootstrapColors.primary;
   colors.primaryLight = bootstrapColors.primaryLight;
   colors.primaryDark = bootstrapColors.primaryDark;
 
-  injectCSS(fontFaceStyle('karla--regular', karlaRegular));
-  injectCSS(fontFaceStyle('karla--bold', karlaBold));
-  injectCSS(fontFaceStyle('source-code-pro--regular', sourceCodeProRegular));
-  injectCSS(fontFaceStyle('source-code-pro--medium', sourceCodeProMedium));
+  injectCSS(fontFaceStyle('primary--regular', fonts.primary.regular));
+  injectCSS(fontFaceStyle('primary--bold', fonts.primary.bold));
+  injectCSS(fontFaceStyle('secondary--regular', fonts.secondary.regular));
+  injectCSS(fontFaceStyle('secondary--bold', fonts.secondary.bold));
   injectCSS(universalSpacing);
 };
 

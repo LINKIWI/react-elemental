@@ -18,10 +18,10 @@ describe('Fonts', () => {
 
   test('Primary style bold variant', () => {
     const regular = primaryFontStyle('alpha', 'gray50', false);
-    expect(regular.fontFamily).toBe('karla--regular');
+    expect(regular.fontFamily).toBe('primary--regular');
 
     const bold = primaryFontStyle('alpha', 'gray50', true);
-    expect(bold.fontFamily).toBe('karla--bold');
+    expect(bold.fontFamily).toBe('primary--bold');
   });
 
   test('Primary style size and color fallbacks', () => {
@@ -40,10 +40,10 @@ describe('Fonts', () => {
 
   test('Secondary style bold variant', () => {
     const regular = secondaryFontStyle('alpha', 'gray50', false);
-    expect(regular.fontFamily).toBe('source-code-pro--regular');
+    expect(regular.fontFamily).toBe('secondary--regular');
 
     const bold = secondaryFontStyle('alpha', 'gray50', true);
-    expect(bold.fontFamily).toBe('source-code-pro--medium');
+    expect(bold.fontFamily).toBe('secondary--bold');
   });
 
   test('Secondary style size and color fallbacks', () => {
