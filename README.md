@@ -113,11 +113,18 @@ Toasts are used to present temporary notification alerts.
 Tooltips are used to provide contextual information on specific elements for purposes of user
 education.
 
-## Installation and Usage
+## Installation
 
 ```bash
 $ npm install --save react-elemental
 ```
+
+Note that the Elemental fonts are not bundled directly with the component library. This cuts down
+the size of `react-elemental` and allows you to inject fonts of your choosing into the library. To
+use the standard Elemental fonts, see the installation instructions of
+[`react-elemental-fonts`](https://www.npmjs.com/package/react-elemental-fonts).
+
+## Usage
 
 ```javascript
 import { bootstrap } from 'react-elemental';
@@ -125,7 +132,7 @@ import { bootstrap } from 'react-elemental';
 // As early as possible in your client-side rendering path, invoke the bootstrapping function.
 // This will inject some necessary global CSS into the document head and override default
 // configuration parameters with those you specify.
-bootstrap();
+bootstrap(...);
 
 const App = () => {
   ...
@@ -160,10 +167,19 @@ overrides for global constants used by `react-elemental`:
 ```javascript
 import { bootstrap } from 'react-elemental';
 
-bootstrap(colorOpts);
+bootstrap(fontOpts, colorOpts);
 ```
 
 All respected override options are as follows:
+
+#### `fontOpts`
+
+|Key|Value|Example|
+|-|-|-|
+|`primary.regular`|URL to the primary regular font.|`'url(data:application/x-font-ttf;base64,...)'`|
+|`primary.bold`|URL to the primary bold font.|`'url(data:application/x-font-ttf;base64,...)'`|
+|`secondary.regular`|URL to the secondary regular font.|`'url(data:application/x-font-ttf;base64,...)'`|
+|`secondary.regular`|URL to the secondary bold font.|`'url(data:application/x-font-ttf;base64,...)'`|
 
 #### `colorOpts`
 
