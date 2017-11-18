@@ -1,5 +1,9 @@
 import React from 'react';
 import { Spacing, bootstrap } from 'react-elemental';
+import karlaBold from 'react-elemental-fonts/karla-bold';
+import karlaRegular from 'react-elemental-fonts/karla-regular';
+import sourceCodeProMedium from 'react-elemental-fonts/source-code-pro-medium';
+import sourceCodeProRegular from 'react-elemental-fonts/source-code-pro-regular';
 import SampleAlert from './components/alert';
 import SampleButton from './components/button';
 import SampleCheckbox from './components/checkbox';
@@ -15,7 +19,16 @@ import SampleTextField from './components/text-field';
 import SampleToast from './components/toast';
 import SampleTooltip from './components/tooltip';
 
-bootstrap();
+bootstrap({
+  primary: {
+    regular: karlaRegular,
+    bold: karlaBold,
+  },
+  secondary: {
+    regular: sourceCodeProRegular,
+    bold: sourceCodeProMedium,
+  },
+});
 
 const App = () => (
   <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
