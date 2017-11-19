@@ -55,7 +55,7 @@
     "eslint": "^4.6.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-import-resolver-babel-module": "^3.0.0",
-    "eslint-plugin-disable": "^0.3.0",
+    "eslint-plugin-disable": "^1.0.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jest": "^21.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
