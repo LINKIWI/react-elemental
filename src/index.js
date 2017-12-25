@@ -1,6 +1,7 @@
 import Alert from 'components/alert';
 import Button from 'components/button';
 import Checkbox from 'components/checkbox';
+import Label from 'components/label';
 import Link from 'components/link';
 import LoadingBar from 'components/loading-bar';
 import Modal from 'components/modal';
@@ -23,6 +24,7 @@ export {
   Alert,
   Button,
   Checkbox,
+  Label,
   Link,
   LoadingBar,
   Modal,
