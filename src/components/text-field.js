@@ -12,22 +12,18 @@ import { primaryFontStyle } from 'styles/font';
  */
 class TextField extends Component {
   static propTypes = {
-    label: PropTypes.string,
-    sublabel: PropTypes.string,
     error: PropTypes.string,
     secondary: PropTypes.bool,
     style: PropTypes.object,
   };
   static defaultProps = {
-    label: null,
-    sublabel: null,
     error: null,
     secondary: false,
     style: {},
   };
 
   render() {
-    const { label, sublabel, error, secondary, style: overrides, ...props } = this.props;
+    const { error, secondary, style: overrides, ...props } = this.props;
 
     const hoverRed = new Color(colors.red).lighten(0.7).string();
     const primaryIdleColor = error ? colors.redLight : colors.gray10;
@@ -77,41 +73,18 @@ class TextField extends Component {
 
     return (
       <div>
-        {
-          (label || sublabel) && (
-            <Spacing size="tiny" bottom>
-              {
-                label && (
-                  <Text size="kilo" color="gray50" uppercase bold>
-                    {label}
-                  </Text>
-                )
-              }
-              {
-                label && (
-                  <Text size="lambda" color="gray25">
-                    {sublabel}
-                  </Text>
-                )
-              }
-            </Spacing>
-          )
-        }
-
         <input
           style={style}
           {...props}
         />
 
-        {
-          error && (
-            <Spacing size="micro" top>
-              <Text color="red" size="lambda" bold>
-                {error}
-              </Text>
-            </Spacing>
-          )
-        }
+        {error && (
+          <Spacing size="micro" top>
+            <Text color="red" size="lambda" bold>
+              {error}
+            </Text>
+          </Spacing>
+          )}
       </div>
     );
   }
