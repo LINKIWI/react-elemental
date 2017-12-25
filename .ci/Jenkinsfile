@@ -1,0 +1,38 @@
+pipeline {
+    agent {
+        docker 'docker.internal.kevinlin.info/infra/ci-base:0.0.5'
+    }
+
+    stages {
+        stage('Install') {
+            steps {
+                sh 'npm-s3 install'
+            }
+        }
+        stage('Test') {
+            parallel {
+                stage('Build') {
+                    steps {
+                        sh 'npm run build'
+                    }
+                }
+                stage('Lint') {
+                    steps {
+                        sh 'npm run lint'
+                    }
+                }
+                stage('Unit') {
+                    steps {
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}
