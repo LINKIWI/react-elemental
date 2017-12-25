@@ -1,34 +1,5 @@
 {
-  "parser": "babel-eslint",
-  "plugins": [
-    "disable",
-    "jest"
-  ],
-  "env": {
-    "jest/globals": true,
-    "browser": true
-  },
-  "rules": {
-    "arrow-parens": ["error", "always"],
-    "import/extensions": ["error", "never"],
-    "max-len": ["error", {
-      "code": 100,
-      "tabWidth": 2
-    }],
-    "react/jsx-filename-extension": "off",
-    "react/forbid-prop-types": "off"
-  },
-  "settings": {
-    "import/resolver": {
-      "babel-module": {}
-    },
-    "eslint-plugin-disable": {
-      "paths": {
-        "jsx-a11y": ["*"]
-      }
-    }
-  },
   "extends": [
-    "airbnb"
+    "@linkiwi/eslint-config"
   ]
 }
