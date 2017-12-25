@@ -82,8 +82,13 @@ export default class SelectList extends Component {
   }
 
   handleChange = (selectedOption) => () => {
-    this.props.onChange(selectedOption.value);
-    this.setState({ selectedOption });
+    const { selectedOption: currentSelectedOption } = this.state;
+
+    if (currentSelectedOption.value !== selectedOption.value) {
+      this.props.onChange(selectedOption.value);
+      this.setState({ selectedOption });
+    }
+
     this.toggleExpand();
   };
 
