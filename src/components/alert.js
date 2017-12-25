@@ -87,7 +87,7 @@ class Alert extends Component {
     }
 
     return (
-      <Spacing size="large" style={style} bottom {...proxyProps}>
+      <div style={style} {...proxyProps}>
         {
           dismissable && (
             <Text color="gray15" style={clearStyle} onClick={this.handleDismiss} inline>
@@ -105,7 +105,7 @@ class Alert extends Component {
             {message}
           </Text>
         </Spacing>
-      </Spacing>
+      </div>
     );
   }
 }
