@@ -22,41 +22,15 @@ const SampleLink = () => (
       <Spacing bottom>
         <Spacing size="micro" bottom>
           <Text size="kilo" color="gray30" uppercase bold>
-            Light
+            Regular
           </Text>
         </Spacing>
 
-        <div style={{ backgroundColor: colors.gray80 }}>
-          <Spacing padding top right bottom left>
-            <Link type="light" href="">
-              Use light links against dark backgrounds
-            </Link>
-          </Spacing>
-        </div>
-      </Spacing>
-
-      <Spacing bottom>
-        <Spacing size="micro" bottom>
-          <Text size="kilo" color="gray30" uppercase bold>
-            Dark
-          </Text>
-        </Spacing>
-
-        <Link type="dark" href="">
-          Use dark links in scenarios where additional color is distracting
-        </Link>
-      </Spacing>
-
-      <Spacing bottom>
-        <Spacing size="micro" bottom>
-          <Text size="kilo" color="gray30" uppercase bold>
-            Primary
-          </Text>
-        </Spacing>
-
-        <Link type="primary" href="">
-          Use primary links in most scenarios
-        </Link>
+        <Text color={colors.primary}>
+          <Link href="" activeColor={colors.black}>
+            Links will inherit whatever color is used in the parent Text element.
+          </Link>
+        </Text>
       </Spacing>
 
       <Spacing bottom>
@@ -66,9 +40,11 @@ const SampleLink = () => (
           </Text>
         </Spacing>
 
-        <Link type="primary" href="" plain>
-          Use plain links to disable the underline on hover
-        </Link>
+        <Text color={colors.primary}>
+          <Link type="plain" href="" activeColor={colors.black}>
+            Use plain links to disable the underline on hover
+          </Link>
+        </Text>
       </Spacing>
 
       <Spacing bottom>
@@ -78,21 +54,11 @@ const SampleLink = () => (
           </Text>
         </Spacing>
 
-        <Link type="primary" href="" underline>
-          Use underline links to always show the underline
-        </Link>
-      </Spacing>
-
-      <Spacing bottom>
-        <Spacing size="micro" bottom>
-          <Text size="kilo" color="gray30" uppercase bold>
-            Fake
-          </Text>
-        </Spacing>
-
-        <Link type="primary" fake>
-          Give the element the responsibility of an anchor tag, without actually navigating on click
-        </Link>
+        <Text color={colors.primary}>
+          <Link type="underline" href="" activeColor={colors.black}>
+            Use underline links to always show the underline
+          </Link>
+        </Text>
       </Spacing>
     </Spacing>
   </div>
