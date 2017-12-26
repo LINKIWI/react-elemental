@@ -118,5 +118,7 @@ describe('Modal', () => {
 
     expect(modal.childAt(0).props().style.width).toBe('100%');
     expect(modal.childAt(0).props().style.height).toBe('100%');
+
+    modal.unmount();
   });
 });

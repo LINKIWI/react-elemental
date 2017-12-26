@@ -3,6 +3,7 @@ import { mount, shallow } from 'enzyme';
 import Check from 'react-icons/lib/md/check';
 import Checkbox from 'components/checkbox';
 import Text from 'components/text';
+import { colors } from 'styles/color';
 
 describe('Checkbox', () => {
   test('Accepts proxy props', () => {
@@ -32,6 +33,16 @@ describe('Checkbox', () => {
     );
 
     expect(checkbox.find(Check).props().style.opacity).toBe(0);
+  });
+
+  test('Rendering of hovered checkbox', () => {
+    const checkbox = shallow(
+      <Checkbox />,
+    );
+
+    checkbox.find('button').simulate('mouseenter');
+
+    expect(checkbox.childAt(0).props().style.border).toBe(`1px solid ${colors.gray20}`);
   });
 
   test('Check change callback for unchecked checkbox', () => {
