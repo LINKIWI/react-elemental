@@ -4,6 +4,7 @@
   "description": "Example usage for react-elemental",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "start": "webpack-dev-server --disable-host-check --watch"
   },
   "repository": {
