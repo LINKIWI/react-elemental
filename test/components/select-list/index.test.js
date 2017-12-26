@@ -58,22 +58,6 @@ describe('Select list', () => {
     expect(selectList.find(SelectListItem).length).toBe(2);
   });
 
-  test('Label and sublabel rendering', () => {
-    const props = {
-      ...defaultProps,
-      label: 'label',
-      sublabel: 'sublabel',
-    };
-
-    const selectList = shallow(
-      <SelectList {...props} />,
-    );
-
-    expect(selectList.find(Text).length).toBe(2);
-    expect(selectList.find(Text).at(0).children().text()).toBe('label');
-    expect(selectList.find(Text).at(1).children().text()).toBe('sublabel');
-  });
-
   test('Error rendering', () => {
     const props = {
       ...defaultProps,

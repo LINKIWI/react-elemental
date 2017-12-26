@@ -34,8 +34,6 @@ const modulo = (num, modulus) => ((num % modulus) + modulus) % modulus;
  */
 export default class SelectList extends Component {
   static propTypes = {
-    label: PropTypes.string,
-    sublabel: PropTypes.string,
     placeholder: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string,
@@ -52,8 +50,6 @@ export default class SelectList extends Component {
   };
 
   static defaultProps = {
-    label: null,
-    sublabel: null,
     placeholder: 'Select an item...',
     options: [],
     width: '100%',
@@ -173,8 +169,6 @@ export default class SelectList extends Component {
 
   render() {
     const {
-      label,
-      sublabel,
       options,
       width,
       height,
@@ -216,27 +210,6 @@ export default class SelectList extends Component {
         style={overrides}
         {...proxyProps}
       >
-        {
-          (label || sublabel) && (
-            <Spacing size="tiny" bottom>
-              {
-                label && (
-                  <Text size="kilo" color="gray50" uppercase bold>
-                    {label}
-                  </Text>
-                )
-              }
-              {
-                label && (
-                  <Text size="lambda" color="gray25">
-                    {sublabel}
-                  </Text>
-                )
-              }
-            </Spacing>
-          )
-        }
-
         <SelectListPlaceholder
           label={selectedOption.label}
           color={outlineColor}
@@ -247,33 +220,29 @@ export default class SelectList extends Component {
           onHoverStateChange={this.handleHoverStateChange}
         />
 
-        {
-          isExpanded && (
-            <div style={dropdownElementsStyle}>
-              {options.map((option, idx) => (
-                <SelectListItem
-                  key={option.value}
-                  label={option.label}
-                  width={width}
-                  isSelected={
-                    (highlightedIdx !== null) && modulo(highlightedIdx, options.length) === idx
-                  }
-                  onClick={this.handleChange(option)}
-                />
-              ))}
-            </div>
-          )
-        }
+        {isExpanded && (
+          <div style={dropdownElementsStyle}>
+            {options.map((option, idx) => (
+              <SelectListItem
+                key={option.value}
+                label={option.label}
+                width={width}
+                isSelected={
+                  (highlightedIdx !== null) && modulo(highlightedIdx, options.length) === idx
+                }
+                onClick={this.handleChange(option)}
+              />
+            ))}
+          </div>
+        )}
 
-        {
-          error && (
-            <Spacing size="micro" top>
-              <Text color="red" size="lambda" bold>
-                {error}
-              </Text>
-            </Spacing>
-          )
-        }
+        {error && (
+          <Spacing size="micro" top>
+            <Text color="red" size="lambda" bold>
+              {error}
+            </Text>
+          </Spacing>
+        )}
       </div>
     );
   }
