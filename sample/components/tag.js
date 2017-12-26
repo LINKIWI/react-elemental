@@ -92,8 +92,8 @@ const SampleTag = () => (
 
       <Spacing size="small" bottom>
         <Text>
-          You can optionally specify that the tag is dismissable. When the user clicks the clear
-          icon, the tag will be permanently hidden.
+          You can optionally specify that the tag is dismissable. It is the responsibility of the
+          parent component to handle visibility state by reacting to the onDismiss callback.
         </Text>
       </Spacing>
 

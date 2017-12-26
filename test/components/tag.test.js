@@ -27,15 +27,14 @@ describe('Tag', () => {
   });
 
   test('Dismissable tag', () => {
+    const mockOnDismiss = jest.fn();
     const tag = shallow(
-      <Tag text="text" dismissable />,
+      <Tag text="text" onDismiss={mockOnDismiss} dismissable />,
     );
 
-    expect(tag.state().isVisible).toBe(true);
     expect(tag.find(Text).length).toBe(1);
     tag.find(Clear).simulate('click');
-    expect(tag.state().isVisible).toBe(false);
-    expect(tag.find(Text).length).toBe(0);
+    expect(mockOnDismiss).toBeCalled();
   });
 
   test('Clear icon size', () => {
