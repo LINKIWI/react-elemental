@@ -25,11 +25,12 @@ const Label = ({ label, sublabel, ...proxyProps }) => (
 );
 
 Label.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   sublabel: PropTypes.string,
 };
 
 Label.defaultProps = {
+  label: null,
   sublabel: null,
 };
 
