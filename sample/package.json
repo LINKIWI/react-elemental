@@ -16,7 +16,8 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-elemental": "file:.."
+    "react-elemental": "file:..",
+    "react-elemental-fonts": "^0.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
