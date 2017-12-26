@@ -12,6 +12,7 @@ import SampleLoadingBar from './components/loading-bar';
 import SampleModal from './components/modal';
 import SampleSelectList from './components/select-list';
 import SampleSpinner from './components/spinner';
+import SampleTabs from './components/tabs';
 import SampleTag from './components/tag';
 import SampleText from './components/text';
 import SampleTextArea from './components/text-area';
@@ -32,6 +33,7 @@ bootstrap({
 
 const App = () => (
   <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+    <SampleTabs />
     <SampleToast />
     <SampleModal />
     <SampleTooltip />

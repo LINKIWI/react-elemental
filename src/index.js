@@ -8,6 +8,7 @@ import Modal from 'components/modal';
 import SelectList from 'components/select-list';
 import Spacing from 'components/spacing';
 import Spinner from 'components/spinner';
+import Tabs from 'components/tabs';
 import Tag from 'components/tag';
 import Text from 'components/text';
 import TextArea from 'components/text-area';
@@ -31,6 +32,7 @@ export {
   SelectList,
   Spacing,
   Spinner,
+  Tabs,
   Tag,
   Text,
   TextArea,
