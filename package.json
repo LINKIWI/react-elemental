@@ -26,7 +26,6 @@
     "test"
   ],
   "dependencies": {
-    "@linkiwi/react-window-state": "^1.0.0",
     "color": "^2.0.1",
     "inline-style-prefixer": "^3.0.7",
     "prop-types": "^15.5.10",

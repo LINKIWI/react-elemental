@@ -10,7 +10,14 @@ import { colors } from 'styles/color';
  * whether the dropdown is currently expanded.
  */
 const SelectListPlaceholder = (props) => {
-  const { label, color, width, arrowDirection, onClick, onHoverStateChange } = props;
+  const {
+    label,
+    color,
+    width,
+    arrowDirection,
+    onClick,
+    onHoverStateChange,
+  } = props;
 
   const style = {
     alignItems: 'center',

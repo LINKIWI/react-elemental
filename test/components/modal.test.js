@@ -25,7 +25,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.childAt(0).simulate('click');
+    modal.childAt(0).childAt(0).simulate('click');
 
     expect(onClick).toBeCalled();
   });
@@ -71,8 +71,8 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.childAt(0).simulate('keydown', { keyCode: 80 });
-    modal.childAt(0).simulate('keydown', { keyCode: 27 });
+    modal.childAt(0).childAt(0).simulate('keydown', { keyCode: 80 });
+    modal.childAt(0).childAt(0).simulate('keydown', { keyCode: 27 });
     expect(onHide).toBeCalled();
   });
 
@@ -98,8 +98,8 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.instance().component.setState({ modal: mockRef });
-    modal.instance().component.componentDidUpdate({}, {});
+    modal.setState({ modal: mockRef });
+    modal.instance().componentDidUpdate({}, {});
 
     expect(mockRef.focus).toBeCalled();
   });
@@ -114,8 +114,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.instance().component.setState({ modal: mockRef });
-    modal.setState({ win: { width: 0, height: 0 } });
+    modal.setState({ modal: mockRef, windowWidth: 0, windowHeight: 0 });
 
     expect(modal.childAt(0).props().style.width).toBe('100%');
     expect(modal.childAt(0).props().style.height).toBe('100%');
