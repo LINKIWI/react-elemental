@@ -79,6 +79,12 @@ Tags serve as simple, textual status indicators.
 
 ![Green](https://linkiwi.github.io/react-elemental/images/tag/green.png)
 
+#### `Tabs`
+
+Tabs allow visual segmentation of categories within the same semantic hierarchy.
+
+![Selected](https://linkiwi.github.io/react-elemental/images/tabs/selected.png)
+
 #### `Text`
 
 Text elements automatically apply font styles and sizes. The Elemental typeface is Karla (primary),

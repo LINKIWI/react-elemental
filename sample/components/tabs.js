@@ -16,7 +16,7 @@ export default class SampleTabs extends Component {
             Tabs
           </Text>
           <Text>
-            Tabs allows visual segmentation of categories within the same semantic hierarchy.
+            Tabs allow visual segmentation of categories within the same semantic hierarchy.
           </Text>
         </Spacing>
 
