@@ -32,6 +32,15 @@ const universalSpacing = `
 `;
 
 /**
+ * Remove the annoying outline that appears on all depressed buttons in Firefox
+ */
+const buttonOutlines = `
+  button::-moz-focus-inner {
+    border: 0;
+  }
+`;
+
+/**
  * Inject a CSS style declaration into the document head.
  *
  * @param {string} css Valid CSS string.
@@ -70,6 +79,7 @@ const bootstrap = (fontOpts = {}, colorOpts = {}) => {
   injectCSS(fontFaceStyle('secondary--regular', fonts.secondary.regular));
   injectCSS(fontFaceStyle('secondary--bold', fonts.secondary.bold));
   injectCSS(universalSpacing);
+  injectCSS(buttonOutlines);
 };
 
 export default bootstrap;
