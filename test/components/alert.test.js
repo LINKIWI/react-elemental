@@ -46,17 +46,16 @@ describe('Alert', () => {
   });
 
   test('Dismissable alert', () => {
+    const onDismiss = jest.fn();
     const alert = shallow(
       <Alert
         type="info"
         title="title"
         message="message"
+        onDismiss={onDismiss}
         dismissable
       />,
     );
-
-    expect(alert.state().isVisible).toBe(true);
-    expect(alert.find(Text).length).toBe(3);
 
     const dismissIcon = alert.find(Text).at(0);
     expect(dismissIcon.props().onClick).toBeTruthy();
@@ -64,7 +63,7 @@ describe('Alert', () => {
 
     dismissIcon.simulate('click');
 
-    expect(alert.find(dismissIcon.props()).length).toBe(0);
+    expect(onDismiss).toBeCalled();
   });
 
   test('Info, success, warn, and error variants', () => {
