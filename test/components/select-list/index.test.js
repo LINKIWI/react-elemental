@@ -58,22 +58,6 @@ describe('Select list', () => {
     expect(selectList.find(SelectListItem).length).toBe(2);
   });
 
-  test('Label and sublabel rendering', () => {
-    const props = {
-      ...defaultProps,
-      label: 'label',
-      sublabel: 'sublabel',
-    };
-
-    const selectList = shallow(
-      <SelectList {...props} />,
-    );
-
-    expect(selectList.find(Text).length).toBe(2);
-    expect(selectList.find(Text).at(0).children().text()).toBe('label');
-    expect(selectList.find(Text).at(1).children().text()).toBe('sublabel');
-  });
-
   test('Error rendering', () => {
     const props = {
       ...defaultProps,
@@ -131,20 +115,31 @@ describe('Select list', () => {
   });
 
   test('Focus state change', () => {
-    const clock = sinon.useFakeTimers();
     const selectList = shallow(
       <SelectList {...defaultProps} />,
     );
 
+    selectList.instance().dropdown = document.createElement('div');
+
     expect(selectList.state().isFocused).toBe(false);
     selectList.at(0).simulate('focus');
     expect(selectList.state().isFocused).toBe(true);
-    selectList.at(0).simulate('blur');
-    expect(selectList.state().isFocused).toBe(true);
-    clock.tick(100);
+    selectList.at(0).simulate('blur', { relatedTarget: document.createElement('div') });
     expect(selectList.state().isFocused).toBe(false);
+  });
 
-    clock.restore();
+  test('Blur is skipped if a dropdown option is selected', () => {
+    const selectList = shallow(
+      <SelectList {...defaultProps} />,
+    );
+
+    selectList.instance().dropdown = document.createElement('div');
+
+    expect(selectList.state().isFocused).toBe(false);
+    selectList.at(0).simulate('focus');
+    expect(selectList.state().isFocused).toBe(true);
+    selectList.at(0).simulate('blur', { relatedTarget: selectList.instance().dropdown });
+    expect(selectList.state().isFocused).toBe(true);
   });
 
   test('Toggling expansion state', () => {
@@ -246,6 +241,8 @@ describe('Select list', () => {
       <SelectList {...props} />,
     );
 
+    selectList.instance().container = document.createElement('div');
+
     selectList.at(0).simulate('keydown', { keyCode: 38, preventDefault });
     expect(preventDefault).toBeCalled();
     expect(selectList.state().isExpanded).toBe(true);
@@ -272,6 +269,8 @@ describe('Select list', () => {
       <SelectList {...props} />,
     );
 
+    selectList.instance().container = document.createElement('div');
+
     selectList.at(0).simulate('keydown', { keyCode: 40, preventDefault });
     expect(preventDefault).toBeCalled();
     expect(selectList.state().isExpanded).toBe(true);
@@ -297,6 +296,8 @@ describe('Select list', () => {
     const selectList = shallow(
       <SelectList {...props} />,
     );
+
+    selectList.instance().container = document.createElement('div');
 
     selectList.at(0).simulate('keydown', { keyCode: 75, preventDefault });
     expect(selectList.state().highlightedIdx).toBe(null);

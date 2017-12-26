@@ -1,11 +1,9 @@
 language: node_js
 node_js:
-  - "6"
+  - "8"
 install:
   - npm install
 script:
   - npm run build
-  - npm run build-dist
-  - npm run build-sample
   - npm run lint
   - npm run coveralls

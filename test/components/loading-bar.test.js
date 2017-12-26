@@ -1,12 +1,12 @@
 import React from 'react';
 import sinon from 'sinon';
-import { mount } from 'enzyme';
-import LoadingBar, { POSITION_LEFT, POSITION_RIGHT, BOUNCE_INTERVAL } from 'components/loading-bar';
+import { shallow } from 'enzyme';
+import LoadingBar, { POSITION_LEFT, POSITION_RIGHT } from 'components/loading-bar';
 
 describe('Loading bar', () => {
   test('Accepts proxy props', () => {
     const onClick = jest.fn();
-    const loadingBar = mount(
+    const loadingBar = shallow(
       <LoadingBar
         onClick={onClick}
       />,
@@ -16,12 +16,10 @@ describe('Loading bar', () => {
   });
 
   test('Standard rendering', () => {
-    const loadingBar = mount(
+    const loadingBar = shallow(
       <LoadingBar
         color="white"
         thickness={3}
-        width="100px"
-        position="absolute"
       />,
     );
 
@@ -30,8 +28,8 @@ describe('Loading bar', () => {
 
   test('State update logic', () => {
     const clock = sinon.useFakeTimers();
-    const loadingBar = mount(
-      <LoadingBar />,
+    const loadingBar = shallow(
+      <LoadingBar duration={500} delay={50} />,
     );
 
     // Initial state
@@ -42,7 +40,7 @@ describe('Loading bar', () => {
     // Simulate time events
     clock.tick(5);
     expect(loadingBar.state().position).toBe(POSITION_RIGHT);
-    clock.tick(BOUNCE_INTERVAL);
+    clock.tick(550);
     expect(loadingBar.state().position).toBe(POSITION_LEFT);
 
     // Unmount clears timeout

@@ -86,26 +86,26 @@ const SampleTag = () => (
     <Spacing size="huge" bottom>
       <Spacing bottom>
         <Text size="iota" color="gray70" uppercase bold>
-          Dismissable tags
+          Dismissible tags
         </Text>
       </Spacing>
 
       <Spacing size="small" bottom>
         <Text>
-          You can optionally specify that the tag is dismissable. When the user clicks the clear
-          icon, the tag will be permanently hidden.
+          You can optionally specify that the tag is dismissible. It is the responsibility of the
+          parent component to handle visibility state by reacting to the onDismiss callback.
         </Text>
       </Spacing>
 
       <Spacing size="tiny" right inline>
-        <Tag text="Dismiss me" dismissable />
+        <Tag text="Dismiss me" dismissible />
       </Spacing>
       <Spacing size="tiny" right inline>
         <Tag
           text="Dismiss me again"
           outlineColor={colors.green}
           backgroundColor={colors.greenLight}
-          dismissable
+          dismissible
         />
       </Spacing>
     </Spacing>

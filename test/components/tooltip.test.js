@@ -12,8 +12,8 @@ describe('Tooltip', () => {
       </Tooltip>,
     );
 
-    expect(tooltip.at(0).childAt(0)).toBeDefined();
-    expect(tooltip.at(0).childAt(1)).toBeDefined();
+    expect(tooltip.childAt(0).childAt(0)).toBeDefined();
+    expect(tooltip.childAt(0).childAt(1)).toBeDefined();
   });
 
   test('Persistent modifier', () => {
@@ -26,7 +26,7 @@ describe('Tooltip', () => {
       </Tooltip>,
     );
 
-    expect(tooltip.at(0).childAt(0).props().style.visibility).toBe('inherit');
+    expect(tooltip.childAt(0).childAt(0).props().style.visibility).toBe('inherit');
   });
 
   test('Tooltip display is toggled by mouse events', () => {
@@ -36,16 +36,14 @@ describe('Tooltip', () => {
         children
       </Tooltip>,
     );
-    const container = tooltip.at(0);
-    const contents = tooltip.childAt(0);
 
-    expect(contents.props().style.opacity).toBe(0);
-    container.simulate('mouseOver');
-    expect(contents.props().style.opacity).toBe(0.95);
-    container.simulate('mouseOut');
+    expect(tooltip.childAt(0).childAt(0).props().style.opacity).toBe(0);
+    tooltip.childAt(0).simulate('mouseOver');
+    expect(tooltip.childAt(0).childAt(0).props().style.opacity).toBe(0.95);
+    tooltip.childAt(0).simulate('mouseOut');
     // Allow a sufficiently long amount of time to pass
     clock.tick(GRACE_TIMEOUT_INTERVAL * 100);
-    expect(contents.props().style.opacity).toBe(0);
+    expect(tooltip.update().childAt(0).childAt(0).props().style.opacity).toBe(0);
 
     clock.restore();
   });
@@ -57,28 +55,26 @@ describe('Tooltip', () => {
         children
       </Tooltip>,
     );
-    const container = tooltip.at(0);
-    const contents = tooltip.childAt(0);
 
-    expect(contents.props().style.opacity).toBe(0);
-    container.simulate('mouseOver');
-    expect(contents.props().style.opacity).toBe(0.95);
-    container.simulate('mouseOut');
-    expect(contents.props().style.opacity).toBe(0.95);
+    expect(tooltip.childAt(0).childAt(0).props().style.opacity).toBe(0);
+    tooltip.childAt(0).simulate('mouseOver');
+    expect(tooltip.childAt(0).childAt(0).props().style.opacity).toBe(0.95);
+    tooltip.childAt(0).simulate('mouseOut');
+    expect(tooltip.childAt(0).childAt(0).props().style.opacity).toBe(0.95);
     clock.tick(GRACE_TIMEOUT_INTERVAL / 2);
-    expect(contents.props().style.opacity).toBe(0.95);
+    expect(tooltip.update().childAt(0).childAt(0).props().style.opacity).toBe(0.95);
     clock.tick(GRACE_TIMEOUT_INTERVAL / 2);
-    expect(contents.props().style.opacity).toBe(0);
-    container.simulate('mouseOver');
-    expect(contents.props().style.opacity).toBe(0.95);
+    expect(tooltip.update().childAt(0).childAt(0).props().style.opacity).toBe(0);
+    tooltip.childAt(0).simulate('mouseOver');
+    expect(tooltip.childAt(0).childAt(0).props().style.opacity).toBe(0.95);
     clock.tick(GRACE_TIMEOUT_INTERVAL / 2);
-    container.simulate('mouseOver');
-    expect(contents.props().style.opacity).toBe(0.95);
-    container.simulate('mouseOut');
+    tooltip.update().childAt(0).simulate('mouseOver');
+    expect(tooltip.childAt(0).childAt(0).props().style.opacity).toBe(0.95);
+    tooltip.childAt(0).simulate('mouseOut');
     clock.tick(GRACE_TIMEOUT_INTERVAL / 2);
-    expect(contents.props().style.opacity).toBe(0.95);
+    expect(tooltip.update().childAt(0).childAt(0).props().style.opacity).toBe(0.95);
     clock.tick(GRACE_TIMEOUT_INTERVAL / 2);
-    expect(contents.props().style.opacity).toBe(0);
+    expect(tooltip.update().childAt(0).childAt(0).props().style.opacity).toBe(0);
 
     clock.restore();
   });
@@ -90,7 +86,7 @@ describe('Tooltip', () => {
       </Tooltip>,
     );
 
-    expect(tooltip.childAt(0).props().style.bottom).toBeUndefined();
-    expect(tooltip.childAt(0).props().style.top).toBeDefined();
+    expect(tooltip.childAt(0).childAt(0).props().style.bottom).toBeUndefined();
+    expect(tooltip.childAt(0).childAt(0).props().style.top).toBeDefined();
   });
 });

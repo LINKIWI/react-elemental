@@ -2,7 +2,7 @@
   "env": {
     "production": {
       "presets": [
-        ["es2015", {"modules": false}],
+        ["env", {"modules": false}],
         "react",
         "stage-0"
       ],
@@ -12,7 +12,7 @@
     }
   },
   "presets": [
-    "es2015",
+    "env",
     "react",
     "stage-0"
   ],
@@ -20,10 +20,7 @@
     ["module-resolver", {
       "root": [
         "./src"
-      ],
-      "alias": {
-        "react-elemental": "./dist"
-      }
+      ]
     }]
   ]
 }

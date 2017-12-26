@@ -12,19 +12,6 @@ describe('Text area', () => {
     expect(textArea.find('textarea').props().rows).toBe(40);
   });
 
-  test('Label and sublabels', () => {
-    const textArea = shallow(
-      <TextArea
-        label="label"
-        sublabel="sublabel"
-      />,
-    );
-
-    expect(textArea.find(Text).length).toBe(2);
-    expect(textArea.find(Text).at(0).children().text()).toBe('label');
-    expect(textArea.find(Text).at(1).children().text()).toBe('sublabel');
-  });
-
   test('Error message', () => {
     const textArea = shallow(
       <TextArea

@@ -6,8 +6,7 @@ import SelectListPlaceholder from 'components/select-list/select-list-placeholde
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-
-const noop = () => {};
+import noop from 'util/noop';
 
 // Generic, (hopefully) unique key reserved for the placeholder item in the select list.
 const PLACEHOLDER_VALUE = 'select-list-placeholder-item-value';
@@ -35,8 +34,6 @@ const modulo = (num, modulus) => ((num % modulus) + modulus) % modulus;
  */
 export default class SelectList extends Component {
   static propTypes = {
-    label: PropTypes.string,
-    sublabel: PropTypes.string,
     placeholder: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string,
@@ -53,8 +50,6 @@ export default class SelectList extends Component {
   };
 
   static defaultProps = {
-    label: null,
-    sublabel: null,
     placeholder: 'Select an item...',
     options: [],
     width: '100%',
@@ -81,10 +76,18 @@ export default class SelectList extends Component {
     };
   }
 
+  setDropdownRef = (ref) => {
+    this.dropdown = ref;
+  };
+
+  setContainerRef = (ref) => {
+    this.container = ref;
+  };
+
   handleChange = (selectedOption) => () => {
     this.props.onChange(selectedOption.value);
-    this.setState({ selectedOption });
-    this.toggleExpand();
+    this.setState({ selectedOption, isExpanded: false });
+    this.container.focus();
   };
 
   handleHoverStateChange = (isHovered) => () => this.setState({ isHovered });
@@ -92,15 +95,20 @@ export default class SelectList extends Component {
   handleFocus = () => this.setState({ isFocused: true });
 
   // The dropdown will be blurred on any mouse event that isn't on the select item placeholder.
-  // In order to allow the onClick event of the dropdown items to fire before triggering normal
-  // onBlur behavior, we will delay the standard blur behavior.
-  handleBlur = () => setTimeout(() => {
+  // In order to allow the onClick event of the dropdown items to fire instead of triggering the
+  // normal onBlur behavior, only hide the dropdown items if the click target is outside of the
+  // dropdown's containing DOM node.
+  handleBlur = (evt) => {
+    if (evt && this.dropdown.contains(evt.relatedTarget)) {
+      return;
+    }
+
     this.setState({
       isExpanded: false,
       isFocused: false,
       highlightedIdx: null,
     });
-  }, 100);
+  };
 
   handleKeyDown = (evt) => {
     const { keyCode } = evt;
@@ -112,13 +120,13 @@ export default class SelectList extends Component {
     };
 
     const selectHandler = () => {
-      const { highlightedIdx } = this.state;
+      const { highlightedIdx, isExpanded } = this.state;
 
-      if (highlightedIdx !== null) {
-        return this.handleChange(options[modulo(highlightedIdx, options.length)])();
+      if (highlightedIdx === null || !isExpanded) {
+        return this.toggleExpand();
       }
 
-      return this.toggleExpand();
+      return this.handleChange(options[modulo(highlightedIdx, options.length)])();
     };
 
     const escapeHandler = () => this.handleBlur();
@@ -169,8 +177,6 @@ export default class SelectList extends Component {
 
   render() {
     const {
-      label,
-      sublabel,
       options,
       width,
       height,
@@ -205,47 +211,30 @@ export default class SelectList extends Component {
 
     return (
       <div
+        ref={this.setContainerRef}
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         tabIndex={0}
-        style={overrides}
+        style={{ display: 'inline-block', ...overrides }}
         {...proxyProps}
       >
-        {
-          (label || sublabel) && (
-            <Spacing size="tiny" bottom>
-              {
-                label && (
-                  <Text size="kilo" color="gray50" uppercase bold>
-                    {label}
-                  </Text>
-                )
-              }
-              {
-                label && (
-                  <Text size="lambda" color="gray25">
-                    {sublabel}
-                  </Text>
-                )
-              }
-            </Spacing>
-          )
-        }
-
         <SelectListPlaceholder
           label={selectedOption.label}
           color={outlineColor}
           arrowDirection={isExpanded ? 'up' : 'down'}
           width={width}
           error={error}
-          onClick={this.handleChange(selectedOption)}
+          onClick={this.toggleExpand}
           onHoverStateChange={this.handleHoverStateChange}
         />
 
-        {
-          isExpanded && (
-            <div style={dropdownElementsStyle}>
+        <div ref={this.setDropdownRef}>
+          {isExpanded && (
+            <div
+              style={dropdownElementsStyle}
+              tabIndex={-1}
+            >
               {options.map((option, idx) => (
                 <SelectListItem
                   key={option.value}
@@ -258,18 +247,16 @@ export default class SelectList extends Component {
                 />
               ))}
             </div>
-          )
-        }
+          )}
+        </div>
 
-        {
-          error && (
-            <Spacing size="micro" top>
-              <Text color="red" size="lambda" bold>
-                {error}
-              </Text>
-            </Spacing>
-          )
-        }
+        {error && (
+          <Spacing size="micro" top>
+            <Text color="red" size="lambda" bold>
+              {error}
+            </Text>
+          </Spacing>
+        )}
       </div>
     );
   }

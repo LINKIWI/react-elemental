@@ -3,6 +3,7 @@ import { mount, shallow } from 'enzyme';
 import Check from 'react-icons/lib/md/check';
 import Checkbox from 'components/checkbox';
 import Text from 'components/text';
+import { colors } from 'styles/color';
 
 describe('Checkbox', () => {
   test('Accepts proxy props', () => {
@@ -16,14 +17,6 @@ describe('Checkbox', () => {
     expect(checkbox.at(0).props().onClick).toBe(onClick);
   });
 
-  test('Setting ref in state', () => {
-    const checkbox = mount(
-      <Checkbox />,
-    );
-
-    expect(checkbox.state().ref).toBeTruthy();
-  });
-
   test('Standard rendering', () => {
     const checkbox = shallow(
       <Checkbox label="label" />,
@@ -34,63 +27,54 @@ describe('Checkbox', () => {
     expect(checkbox.find(Text).props().children).toBe('label');
   });
 
-  test('Check and uncheck actions', () => {
+  test('Rendering of checked checkbox', () => {
     const checkbox = shallow(
       <Checkbox />,
     );
 
-    expect(checkbox.state().isCurrentlyChecked).toBe(false);
-    expect(checkbox.instance().isChecked()).toBe(false);
-    checkbox.childAt(0).simulate('click');
-    expect(checkbox.state().isCurrentlyChecked).toBe(true);
-    expect(checkbox.instance().isChecked()).toBe(true);
-    checkbox.childAt(0).simulate('click');
-    expect(checkbox.state().isCurrentlyChecked).toBe(false);
-    expect(checkbox.instance().isChecked()).toBe(false);
+    expect(checkbox.find(Check).props().style.opacity).toBe(0);
   });
 
-  test('Keyboard actions', () => {
+  test('Rendering of hovered checkbox', () => {
     const checkbox = shallow(
       <Checkbox />,
     );
 
-    const checkContainer = checkbox.childAt(0).childAt(0);
+    checkbox.find('button').simulate('mouseenter');
 
-    checkContainer.simulate('keydown', { keyCode: 32 });
-    expect(checkbox.instance().isChecked()).toBe(true);
-    checkContainer.simulate('keydown', { keyCode: 13 });
-    expect(checkbox.instance().isChecked()).toBe(false);
-    checkContainer.simulate('keydown', { keyCode: 27 });
-    expect(checkbox.instance().isChecked()).toBe(false);
-    checkContainer.simulate('keydown', { keyCode: 32 });
-    expect(checkbox.instance().isChecked()).toBe(true);
-    checkContainer.simulate('keydown', { keyCode: 27 });
-    expect(checkbox.instance().isChecked()).toBe(false);
-    checkContainer.simulate('keydown', { keyCode: 10 });
-    expect(checkbox.instance().isChecked()).toBe(false);
+    expect(checkbox.childAt(0).props().style.border).toBe(`1px solid ${colors.gray20}`);
+  });
+
+  test('Check change callback for unchecked checkbox', () => {
+    const onChange = jest.fn();
+    const checkbox = shallow(
+      <Checkbox onChange={onChange} />,
+    );
+
+    expect(onChange.mock.calls.length).toBe(0);
+    checkbox.at(0).simulate('click');
+    expect(onChange).toBeCalledWith(true);
+  });
+
+  test('Uncheck change callback for checked checkbox', () => {
+    const onChange = jest.fn();
+    const checkbox = shallow(
+      <Checkbox onChange={onChange} checked />,
+    );
+
+    expect(onChange.mock.calls.length).toBe(0);
+    checkbox.at(0).simulate('click');
+    expect(onChange).toBeCalledWith(false);
   });
 
   test('Disabled checkbox', () => {
+    const onChange = jest.fn();
     const checkbox = shallow(
-      <Checkbox disabled />,
+      <Checkbox onChange={onChange} disabled />,
     );
 
-    expect(checkbox.instance().isChecked()).toBe(false);
-    checkbox.childAt(0).simulate('click');
-    expect(checkbox.instance().isChecked()).toBe(false);
-    checkbox.childAt(0).childAt(0).simulate('keydown', { keyCode: 32 });
-    expect(checkbox.instance().isChecked()).toBe(false);
-  });
-
-  test('Safe ref access', () => {
-    const checkbox = mount(
-      <Checkbox />,
-    );
-
-    const checkContainer = checkbox.childAt(0).childAt(0);
-
-    checkContainer.simulate('mouseout');
-    checkbox.setState({ ref: null });
-    checkContainer.simulate('mouseout');
+    expect(onChange.mock.calls.length).toBe(0);
+    checkbox.at(0).simulate('click');
+    expect(onChange.mock.calls.length).toBe(0);
   });
 });

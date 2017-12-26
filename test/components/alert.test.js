@@ -45,18 +45,17 @@ describe('Alert', () => {
     expect(alert.find({ style: { padding: '10px 15px' } }).length).toBe(1);
   });
 
-  test('Dismissable alert', () => {
+  test('Dismissible alert', () => {
+    const onDismiss = jest.fn();
     const alert = shallow(
       <Alert
         type="info"
         title="title"
         message="message"
-        dismissable
+        onDismiss={onDismiss}
+        dismissible
       />,
     );
-
-    expect(alert.state().isVisible).toBe(true);
-    expect(alert.find(Text).length).toBe(3);
 
     const dismissIcon = alert.find(Text).at(0);
     expect(dismissIcon.props().onClick).toBeTruthy();
@@ -64,7 +63,7 @@ describe('Alert', () => {
 
     dismissIcon.simulate('click');
 
-    expect(alert.find(dismissIcon.props()).length).toBe(0);
+    expect(onDismiss).toBeCalled();
   });
 
   test('Info, success, warn, and error variants', () => {

@@ -79,7 +79,7 @@ describe('Button', () => {
       <Button color={color} text="text" secondary />,
     );
 
-    expect(button.find('button').props().style.backgroundColor).toBe('white');
+    expect(button.find('button').props().style.backgroundColor).toBe('transparent');
     expect(button.find(Text).props().color).toBe(color);
   });
 
@@ -118,5 +118,15 @@ describe('Button', () => {
     button.setProps({ color: nextColor });
 
     expect(button.find('button').props().style.backgroundColor).toBe(nextColor);
+  });
+
+  test('Appropriately reduced padding for secondary style', () => {
+    const button = shallow(
+      <Button size="beta" secondary>
+        children
+      </Button>,
+    );
+
+    expect(button.find('button').props().style.padding).toBe('8px 14px');
   });
 });

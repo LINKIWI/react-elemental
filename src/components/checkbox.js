@@ -1,196 +1,126 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
 import PropTypes from 'prop-types';
 import Check from 'react-icons/lib/md/check';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-
-const KEY_CODE_SPACE = 32;
-const KEY_CODE_ENTER = 13;
-const KEY_CODE_ESCAPE = 27;
-
-const noop = () => {};
+import noop from 'util/noop';
 
 /**
  * Styled checkbox element.
  */
 class Checkbox extends Component {
   static propTypes = {
-    isChecked: PropTypes.bool,
+    checked: PropTypes.bool,
     label: PropTypes.string,
     style: PropTypes.object,
     disabled: PropTypes.bool,
-    onCheck: PropTypes.func,
-    onUncheck: PropTypes.func,
+    onChange: PropTypes.func,
+    children: PropTypes.node,
   };
 
   static defaultProps = {
-    isChecked: false,
+    checked: false,
     label: null,
-    disabled: false,
     style: {},
-    onCheck: noop,
-    onUncheck: noop,
+    disabled: false,
+    onChange: noop,
+    children: null,
   };
 
-  constructor(props) {
-    super(props);
+  state = { isHover: false, isFocus: false };
 
-    this.state = {
-      isCurrentlyChecked: props.isChecked,
-      ref: null,
-    };
-  }
+  handleClick = () => {
+    const { checked, onChange, disabled } = this.props;
 
-  /**
-   * Set a ref to checkbox container in component state.
-   *
-   * @param {HTMLElement} ref Node for the check container.
-   */
-  setRef = (ref) => {
-    if (!this.state.ref) {
-      this.setState({ ref });
-    }
+    return !disabled && onChange(!checked);
   };
 
-  /**
-   * For accessibility compatibility: by default, after clicking on the checkbox, the DOM element
-   * will still remain in focus. This workaround forces the DOM to un-focus the element after
-   * mousing out, so that the focus style does not clash with the hover style.
-   */
-  handleMouseOut = () => {
-    const { ref } = this.state;
+  handleHoverChange = (isHover) => () => this.setState({ isHover });
 
-    if (ref) {
-      ref.blur();
-    }
-  };
-
-  /**
-   * For accessibility compatibility: while the checkbox is in focus, pressing the space and enter
-   * keys should toggle the checkbox while pressing the escape key should always uncheck it.
-   *
-   * @param {Object} evt The keyboard DOM event.
-   * @returns {*} Return value is unused.
-   */
-  handleKeyDown = (evt) => {
-    const { onUncheck } = this.props;
-
-    switch (evt.keyCode) {
-      case KEY_CODE_SPACE:
-      case KEY_CODE_ENTER:
-        return this.toggleCheckState();
-      case KEY_CODE_ESCAPE:
-        this.setState({ isCurrentlyChecked: false });
-        return onUncheck();
-      default:
-        return null;
-    }
-  };
-
-  /**
-   * Clicking the checkbox should toggle the current check state.
-   */
-  handleClick = () => this.toggleCheckState();
-
-  /**
-   * Toggle the current check state of the checkbox. This will also trigger the check/uncheck
-   * callbacks as appropriate.
-   */
-  toggleCheckState = () => {
-    const { disabled, onCheck, onUncheck } = this.props;
-
-    if (disabled) {
-      return;
-    }
-
-    this.setState(({ isCurrentlyChecked }) => {
-      (isCurrentlyChecked ? onUncheck : onCheck)();
-
-      return { isCurrentlyChecked: !isCurrentlyChecked };
-    });
-  };
-
-  /**
-   * Return whether the checkbox is currently checked.
-   *
-   * @returns {Boolean} True if the checkbox is currently checked; false otherwise.
-   */
-  isChecked = () => this.state.isCurrentlyChecked;
+  handleFocusChange = (isFocus) => () => this.setState({ isFocus });
 
   render() {
     const {
+      checked,
       label,
-      disabled,
       style: overrides,
-      isChecked,
-      onCheck,
-      onUncheck,
+      disabled,
+      children,
       ...proxyProps
     } = this.props;
-    const { isCurrentlyChecked } = this.state;
+    const { isHover, isFocus } = this.state;
+    const isActive = isHover || isFocus;
+
+    const backgroundColor = (() => {
+      if (checked) {
+        return colors.primary;
+      }
+
+      return disabled ? colors.gray5 : 'rgb(250, 250, 250)';
+    })();
+
+    const borderColor = (() => {
+      if (checked) {
+        return colors.primary;
+      }
+
+      return isActive ? colors.gray20 : colors.gray10;
+    })();
 
     const containerStyle = {
+      alignItems: 'center',
+      background: 'inherit',
+      border: 0,
       cursor: 'pointer',
-      display: 'flex',
-      opacity: disabled ? 0.6 : 1,
-      userSelect: 'none',
-      ':hover': !disabled && {
-        opacity: 0.85,
-      },
-      ':focus': !disabled && {
-        opacity: 0.85,
-      },
-      transition: 'all 0.2s ease',
+      display: 'inline-flex',
       ...overrides,
     };
 
     const checkboxStyle = {
-      backgroundColor: colors.gray5,
-      color: isCurrentlyChecked ? colors.primary : colors.primaryLight,
+      alignItems: 'center',
+      backgroundColor,
+      border: `1px solid ${borderColor}`,
       display: 'flex',
       height: '18px',
-      margin: 'auto',
-      padding: '1px',
+      justifyContent: 'center',
+      opacity: disabled ? 0.5 : 1,
       width: '18px',
-      transition: 'all 0.15s ease-out',
+      transition: 'all 0.15s ease',
     };
 
     const checkStyle = {
-      margin: 'auto',
+      color: colors.gray5,
+      opacity: checked ? 1 : 0,
+      transition: 'all 0.15s ease',
     };
 
     return (
-      <div style={containerStyle} key="elemental-checkbox" {...proxyProps}>
-        <span
-          style={containerStyle}
-          onClick={this.handleClick}
-          draggable="false"
-        >
-          <span
-            ref={this.setRef}
-            style={checkboxStyle}
-            onMouseOut={this.handleMouseOut}
-            onKeyDown={this.handleKeyDown}
-            tabIndex={0}
-          >
-            <Check style={checkStyle} />
-          </span>
+      <button
+        style={containerStyle}
+        onClick={this.handleClick}
+        onMouseEnter={this.handleHoverChange(true)}
+        onMouseLeave={this.handleHoverChange(false)}
+        onFocus={this.handleFocusChange(true)}
+        onBlur={this.handleFocusChange(false)}
+        {...proxyProps}
+      >
+        <div style={checkboxStyle}>
+          <Check style={checkStyle} />
+        </div>
 
-          {
-            label && (
-              <Spacing size="small" left inline>
-                <Text size="iota" color="gray60" inline>
-                  {label}
-                </Text>
-              </Spacing>
-            )
-          }
-        </span>
-      </div>
+        {label && (
+          <Spacing size="small" left inline>
+            <Text size="iota" color="gray80" inline>
+              {label}
+            </Text>
+          </Spacing>
+        )}
+
+        {children}
+      </button>
     );
   }
 }
 
-export default Radium(Checkbox);
+export default Checkbox;

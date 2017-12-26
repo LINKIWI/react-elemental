@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Color from 'color';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-
-const noop = () => {};
+import noop from 'util/noop';
 
 const COLOR_INTENSITY_RATIO = 0.08;
 
@@ -19,11 +18,18 @@ const textSizeMap = {
   alpha: 'iota',
 };
 
-// Mapping of button sizes to the corresponding button padding values.
-const paddingMap = {
+// Mapping of primary button sizes to the corresponding button padding values.
+const primaryPaddingMap = {
   gamma: '6px 12px',
   beta: '10px 16px',
   alpha: '12px 22px',
+};
+
+// Mapping of secondary button sizes to the corresponding button padding values.
+const secondaryPaddingMap = {
+  gamma: '4px 10px',
+  beta: '8px 14px',
+  alpha: '10px 20px',
 };
 
 /**
@@ -136,12 +142,12 @@ class Button extends Component {
 
     const color = buttonColors[buttonState];
     const style = {
-      backgroundColor: secondary ? 'white' : color,
+      backgroundColor: secondary ? 'transparent' : color,
       border: secondary ? `2px solid ${color}` : 'none',
       borderRadius: 0,
       cursor: 'pointer',
       opacity: disabled ? 0.4 : 1,
-      padding: paddingMap[size],
+      padding: (secondary ? secondaryPaddingMap : primaryPaddingMap)[size],
       pointerEvents: disabled ? 'none' : 'inherit',
       textDecoration: 'none',
       transition: 'all 0.15s ease-out',

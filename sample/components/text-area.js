@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spacing, Text, TextArea } from 'react-elemental';
+import { Label, Spacing, Text, TextArea } from 'react-elemental';
 
 const SampleTextArea = () => (
   <div>
@@ -19,9 +19,11 @@ const SampleTextArea = () => (
         </Text>
       </Spacing>
 
-      <TextArea
+      <Label
         label="Text area"
         sublabel="Type some monospaced text in here."
+      />
+      <TextArea
         placeholder="Type away"
         style={{
           height: '100px',
@@ -37,10 +39,10 @@ const SampleTextArea = () => (
         </Text>
       </Spacing>
 
+      <Label label="Oh noes" />
       <TextArea
-        label="Oh noes"
         error="Some error message here"
-        value="Bad text"
+        placeholder="Bad text"
         style={{
           height: '100px',
           width: '600px',

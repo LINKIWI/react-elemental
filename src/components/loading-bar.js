@@ -4,7 +4,6 @@ import { colors } from 'styles/color';
 
 export const POSITION_LEFT = 0;
 export const POSITION_RIGHT = 100;
-export const BOUNCE_INTERVAL = 1100;
 
 /**
  * Indeterminate loading bar component.
@@ -13,19 +12,16 @@ export default class LoadingBar extends Component {
   static propTypes = {
     color: PropTypes.string,
     thickness: PropTypes.number,
-    width: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-    position: PropTypes.oneOf(['relative', 'absolute']),
+    duration: PropTypes.number,
+    delay: PropTypes.number,
     style: PropTypes.object,
   };
 
   static defaultProps = {
     color: undefined,
     thickness: 4,
-    width: '100%',
-    position: 'relative',
+    duration: 900,
+    delay: 100,
     style: {},
   };
 
@@ -47,21 +43,24 @@ export default class LoadingBar extends Component {
   }
 
   tick = () => {
+    const { duration, delay } = this.props;
+
     // On every tick, we'll update the position to the other boundary.
-    // Additionally, we'll schedule another tick for BOUNCE_INTERVAL ms from now.
     this.setState(({ position }) => ({
       position: (position === POSITION_LEFT) ? POSITION_RIGHT : POSITION_LEFT,
     }));
 
-    this.interval = setTimeout(this.tick, BOUNCE_INTERVAL);
+    // Additionally, we'll schedule another tick after the animation has completed and the requested
+    // bounce delay has elapsed.
+    this.interval = setTimeout(this.tick, duration + delay);
   };
 
   render() {
     const {
       color = colors.primary,
       thickness,
-      width,
-      position: positionStyle,
+      duration,
+      delay,
       style: overrides,
       ...proxyProps
     } = this.props;
@@ -71,15 +70,15 @@ export default class LoadingBar extends Component {
     const containerStyle = {
       overflow: 'hidden',
       height: thickness,
-      width,
-      position: positionStyle,
+      width: '100%',
+      position: 'relative',
       ...overrides,
     };
 
     const loadingBarStyle = {
       backgroundColor: color,
       height: thickness,
-      transition: 'all 1s cubic-bezier(.75, 0, .32, .99)',
+      transition: `all ${duration / 1000}s cubic-bezier(.75, 0, .32, .99)`,
       width: '100px',
       marginLeft: `calc(${position}% + ${offset}px)`,
     };

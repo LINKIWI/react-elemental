@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: {
-    sample: './sample/entry.js',
+    sample: './entry.js',
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -19,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /sample\/.+\.js$/,
+        test: /.+\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
@@ -43,7 +43,7 @@ module.exports = {
       comments: false,
     }),
     isProduction && new HTMLWebpackPlugin({
-      template: 'sample/index.html',
+      template: './index.html',
       title: 'Elemental UI',
       inlineSource: '.js$',
     }),

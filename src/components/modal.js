@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
 import Close from 'react-icons/lib/md/close';
-import { withWindowState } from '@linkiwi/react-window-state';
 import Spacing from 'components/spacing';
 import { colors } from 'styles/color';
+import noop from 'util/noop';
 
 const KEY_CODE_ESC = 27;
-
-const noop = () => {};
 
 const widthMap = {
   alpha: 900,
@@ -24,14 +22,6 @@ class Modal extends Component {
     size: PropTypes.oneOf(['alpha', 'beta', 'gamma']),
     persistent: PropTypes.bool,
     onHide: PropTypes.func,
-    win: PropTypes.shape({
-      width: PropTypes.number,
-      height: PropTypes.number,
-    }).isRequired,
-    doc: PropTypes.shape({
-      width: PropTypes.number,
-      height: PropTypes.number,
-    }).isRequired,
     style: PropTypes.object,
     children: PropTypes.any,
   };
@@ -46,7 +36,15 @@ class Modal extends Component {
 
   state = {
     modal: null,
+    windowWidth: null,
+    windowHeight: null,
   };
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onResize);
+
+    this.onResize();
+  }
 
   componentDidUpdate(prevProps, prevState) {
     // After the modal's ref has been set, put it into focus so that it can properly listen for
@@ -55,6 +53,15 @@ class Modal extends Component {
       this.state.modal.focus();
     }
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+  }
+
+  onResize = () => this.setState({
+    windowWidth: window.innerWidth,
+    windowHeight: window.innerHeight,
+  });
 
   setRef = (modal) => {
     if (!this.state.modal) {
@@ -82,16 +89,18 @@ class Modal extends Component {
       size,
       persistent,
       onHide,
-      win,
-      doc,
       style: overrides,
       children,
       ...proxyProps
     } = this.props;
-    const { modal } = this.state;
+    const { modal, windowWidth, windowHeight } = this.state;
+
+    if (windowWidth === null || windowHeight === null) {
+      return null;
+    }
 
     const modalHeight = modal ? modal.scrollHeight : 0;
-    const width = win.width < widthMap[size] ? '100%' : `${widthMap[size]}px`;
+    const width = windowWidth < widthMap[size] ? '100%' : `${widthMap[size]}px`;
     const modalStyle = {
       backgroundColor: colors.white,
       left: '50%',
@@ -100,7 +109,7 @@ class Modal extends Component {
       transform: 'translateX(-50%) translateY(-50%)',
       width,
       zIndex: 100,
-      ...(win.height < modalHeight) && {
+      ...(windowHeight.height < modalHeight) && {
         height: '100%',
         overflow: 'auto',
       },
@@ -164,4 +173,4 @@ class Modal extends Component {
   }
 }
 
-export default withWindowState(Radium(Modal));
+export default Radium(Modal);

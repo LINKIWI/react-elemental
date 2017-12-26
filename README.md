@@ -79,7 +79,11 @@ Tags serve as simple, textual status indicators.
 
 ![Green](https://linkiwi.github.io/react-elemental/images/tag/green.png)
 
-![Dismissable](https://linkiwi.github.io/react-elemental/images/tag/dismissable.png)
+#### `Tabs`
+
+Tabs allow visual segmentation of categories within the same semantic hierarchy.
+
+![Selected](https://linkiwi.github.io/react-elemental/images/tabs/selected.png)
 
 #### `Text`
 
@@ -189,7 +193,15 @@ All respected override options are as follows:
 |`primaryLight`|Hex color code string for the desired primary light color.|`'#d6ecf5'`|
 |`primaryDark`|Hex color code string for the desired primary dark color.|`'#036996'`|
 
-## Guiding Principles
+## Development
 
-* Only inline styles, and no CSS (or at least as little CSS as possible)
-* Minimalistic, simple design language
+It is easiest to symbolically link the sample project's `react-elemental` dependency to the root project. Then, auto-transpile on source changes and auto-rebuild the sample project on dependency changes.
+
+```bash
+$ npm install
+$ npm run build:watch &
+$ cd sample
+$ npm install
+$ ln -sf node_modules/react-elemental ..
+$ npm run start
+```
