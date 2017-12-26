@@ -1,12 +1,24 @@
 pipeline {
     agent {
-        docker 'docker.internal.kevinlin.info/infra/ci-base:0.0.5'
+        docker {
+            image 'docker.internal.kevinlin.info/infra/ci-base:0.0.5'
+            args '-v $HOME/.ssh:/home/jenkins/.ssh:ro'
+        }
     }
 
     stages {
         stage('Install') {
-            steps {
-                sh 'npm-s3 install'
+            parallel {
+                stage('Library') {
+                    steps {
+                        sh 'npm-s3 install'
+                    }
+                }
+                stage('Sample') {
+                    steps {
+                        sh 'cd sample/ && npm install'
+                    }
+                }
             }
         }
         stage('Test') {
@@ -26,6 +38,31 @@ pipeline {
                         sh 'npm run test'
                     }
                 }
+                stage('Sample') {
+                    environment {
+                        NODE_ENV = 'production'
+                    }
+                    steps {
+                        sh 'cd sample/ && npm run build'
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'mv sample/dist/index.html /tmp/react-elemental'
+                sh 'git fetch --all'
+                sh 'git checkout gh-pages'
+                sh 'git reset --hard origin/gh-pages'
+                sh 'git clean -fd'
+                sh 'mv /tmp/react-elemental index.html'
+                sh 'cp index.html 404.html'
+                sh 'git add .'
+                sh 'git status'
+                sh "git commit -m \"[automatic commit] ${GIT_BRANCH}:${GIT_COMMIT}\" || :"
+                sh 'git remote add github git@github.com:LINKIWI/react-elemental.git'
+                sh 'git push origin HEAD'
+                sh 'git push github HEAD'
             }
         }
     }
