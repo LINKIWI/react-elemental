@@ -40,7 +40,7 @@ const SampleTextArea = () => (
       <TextArea
         label="Oh noes"
         error="Some error message here"
-        value="Bad text"
+        placeholder="Bad text"
         style={{
           height: '100px',
           width: '600px',
