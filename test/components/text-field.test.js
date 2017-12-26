@@ -12,19 +12,6 @@ describe('Text field', () => {
     expect(textField.find('input').props().type).toBe('password');
   });
 
-  test('Label and sublabels', () => {
-    const textField = shallow(
-      <TextField
-        label="label"
-        sublabel="sublabel"
-      />,
-    );
-
-    expect(textField.find(Text).length).toBe(2);
-    expect(textField.find(Text).at(0).children().text()).toBe('label');
-    expect(textField.find(Text).at(1).children().text()).toBe('sublabel');
-  });
-
   test('Error message', () => {
     const textField = shallow(
       <TextField
