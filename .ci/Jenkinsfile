@@ -16,7 +16,9 @@ pipeline {
                 }
                 stage('Sample') {
                     steps {
-                        sh 'cd sample/ && npm install'
+                        sh 'cd sample/ && npm-s3 install'
+                        sh 'rm -rf sample/node_modules/react-elemental'
+                        sh 'ln -s ../.. sample/node_modules/react-elemental'
                     }
                 }
             }
@@ -38,14 +40,14 @@ pipeline {
                         sh 'npm run test'
                     }
                 }
-                stage('Sample') {
-                    environment {
-                        NODE_ENV = 'production'
-                    }
-                    steps {
-                        sh 'cd sample/ && npm run build'
-                    }
-                }
+            }
+        }
+        stage('Site') {
+            environment {
+                NODE_ENV = 'production'
+            }
+            steps {
+                sh 'cd sample/ && npm run build'
             }
         }
         stage('Deploy') {
@@ -69,6 +71,7 @@ pipeline {
 
     post {
         always {
+            archive 'index.html'
             deleteDir()
         }
     }
