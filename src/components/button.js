@@ -143,7 +143,7 @@ class Button extends Component {
 
     const color = buttonColors[buttonState];
     const style = {
-      backgroundColor: secondary ? 'white' : color,
+      backgroundColor: secondary ? 'transparent' : color,
       border: secondary ? `2px solid ${color}` : 'none',
       borderRadius: 0,
       cursor: 'pointer',

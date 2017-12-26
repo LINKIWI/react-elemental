@@ -79,7 +79,7 @@ describe('Button', () => {
       <Button color={color} text="text" secondary />,
     );
 
-    expect(button.find('button').props().style.backgroundColor).toBe('white');
+    expect(button.find('button').props().style.backgroundColor).toBe('transparent');
     expect(button.find(Text).props().color).toBe(color);
   });
 
