@@ -19,11 +19,18 @@ const textSizeMap = {
   alpha: 'iota',
 };
 
-// Mapping of button sizes to the corresponding button padding values.
-const paddingMap = {
+// Mapping of primary button sizes to the corresponding button padding values.
+const primaryPaddingMap = {
   gamma: '6px 12px',
   beta: '10px 16px',
   alpha: '12px 22px',
+};
+
+// Mapping of secondary button sizes to the corresponding button padding values.
+const secondaryPaddingMap = {
+  gamma: '4px 10px',
+  beta: '8px 14px',
+  alpha: '10px 20px',
 };
 
 /**
@@ -141,7 +148,7 @@ class Button extends Component {
       borderRadius: 0,
       cursor: 'pointer',
       opacity: disabled ? 0.4 : 1,
-      padding: paddingMap[size],
+      padding: (secondary ? secondaryPaddingMap : primaryPaddingMap)[size],
       pointerEvents: disabled ? 'none' : 'inherit',
       textDecoration: 'none',
       transition: 'all 0.15s ease-out',

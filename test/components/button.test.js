@@ -119,4 +119,14 @@ describe('Button', () => {
 
     expect(button.find('button').props().style.backgroundColor).toBe(nextColor);
   });
+
+  test('Appropriately reduced padding for secondary style', () => {
+    const button = shallow(
+      <Button size="beta" secondary>
+        children
+      </Button>,
+    );
+
+    expect(button.find('button').props().style.padding).toBe('8px 14px');
+  });
 });
