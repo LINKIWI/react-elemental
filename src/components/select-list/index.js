@@ -76,15 +76,18 @@ export default class SelectList extends Component {
     };
   }
 
+  setDropdownRef = (ref) => {
+    this.dropdown = ref;
+  };
+
+  setContainerRef = (ref) => {
+    this.container = ref;
+  };
+
   handleChange = (selectedOption) => () => {
-    const { selectedOption: currentSelectedOption } = this.state;
-
-    if (currentSelectedOption.value !== selectedOption.value) {
-      this.props.onChange(selectedOption.value);
-      this.setState({ selectedOption });
-    }
-
-    this.toggleExpand();
+    this.props.onChange(selectedOption.value);
+    this.setState({ selectedOption, isExpanded: false });
+    this.container.focus();
   };
 
   handleHoverStateChange = (isHovered) => () => this.setState({ isHovered });
@@ -92,15 +95,20 @@ export default class SelectList extends Component {
   handleFocus = () => this.setState({ isFocused: true });
 
   // The dropdown will be blurred on any mouse event that isn't on the select item placeholder.
-  // In order to allow the onClick event of the dropdown items to fire before triggering normal
-  // onBlur behavior, we will delay the standard blur behavior.
-  handleBlur = () => setTimeout(() => {
+  // In order to allow the onClick event of the dropdown items to fire instead of triggering the
+  // normal onBlur behavior, only hide the dropdown items if the click target is outside of the
+  // dropdown's containing DOM node.
+  handleBlur = (evt) => {
+    if (evt && this.dropdown.contains(evt.relatedTarget)) {
+      return;
+    }
+
     this.setState({
       isExpanded: false,
       isFocused: false,
       highlightedIdx: null,
     });
-  }, 100);
+  };
 
   handleKeyDown = (evt) => {
     const { keyCode } = evt;
@@ -112,13 +120,13 @@ export default class SelectList extends Component {
     };
 
     const selectHandler = () => {
-      const { highlightedIdx } = this.state;
+      const { highlightedIdx, isExpanded } = this.state;
 
-      if (highlightedIdx !== null) {
-        return this.handleChange(options[modulo(highlightedIdx, options.length)])();
+      if (highlightedIdx === null || !isExpanded) {
+        return this.toggleExpand();
       }
 
-      return this.toggleExpand();
+      return this.handleChange(options[modulo(highlightedIdx, options.length)])();
     };
 
     const escapeHandler = () => this.handleBlur();
@@ -203,11 +211,12 @@ export default class SelectList extends Component {
 
     return (
       <div
+        ref={this.setContainerRef}
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         tabIndex={0}
-        style={overrides}
+        style={{ display: 'inline-block', ...overrides }}
         {...proxyProps}
       >
         <SelectListPlaceholder
@@ -216,25 +225,30 @@ export default class SelectList extends Component {
           arrowDirection={isExpanded ? 'up' : 'down'}
           width={width}
           error={error}
-          onClick={this.handleChange(selectedOption)}
+          onClick={this.toggleExpand}
           onHoverStateChange={this.handleHoverStateChange}
         />
 
-        {isExpanded && (
-          <div style={dropdownElementsStyle}>
-            {options.map((option, idx) => (
-              <SelectListItem
-                key={option.value}
-                label={option.label}
-                width={width}
-                isSelected={
-                  (highlightedIdx !== null) && modulo(highlightedIdx, options.length) === idx
-                }
-                onClick={this.handleChange(option)}
-              />
-            ))}
-          </div>
-        )}
+        <div ref={this.setDropdownRef}>
+          {isExpanded && (
+            <div
+              style={dropdownElementsStyle}
+              tabIndex={-1}
+            >
+              {options.map((option, idx) => (
+                <SelectListItem
+                  key={option.value}
+                  label={option.label}
+                  width={width}
+                  isSelected={
+                    (highlightedIdx !== null) && modulo(highlightedIdx, options.length) === idx
+                  }
+                  onClick={this.handleChange(option)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
 
         {error && (
           <Spacing size="micro" top>
