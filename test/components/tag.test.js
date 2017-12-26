@@ -26,10 +26,10 @@ describe('Tag', () => {
     expect(tag.find(Clear).length).toBe(0);
   });
 
-  test('Dismissable tag', () => {
+  test('Dismissible tag', () => {
     const mockOnDismiss = jest.fn();
     const tag = shallow(
-      <Tag text="text" onDismiss={mockOnDismiss} dismissable />,
+      <Tag text="text" onDismiss={mockOnDismiss} dismissible />,
     );
 
     expect(tag.find(Text).length).toBe(1);
@@ -39,13 +39,13 @@ describe('Tag', () => {
 
   test('Clear icon size', () => {
     const alphaTag = shallow(
-      <Tag size="alpha" text="text" dismissable />,
+      <Tag size="alpha" text="text" dismissible />,
     );
     expect(alphaTag.find(Clear).props().width).toBe('14px');
     expect(alphaTag.find(Clear).props().height).toBe('14px');
 
     const betaTag = shallow(
-      <Tag size="beta" text="text" dismissable />,
+      <Tag size="beta" text="text" dismissible />,
     );
     expect(betaTag.find(Clear).props().width).toBe('12px');
     expect(betaTag.find(Clear).props().height).toBe('12px');

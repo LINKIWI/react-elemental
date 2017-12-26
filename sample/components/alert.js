@@ -126,13 +126,13 @@ const SampleAlert = () => (
     <Spacing size="huge" bottom>
       <Spacing bottom>
         <Text size="iota" color="gray70" uppercase bold>
-          Dismissable alerts
+          Dismissible alerts
         </Text>
       </Spacing>
 
       <Spacing size="small" bottom>
         <Text>
-          You can optionally specify that the alert is dismissable. When the user clicks the clear
+          You can optionally specify that the alert is dismissible. When the user clicks the clear
           icon, the alert will be permanently hidden.
         </Text>
       </Spacing>
@@ -142,7 +142,7 @@ const SampleAlert = () => (
         size="alpha"
         title="Dismiss me"
         message="Click the clear icon toward the right"
-        dismissable
+        dismissible
       />
     </Spacing>
   </div>

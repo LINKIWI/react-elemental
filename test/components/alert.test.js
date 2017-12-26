@@ -45,7 +45,7 @@ describe('Alert', () => {
     expect(alert.find({ style: { padding: '10px 15px' } }).length).toBe(1);
   });
 
-  test('Dismissable alert', () => {
+  test('Dismissible alert', () => {
     const onDismiss = jest.fn();
     const alert = shallow(
       <Alert
@@ -53,7 +53,7 @@ describe('Alert', () => {
         title="title"
         message="message"
         onDismiss={onDismiss}
-        dismissable
+        dismissible
       />,
     );
 

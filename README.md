@@ -79,8 +79,6 @@ Tags serve as simple, textual status indicators.
 
 ![Green](https://linkiwi.github.io/react-elemental/images/tag/green.png)
 
-![Dismissable](https://linkiwi.github.io/react-elemental/images/tag/dismissable.png)
-
 #### `Text`
 
 Text elements automatically apply font styles and sizes. The Elemental typeface is Karla (primary),

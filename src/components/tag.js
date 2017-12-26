@@ -29,7 +29,7 @@ const Tag = ({
   backgroundColor = colors.primaryLight,
   size,
   text,
-  dismissable,
+  dismissible,
   onDismiss,
   style: overrides,
   ...proxyProps
@@ -56,7 +56,7 @@ const Tag = ({
         {text}
       </Text>
 
-      {dismissable && (
+      {dismissible && (
         <Clear
           width={clearSizeMap[size]}
           height={clearSizeMap[size]}
@@ -73,7 +73,7 @@ Tag.propTypes = {
   backgroundColor: PropTypes.string,
   text: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['alpha', 'beta']),
-  dismissable: PropTypes.bool,
+  dismissible: PropTypes.bool,
   onDismiss: PropTypes.func,
   style: PropTypes.object,
 };
@@ -82,7 +82,7 @@ Tag.defaultProps = {
   outlineColor: undefined,
   backgroundColor: undefined,
   size: 'beta',
-  dismissable: false,
+  dismissible: false,
   onDismiss: noop,
   style: {},
 };

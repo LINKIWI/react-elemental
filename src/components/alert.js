@@ -46,7 +46,7 @@ const Alert = ({
   size,
   title,
   message,
-  dismissable,
+  dismissible,
   style: overrides,
   onDismiss,
   ...proxyProps
@@ -60,19 +60,18 @@ const Alert = ({
   };
 
   const clearStyle = {
+    color,
     cursor: 'pointer',
     float: 'right',
   };
 
   return (
     <div style={style} {...proxyProps}>
-      {
-        dismissable && (
-          <Text color="gray15" style={clearStyle} onClick={onDismiss} inline>
-            <Clear />
-          </Text>
-        )
-      }
+      {dismissible && (
+        <Text color="gray15" style={clearStyle} onClick={onDismiss} inline>
+          <Clear />
+        </Text>
+      )}
 
       <Text size={textSizeMap[size]} color={color} bold inline>
         {title}
@@ -95,7 +94,7 @@ Alert.propTypes = {
     PropTypes.string,
     PropTypes.element,
   ]).isRequired,
-  dismissable: PropTypes.bool,
+  dismissible: PropTypes.bool,
   style: PropTypes.object,
   onDismiss: PropTypes.func,
 };
@@ -103,7 +102,7 @@ Alert.propTypes = {
 Alert.defaultProps = {
   type: 'info',
   size: 'alpha',
-  dismissable: false,
+  dismissible: false,
   style: {},
   onDismiss: noop,
 };
