@@ -5,10 +5,9 @@ import Close from 'react-icons/lib/md/close';
 import { withWindowState } from '@linkiwi/react-window-state';
 import Spacing from 'components/spacing';
 import { colors } from 'styles/color';
+import noop from 'util/noop';
 
 const KEY_CODE_ESC = 27;
-
-const noop = () => {};
 
 const widthMap = {
   alpha: 900,

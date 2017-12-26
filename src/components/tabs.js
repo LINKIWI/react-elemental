@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-
-const noop = () => {};
+import noop from 'util/noop';
 
 /**
  * Horizontally organized segments of options.

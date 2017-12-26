@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Color from 'color';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-
-const noop = () => {};
+import noop from 'util/noop';
 
 const COLOR_INTENSITY_RATIO = 0.08;
 

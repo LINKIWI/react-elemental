@@ -4,8 +4,7 @@ import Check from 'react-icons/lib/md/check';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-
-const noop = () => {};
+import noop from 'util/noop';
 
 /**
  * Styled checkbox element.

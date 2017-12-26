@@ -6,8 +6,7 @@ import SelectListPlaceholder from 'components/select-list/select-list-placeholde
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-
-const noop = () => {};
+import noop from 'util/noop';
 
 // Generic, (hopefully) unique key reserved for the placeholder item in the select list.
 const PLACEHOLDER_VALUE = 'select-list-placeholder-item-value';
