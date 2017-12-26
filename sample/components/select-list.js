@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectList, Spacing, Text } from 'react-elemental';
+import { Label, SelectList, Spacing, Text } from 'react-elemental';
 
 const SampleSelectList = () => (
   <div>
@@ -32,10 +32,12 @@ const SampleSelectList = () => (
       </Spacing>
 
       <Spacing bottom>
-        <SelectList
-          placeholder="Now with customizable width!"
+        <Label
           label="Label"
           sublabel="Select an item from the dropdown"
+        />
+        <SelectList
+          placeholder="Now with customizable width!"
           width={500}
           options={[
             { label: 'Some obnoxiously long label name', value: 'first-item' },
@@ -46,8 +48,8 @@ const SampleSelectList = () => (
       </Spacing>
 
       <Spacing bottom>
+        <Label label="Scrollbar when there are a lot of options" />
         <SelectList
-          label="Scrollbar when there are a lot of options"
           width={200}
           height={300}
           options={[
@@ -77,10 +79,12 @@ const SampleSelectList = () => (
       </Spacing>
 
       <Spacing bottom>
-        <SelectList
-          placeholder="Placeholder"
+        <Label
           label="Oops"
           sublabel="You, as the end user, unsurprisingly supplied bad input"
+        />
+        <SelectList
+          placeholder="Placeholder"
           width={200}
           options={[
             { label: 'Some obnoxiously long label name', value: 'first-item' },

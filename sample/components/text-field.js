@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, SelectList, Spacing, Text, TextField } from 'react-elemental';
+import { Button, Label, SelectList, Spacing, Text, TextField } from 'react-elemental';
 
 const SampleTextField = () => (
   <div>
@@ -24,22 +24,27 @@ const SampleTextField = () => (
       </Spacing>
 
       <Spacing bottom>
-        <TextField label="This is a label" />
+        <Label label="This is a label" />
+        <TextField />
       </Spacing>
 
       <Spacing bottom>
-        <TextField
+        <Label
           label="This is a label"
           sublabel="This is a sublabel, usually used for providing instructions text"
         />
+        <TextField />
       </Spacing>
 
       <Spacing bottom>
-        <TextField
+        <Label
           label="Number"
           sublabel="Enter any number"
+        />
+        <TextField
           value="Some invalid user input"
           error="That's not a number."
+          onChange={() => {}}
         />
       </Spacing>
 
@@ -79,23 +84,29 @@ const SampleTextField = () => (
       </Spacing>
 
       <Spacing bottom>
-        <TextField label="This is a label" secondary />
+        <Label label="This is a label" />
+        <TextField secondary />
       </Spacing>
 
       <Spacing bottom>
-        <TextField
+        <Label
           label="This is a label"
           sublabel="This is a sublabel, usually used for providing instructions text"
+        />
+        <TextField
           secondary
         />
       </Spacing>
 
       <Spacing bottom>
-        <TextField
+        <Label
           label="Number"
           sublabel="Enter any number"
+        />
+        <TextField
           value="Some invalid user input"
           error="That's not a number."
+          onChange={() => {}}
           secondary
         />
       </Spacing>
