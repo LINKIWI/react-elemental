@@ -61,7 +61,7 @@ pipeline {
                 sh 'cp index.html 404.html'
                 sh 'git add .'
                 sh 'git status'
-                sh "git commit -m \"[automatic commit] ${GIT_BRANCH}:${GIT_COMMIT}\" || :"
+                sh "git commit --no-verify -m \"[automatic commit] ${GIT_BRANCH}:${GIT_COMMIT}\" || :"
                 sh 'git remote add github git@github.com:LINKIWI/react-elemental.git'
                 sh 'git push origin HEAD'
                 sh 'git push github HEAD'
