@@ -21,7 +21,7 @@ export default class LoadingBar extends Component {
     color: undefined,
     thickness: 4,
     duration: 900,
-    delay: 100,
+    delay: 125,
     style: {},
   };
 
