@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.1
+
+### Changed
+
+* `LoadingBar` default bounce delay increased by 25 ms
+* `Modal` no longer automatically enforces padding on the modal contents
+
 ## v1.0.0
 
 ### Added
