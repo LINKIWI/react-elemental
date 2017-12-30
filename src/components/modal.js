@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
 import Close from 'react-icons/lib/md/close';
-import Spacing from 'components/spacing';
 import { colors } from 'styles/color';
 import noop from 'util/noop';
 
@@ -158,15 +157,13 @@ class Modal extends Component {
           tabIndex={0}
           {...proxyProps}
         >
-          <Spacing size="large" padding top right bottom left>
-            {!persistent && (
-              <div style={closeStyle} onClick={onHide}>
-                <Close style={closeIconStyle} />
-              </div>
-            )}
+          {!persistent && (
+            <div style={closeStyle} onClick={onHide}>
+              <Close style={closeIconStyle} />
+            </div>
+          )}
 
-            {children}
-          </Spacing>
+          {children}
         </div>
       </div>
     );

@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Close from 'react-icons/lib/md/close';
 import Modal from 'components/modal';
-import Spacing from 'components/spacing';
 
 describe('Modal', () => {
   test('Rendering hierarchy', () => {
@@ -12,9 +11,8 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    expect(modal.find(Spacing).length).toBe(1);
     expect(modal.find(Close).length).toBe(1);
-    expect(modal.find(Spacing).at(0).text()).toBe('children');
+    expect(modal.at(0).at(0).text()).toBe('children');
   });
 
   test('Accepts proxy props', () => {
@@ -49,12 +47,12 @@ describe('Modal', () => {
     const onHide = jest.fn();
     const modal = mount(
       <Modal onHide={onHide}>
-        children
+        <p>text</p>
       </Modal>,
     );
 
     // Clicking within modal container
-    const container = modal.find(Spacing).getDOMNode();
+    const container = modal.find('p').getDOMNode();
     modal.at(0).simulate('click', { target: container });
     expect(onHide.mock.calls.length).toBe(0);
 

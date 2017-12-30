@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, Spacing, Text } from 'react-elemental';
 
 const ModalContents = () => (
-  <div>
+  <Spacing size="large" top right bottom left padding>
     <Spacing bottom>
       <Text size="delta" color="primary" bold>
         Modal title
@@ -24,7 +24,7 @@ const ModalContents = () => (
     <Text right>
       <Button text="Some button here" />
     </Text>
-  </div>
+  </Spacing>
 );
 
 export default class SampleModal extends Component {
