@@ -32,11 +32,26 @@ const universalSpacing = `
 `;
 
 /**
- * Remove the annoying outline that appears on all depressed buttons in Firefox
+ * Remove the annoying outline that appears on all depressed buttons in Firefox.
  */
 const buttonOutlines = `
   button::-moz-focus-inner {
     border: 0;
+  }
+`;
+
+/**
+ * Declare an animation for the Spinner component.
+ */
+const spinAnimation = `
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -80,6 +95,7 @@ const bootstrap = (fontOpts = {}, colorOpts = {}) => {
   injectCSS(fontFaceStyle('secondary--bold', fonts.secondary.bold));
   injectCSS(universalSpacing);
   injectCSS(buttonOutlines);
+  injectCSS(spinAnimation);
 };
 
 export default bootstrap;

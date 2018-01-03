@@ -75,7 +75,7 @@ const SampleSpinner = () => (
 
       <Spacing size="small" bottom>
         <Spacing size="small" right inline>
-          <Spinner size="delta" color={colors.green} />
+          <Spinner size="delta" accentColor={colors.green} />
         </Spacing>
         <Text color="gray50" size="kilo" uppercase bold inline>
           Succeeding
@@ -84,7 +84,7 @@ const SampleSpinner = () => (
 
       <Spacing size="small" bottom>
         <Spacing size="small" right inline>
-          <Spinner size="delta" color={colors.red} />
+          <Spinner size="delta" accentColor={colors.red} />
         </Spacing>
         <Text color="gray50" size="kilo" uppercase bold inline>
           Erroring
@@ -93,36 +93,10 @@ const SampleSpinner = () => (
 
       <Spacing size="small" bottom>
         <Spacing size="small" right inline>
-          <Spinner size="delta" color={colors.orange} />
+          <Spinner size="delta" accentColor={colors.orange} />
         </Spacing>
         <Text color="gray50" size="kilo" uppercase bold inline>
           Why not orange?
-        </Text>
-      </Spacing>
-
-      <Spacing size="small" bottom>
-        <Spacing size="small" right inline>
-          <Spinner size="delta" color={colors.purple} transparent />
-        </Spacing>
-        <Text color="gray50" size="kilo" uppercase bold inline>
-          Transparent background
-        </Text>
-      </Spacing>
-    </Spacing>
-
-    <Spacing size="huge" bottom>
-      <Spacing bottom>
-        <Text size="iota" color="gray70" uppercase bold>
-          Pulsation state
-        </Text>
-      </Spacing>
-
-      <Spacing size="small" bottom>
-        <Spacing size="small" right inline>
-          <Spinner size="delta" color={colors.green} pulsate={false} />
-        </Spacing>
-        <Text color="gray50" size="kilo" uppercase bold inline>
-          Disabled pulsation
         </Text>
       </Spacing>
     </Spacing>
