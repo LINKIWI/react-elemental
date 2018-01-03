@@ -10,6 +10,7 @@ import SampleCheckbox from './components/checkbox';
 import SampleLink from './components/link';
 import SampleLoadingBar from './components/loading-bar';
 import SampleModal from './components/modal';
+import SamplePulsator from './components/pulsator';
 import SampleSelectList from './components/select-list';
 import SampleSpinner from './components/spinner';
 import SampleTabs from './components/tabs';
@@ -37,6 +38,7 @@ const App = () => (
     <SampleToast />
     <SampleModal />
     <SampleTooltip />
+    <SamplePulsator />
     <SampleSpinner />
     <SampleLink />
     <SampleTextArea />

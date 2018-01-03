@@ -6,6 +6,7 @@ export Label from 'components/label';
 export Link from 'components/link';
 export LoadingBar from 'components/loading-bar';
 export Modal from 'components/modal';
+export Pulsator from 'components/pulsator';
 export SelectList from 'components/select-list';
 export Spacing from 'components/spacing';
 export Spinner from 'components/spinner';
