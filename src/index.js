@@ -1,48 +1,26 @@
-import Alert from 'components/alert';
-import Button from 'components/button';
-import Checkbox from 'components/checkbox';
-import Label from 'components/label';
-import Link from 'components/link';
-import LoadingBar from 'components/loading-bar';
-import Modal from 'components/modal';
-import SelectList from 'components/select-list';
-import Spacing from 'components/spacing';
-import Spinner from 'components/spinner';
-import Tabs from 'components/tabs';
-import Tag from 'components/tag';
-import Text from 'components/text';
-import TextArea from 'components/text-area';
-import TextField from 'components/text-field';
-import Toast from 'components/toast';
-import Tooltip from 'components/tooltip';
-import bootstrap from 'bootstrap';
-import { colors } from 'styles/color';
-import { sizes } from 'styles/font';
-import { spacing } from 'styles/spacing';
+// Elemental UI components
+export Alert from 'components/alert';
+export Button from 'components/button';
+export Checkbox from 'components/checkbox';
+export Label from 'components/label';
+export Link from 'components/link';
+export LoadingBar from 'components/loading-bar';
+export Modal from 'components/modal';
+export SelectList from 'components/select-list';
+export Spacing from 'components/spacing';
+export Spinner from 'components/spinner';
+export Tabs from 'components/tabs';
+export Tag from 'components/tag';
+export Text from 'components/text';
+export TextArea from 'components/text-area';
+export TextField from 'components/text-field';
+export Toast from 'components/toast';
+export Tooltip from 'components/tooltip';
 
-export {
-  // Elemental UI components
-  Alert,
-  Button,
-  Checkbox,
-  Label,
-  Link,
-  LoadingBar,
-  Modal,
-  SelectList,
-  Spacing,
-  Spinner,
-  Tabs,
-  Tag,
-  Text,
-  TextArea,
-  TextField,
-  Toast,
-  Tooltip,
-  // Style constants
-  colors,
-  sizes,
-  spacing,
-  // Global bootstrapping/initialization function
-  bootstrap,
-};
+// Global bootstrapping/initialization function
+export bootstrap from 'bootstrap';
+
+// Style constants
+export { colors } from 'styles/color';
+export { sizes } from 'styles/font';
+export { spacing } from 'styles/spacing';
