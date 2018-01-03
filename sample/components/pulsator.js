@@ -118,7 +118,7 @@ const SamplePulsator = () => (
 
       <Spacing size="small" bottom>
         <Spacing size="small" right inline>
-          <Pulsator size="delta" color={colors.green} pulsate={false} />
+          <Pulsator size="delta" color={colors.green} inactive />
         </Spacing>
         <Text color="gray50" size="kilo" uppercase bold inline>
           Disabled pulsation

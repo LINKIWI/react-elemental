@@ -20,7 +20,7 @@ export default class Pulsator extends Component {
   static propTypes = {
     color: PropTypes.string,
     size: PropTypes.oneOf(['alpha', 'beta', 'gamma', 'delta']),
-    pulsate: PropTypes.bool,
+    inactive: PropTypes.bool,
     transparent: PropTypes.bool,
     style: PropTypes.object,
   };
@@ -28,7 +28,7 @@ export default class Pulsator extends Component {
   static defaultProps = {
     color: undefined,
     size: 'beta',
-    pulsate: true,
+    inactive: false,
     transparent: false,
     style: {},
   };
@@ -36,19 +36,19 @@ export default class Pulsator extends Component {
   constructor(props) {
     super(props);
 
-    const { pulsate, transparent, color = colors.primary } = this.props;
+    const { inactive, transparent, color = colors.primary } = this.props;
 
     this.idleColor = transparent ? 'unset' : DEFAULT_IDLE_COLOR;
 
     this.state = {
-      color: pulsate ? this.idleColor : color,
+      color: inactive ? color : this.idleColor,
     };
   }
 
   componentDidMount() {
-    const { pulsate } = this.props;
+    const { inactive } = this.props;
 
-    if (pulsate) {
+    if (!inactive) {
       this.startPulsation();
     }
   }
@@ -56,12 +56,12 @@ export default class Pulsator extends Component {
   componentWillReceiveProps(nextProps) {
     const { color = colors.primary } = nextProps;
 
-    if (!this.props.pulsate && nextProps.pulsate) {
+    if (this.props.inactive && !nextProps.inactive) {
       this.setState({ color: this.idleColor });
       this.startPulsation();
     }
 
-    if (this.props.pulsate && !nextProps.pulsate) {
+    if (!this.props.inactive && nextProps.inactive) {
       // If turning off pulsation, we should also reset the color back to the prop-specified color.
       this.setState({ color });
       clearInterval(this.interval);
@@ -89,7 +89,7 @@ export default class Pulsator extends Component {
   };
 
   render() {
-    const { size, style: overrides, pulsate, transparent, ...proxyProps } = this.props;
+    const { size, style: overrides, inactive, transparent, ...proxyProps } = this.props;
     const { color } = this.state;
 
     const style = {

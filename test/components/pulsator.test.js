@@ -50,7 +50,7 @@ describe('Pulsator', () => {
   test('Optional pulsation disable', () => {
     const clock = sinon.useFakeTimers();
     const pulsator = mount(
-      <Pulsator color={colors.primary} pulsate={false} />,
+      <Pulsator color={colors.primary} inactive />,
     );
 
     expect(pulsator.state().color).toBe(colors.primary);
@@ -84,7 +84,7 @@ describe('Pulsator', () => {
     const pulsator = mount(
       <Pulsator
         color={colors.primary}
-        pulsate={false}
+        inactive
         transparent
       />,
     );
@@ -93,7 +93,7 @@ describe('Pulsator', () => {
     clock.tick(600);
     expect(pulsator.state().color).toBe(colors.primary);
 
-    pulsator.setProps({ pulsate: true });
+    pulsator.setProps({ inactive: false });
 
     expect(pulsator.state().color).toBe('unset');
     clock.tick(600);
@@ -101,7 +101,7 @@ describe('Pulsator', () => {
     clock.tick(600);
     expect(pulsator.state().color).toBe('unset');
 
-    pulsator.setProps({ pulsate: false });
+    pulsator.setProps({ inactive: true });
 
     expect(pulsator.state().color).toBe(colors.primary);
     clock.tick(600);
@@ -133,7 +133,7 @@ describe('Pulsator', () => {
 
   test('Changes in color prop with pulsation disabled', () => {
     const pulsator = mount(
-      <Pulsator color={colors.green} pulsate={false} transparent />,
+      <Pulsator color={colors.green} inactive transparent />,
     );
 
     expect(pulsator.state().color).toBe(colors.green);
