@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.1.0
+
+### Added
+
+* New `Spinner` component, which is now actually a spinner
+
+### Changed
+
+* `Spinner` is now renamed to `Pulsator`
+* `Pulsator` takes prop `inactive` instead of `pulsate`; `inactive={true}` now has the same semantics as `pulsate={false}`
+
 ## v1.0.1
 
 ### Changed
