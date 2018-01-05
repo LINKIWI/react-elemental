@@ -40,8 +40,8 @@ const Toast = (props) => {
     <div style={style}>
       <div style={accentStyle} />
 
-      <Spacing right left>
-        <Spacing size="small" top bottom>
+      <Spacing right left padding>
+        <Spacing size="small" top bottom padding>
           {children}
         </Spacing>
       </Spacing>
