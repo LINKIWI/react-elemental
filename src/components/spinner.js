@@ -14,14 +14,15 @@ const Spinner = ({
   ringColor,
   accentColor = colors.primary,
   duration,
+  thickness,
   style: overrides,
   ...proxyProps
 }) => (
   <div
     style={{
       animation: `spin ${duration}s linear infinite`,
-      border: `2px solid ${ringColor}`,
-      borderTop: `2px solid ${accentColor}`,
+      border: `${thickness}px solid ${ringColor}`,
+      borderTop: `${thickness}px solid ${accentColor}`,
       borderRadius: '50%',
       display: 'inline-block',
       height: sizeMap[size],
@@ -37,6 +38,7 @@ Spinner.propTypes = {
   ringColor: PropTypes.string,
   accentColor: PropTypes.string,
   duration: PropTypes.number,
+  thickness: PropTypes.number,
   style: PropTypes.object,
 };
 
@@ -45,6 +47,7 @@ Spinner.defaultProps = {
   ringColor: colors.gray5,
   accentColor: undefined,
   duration: 0.65,
+  thickness: 3,
   style: {},
 };
 

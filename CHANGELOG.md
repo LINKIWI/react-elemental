@@ -10,6 +10,7 @@
 
 * `Spinner` is now renamed to `Pulsator`
 * `Pulsator` takes prop `inactive` instead of `pulsate`; `inactive={true}` now has the same semantics as `pulsate={false}`
+* `Toast` now adds inner spacing with `padding` rather than `margin`
 
 ## v1.0.1
 

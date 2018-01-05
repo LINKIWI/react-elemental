@@ -57,12 +57,7 @@ const SampleSpinner = () => (
           </Text>
         </Spacing>
 
-        <Spacing size="small" right inline>
-          <Spinner size="delta" />
-        </Spacing>
-        <Text color="gray50" size="kilo" uppercase bold inline>
-          Loading
-        </Text>
+        <Spinner size="delta" />
       </Spacing>
     </Spacing>
 
@@ -97,6 +92,41 @@ const SampleSpinner = () => (
         </Spacing>
         <Text color="gray50" size="kilo" uppercase bold inline>
           Why not orange?
+        </Text>
+      </Spacing>
+    </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Customizable thickness and duration
+        </Text>
+      </Spacing>
+
+      <Spacing size="small" bottom>
+        <Spacing size="small" right inline>
+          <Spinner size="delta" thickness={1} />
+        </Spacing>
+        <Text color="gray50" size="kilo" uppercase bold inline>
+          Thin spinner
+        </Text>
+      </Spacing>
+
+      <Spacing size="small" bottom>
+        <Spacing size="small" right inline>
+          <Spinner size="alpha" thickness={5} />
+        </Spacing>
+        <Text color="gray50" size="kilo" uppercase bold inline>
+          Thick spinner
+        </Text>
+      </Spacing>
+
+      <Spacing size="small" bottom>
+        <Spacing size="small" right inline>
+          <Spinner size="delta" duration={1.2} />
+        </Spacing>
+        <Text color="gray50" size="kilo" uppercase bold inline>
+          Slow spinner
         </Text>
       </Spacing>
     </Spacing>

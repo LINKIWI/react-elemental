@@ -31,7 +31,18 @@ describe('Spinner', () => {
       />,
     );
 
-    expect(spinner.find('div').props().style.border).toBe(`2px solid ${colors.gray50}`);
-    expect(spinner.find('div').props().style.borderTop).toBe(`2px solid ${colors.green}`);
+    expect(spinner.find('div').props().style.border).toBe(`3px solid ${colors.gray50}`);
+    expect(spinner.find('div').props().style.borderTop).toBe(`3px solid ${colors.green}`);
+  });
+
+  test('Assignmnet of thickness', () => {
+    const spinner = mount(
+      <Spinner
+        ringColor={colors.gray50}
+        thickness={1}
+      />,
+    );
+
+    expect(spinner.find('div').props().style.border).toBe(`1px solid ${colors.gray50}`);
   });
 });
