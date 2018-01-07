@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
-import Close from 'react-icons/lib/md/close';
+import Clear from 'icons/clear';
 import { colors } from 'styles/color';
 import noop from 'util/noop';
 
@@ -126,17 +126,19 @@ class Modal extends Component {
     };
 
     const closeStyle = {
-      color: colors.gray20,
+      background: 'inherit',
+      border: 0,
+      fill: colors.gray20,
       cursor: 'pointer',
       position: 'absolute',
       right: '24px',
       top: '24px',
       transition: '0.15s all ease',
       ':hover': {
-        color: colors.gray15,
+        fill: colors.gray15,
       },
       ':active': {
-        color: colors.gray30,
+        fill: colors.gray30,
       },
     };
 
@@ -158,9 +160,9 @@ class Modal extends Component {
           {...proxyProps}
         >
           {!persistent && (
-            <div style={closeStyle} onClick={onHide}>
-              <Close style={closeIconStyle} />
-            </div>
+            <button style={closeStyle} onClick={onHide}>
+              <Clear style={closeIconStyle} />
+            </button>
           )}
 
           {children}

@@ -28,8 +28,7 @@
   "dependencies": {
     "color": "^2.0.1",
     "prop-types": "^15.5.10",
-    "radium": "^0.19.6",
-    "react-icons": "^2.2.7"
+    "radium": "^0.19.6"
   },
   "devDependencies": {
     "@linkiwi/eslint-config": "^1.0.0",

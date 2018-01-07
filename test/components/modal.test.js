@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Close from 'react-icons/lib/md/close';
 import Modal from 'components/modal';
+import Clear from 'icons/clear';
 
 describe('Modal', () => {
   test('Rendering hierarchy', () => {
@@ -11,7 +11,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    expect(modal.find(Close).length).toBe(1);
+    expect(modal.find(Clear).length).toBe(1);
     expect(modal.at(0).at(0).text()).toBe('children');
   });
 
@@ -40,7 +40,7 @@ describe('Modal', () => {
     modal.childAt(0).simulate('keydown', { keyCode: 27 });
 
     expect(onHide.mock.calls.length).toBe(0);
-    expect(modal.find(Close).length).toBe(0);
+    expect(modal.find(Clear).length).toBe(0);
   });
 
   test('Exiting out of modal via backdrop click', () => {
@@ -82,7 +82,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.find(Close).simulate('click');
+    modal.find(Clear).simulate('click');
     expect(onHide).toBeCalled();
   });
 
