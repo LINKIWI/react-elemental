@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import prefixAll from 'inline-style-prefixer/static';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
@@ -30,13 +29,16 @@ const SelectListPlaceholder = (props) => {
     transition: 'all 0.15s ease',
   };
 
-  const arrowStyle = prefixAll({
+  const arrowStyle = {
     alignSelf: 'center',
     marginLeft: 'auto',
     transform: `${arrowDirection === 'up' ? 'rotate(180deg)' : 'rotate(0deg)'}`,
     transition: 'all 0.2s ease',
     userSelect: 'none',
-  });
+    MozUserSelect: 'none',
+    WebkitUserSelect: 'none',
+    MsUserSelect: 'none',
+  };
 
   return (
     <div

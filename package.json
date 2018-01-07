@@ -27,7 +27,6 @@
   ],
   "dependencies": {
     "color": "^2.0.1",
-    "inline-style-prefixer": "^4.0.0",
     "prop-types": "^15.5.10",
     "radium": "^0.19.6",
     "react-icons": "^2.2.7"
