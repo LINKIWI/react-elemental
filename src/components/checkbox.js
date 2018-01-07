@@ -91,6 +91,7 @@ class Checkbox extends Component {
 
     const checkStyle = {
       fill: colors.gray5,
+      height: '16px',
       opacity: checked ? 1 : 0,
       transition: 'all 0.15s ease',
     };
