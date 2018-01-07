@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Clear from 'react-icons/lib/md/clear';
 import Text from 'components/text';
 import Tag from 'components/tag';
+import Clear from 'icons/clear';
 
 describe('Tag', () => {
   test('Accepts proxy props', () => {

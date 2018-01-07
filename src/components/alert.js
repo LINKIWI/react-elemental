@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Clear from 'react-icons/lib/md/clear';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
+import Clear from 'icons/clear';
 import { colors } from 'styles/color';
 import noop from 'util/noop';
 
@@ -59,18 +59,24 @@ const Alert = ({
     ...overrides,
   };
 
-  const clearStyle = {
-    color,
+  const dismissStyle = {
+    background: 'inherit',
+    border: 0,
     cursor: 'pointer',
     float: 'right',
+  };
+
+  const clearStyle = {
+    fill: color,
+    height: '16px',
   };
 
   return (
     <div style={style} {...proxyProps}>
       {dismissible && (
-        <Text color="gray15" style={clearStyle} onClick={onDismiss} inline>
-          <Clear />
-        </Text>
+        <button onClick={onDismiss} style={dismissStyle}>
+          <Clear style={clearStyle} />
+        </button>
       )}
 
       <Text size={textSizeMap[size]} color={color} bold inline>

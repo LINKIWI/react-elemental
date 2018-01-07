@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Clear from 'react-icons/lib/md/clear';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { spacing } from 'styles/spacing';
+import Clear from 'icons/clear';
 import noop from 'util/noop';
 
 const paddingMap = {
@@ -44,7 +44,7 @@ const Tag = ({
   };
 
   const clearStyle = {
-    color: outlineColor,
+    fill: outlineColor,
     cursor: 'pointer',
     float: 'right',
     marginLeft: spacing.tiny,

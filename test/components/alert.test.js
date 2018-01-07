@@ -57,7 +57,7 @@ describe('Alert', () => {
       />,
     );
 
-    const dismissIcon = alert.find(Text).at(0);
+    const dismissIcon = alert.find('button').at(0);
     expect(dismissIcon.props().onClick).toBeTruthy();
     expect(alert.find(dismissIcon.props()).length).toBe(1);
 
