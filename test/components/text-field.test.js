@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Text from 'components/text';
 import TextField from 'components/text-field';
 
@@ -13,7 +13,7 @@ describe('Text field', () => {
   });
 
   test('Error message', () => {
-    const textField = shallow(
+    const textField = mount(
       <TextField
         error="error"
       />,
@@ -24,7 +24,7 @@ describe('Text field', () => {
   });
 
   test('Primary style', () => {
-    const textField = shallow(
+    const textField = mount(
       <TextField />,
     );
 
@@ -32,11 +32,35 @@ describe('Text field', () => {
   });
 
   test('Secondary style', () => {
-    const textField = shallow(
+    const textField = mount(
       <TextField secondary />,
     );
 
     expect(textField.find('input').props().style.border).toBe(undefined);
     expect(textField.find('input').props().style.borderBottom).toBeDefined();
+  });
+
+  test('Hover state', () => {
+    const textField = mount(
+      <TextField />,
+    );
+
+    const primaryIdleColor = textField.find('input').props().style.border;
+    textField.find('input').simulate('mouseover');
+    expect(textField.find('input').props().style.border).not.toEqual(primaryIdleColor);
+    textField.find('input').simulate('mouseout');
+    expect(textField.find('input').props().style.border).toEqual(primaryIdleColor);
+  });
+
+  test('Focus state', () => {
+    const textField = mount(
+      <TextField />,
+    );
+
+    const primaryIdleColor = textField.find('input').props().style.border;
+    textField.find('input').simulate('focus');
+    expect(textField.find('input').props().style.border).not.toEqual(primaryIdleColor);
+    textField.find('input').simulate('blur');
+    expect(textField.find('input').props().style.border).toEqual(primaryIdleColor);
   });
 });

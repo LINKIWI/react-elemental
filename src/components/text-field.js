@@ -1,16 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Color from 'color';
-import Radium from 'radium';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { primaryFontStyle } from 'styles/font';
+import compose from 'util/compose';
+import withToggleState from 'util/with-toggle-state';
 
 /**
  * Input element for accepting user text input.
  */
-const TextField = ({ error, secondary, style: overrides, ...props }) => {
+const TextField = ({
+  error,
+  secondary,
+  style: overrides,
+  handleMouseOver,
+  handleMouseOut,
+  handleFocus,
+  handleBlur,
+  isHover,
+  isFocus,
+  ...props
+}) => {
   const hoverRed = new Color(colors.red).lighten(0.7).string();
   const primaryIdleColor = error ? colors.redLight : colors.gray10;
   const secondaryIdleColor = error ? colors.redLight : colors.primaryLight;
@@ -29,10 +41,10 @@ const TextField = ({ error, secondary, style: overrides, ...props }) => {
     borderRadius: 0,
     boxSizing: 'border-box',
     padding: '10px',
-    ':hover': {
+    ...isHover && {
       border: `1px solid ${primaryHoverColor}`,
     },
-    ':focus': {
+    ...isFocus && {
       border: `1px solid ${focusColor}`,
     },
   };
@@ -43,10 +55,10 @@ const TextField = ({ error, secondary, style: overrides, ...props }) => {
     borderRight: 'none',
     borderBottom: `1px solid ${secondaryIdleColor}`,
     padding: '3px 1px',
-    ':hover': {
+    ...isHover && {
       borderBottom: `1px solid ${secondaryHoverColor}`,
     },
-    ':focus': {
+    ...isFocus && {
       borderBottom: `1px solid ${focusColor}`,
     },
   };
@@ -60,6 +72,10 @@ const TextField = ({ error, secondary, style: overrides, ...props }) => {
   return (
     <div>
       <input
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         style={style}
         {...props}
       />
@@ -79,6 +95,13 @@ TextField.propTypes = {
   error: PropTypes.string,
   secondary: PropTypes.bool,
   style: PropTypes.object,
+  // HOC props
+  handleMouseOver: PropTypes.func.isRequired,
+  handleMouseOut: PropTypes.func.isRequired,
+  handleFocus: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  isHover: PropTypes.bool.isRequired,
+  isFocus: PropTypes.bool.isRequired,
 };
 
 TextField.defaultProps = {
@@ -87,4 +110,7 @@ TextField.defaultProps = {
   style: {},
 };
 
-export default Radium(TextField);
+export default compose(
+  withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
+  withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
+)(TextField);
