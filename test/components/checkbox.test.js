@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Check from 'react-icons/lib/md/check';
 import Checkbox from 'components/checkbox';
 import Text from 'components/text';
+import Check from 'icons/check';
 import { colors } from 'styles/color';
 
 describe('Checkbox', () => {

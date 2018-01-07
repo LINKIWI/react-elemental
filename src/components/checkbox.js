@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Check from 'react-icons/lib/md/check';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
+import Check from 'icons/check';
 import { colors } from 'styles/color';
 import noop from 'util/noop';
 
@@ -82,15 +82,15 @@ class Checkbox extends Component {
       backgroundColor,
       border: `1px solid ${borderColor}`,
       display: 'flex',
-      height: '18px',
+      height: '16px',
       justifyContent: 'center',
       opacity: disabled ? 0.5 : 1,
-      width: '18px',
+      width: '16px',
       transition: 'all 0.15s ease',
     };
 
     const checkStyle = {
-      color: colors.gray5,
+      fill: colors.gray5,
       opacity: checked ? 1 : 0,
       transition: 'all 0.15s ease',
     };
