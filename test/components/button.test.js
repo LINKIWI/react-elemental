@@ -14,14 +14,6 @@ describe('Button', () => {
     expect(button.at(0).props().type).toBe('submit');
   });
 
-  test('Setting ref in state', () => {
-    const button = mount(
-      <Button />,
-    );
-
-    expect(button.state().ref).toBeTruthy();
-  });
-
   test('Optional text props', () => {
     const buttonWithoutText = shallow(
       <Button />,
@@ -110,13 +102,15 @@ describe('Button', () => {
     const initialColor = '#3eb8f0';
     const nextColor = '#d32f2f';
     const button = shallow(
-      <Button color={initialColor}>
+      <Button color={initialColor} size="alpha">
         children
       </Button>,
     );
 
     button.setProps({ color: nextColor });
-
+    expect(button.find('button').props().style.backgroundColor).toBe(nextColor);
+    // Unrelated props change should not affect color
+    button.setProps({ size: 'beta' });
     expect(button.find('button').props().style.backgroundColor).toBe(nextColor);
   });
 

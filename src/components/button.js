@@ -38,7 +38,7 @@ const secondaryPaddingMap = {
 class Button extends Component {
   static propTypes = {
     color: PropTypes.string,
-    size: PropTypes.oneOf(['gamma', 'beta', 'alpha']),
+    size: PropTypes.oneOf(['alpha', 'beta', 'gamma']),
     text: PropTypes.string,
     disabled: PropTypes.bool,
     secondary: PropTypes.bool,
@@ -64,7 +64,6 @@ class Button extends Component {
     const { color = colors.primary } = props;
 
     this.state = {
-      ref: null,
       buttonState: STATE_IDLE,
       buttonColors: {
         [STATE_IDLE]: color,
@@ -89,17 +88,6 @@ class Button extends Component {
   }
 
   /**
-   * Set a ref to the rendered button element in component state.
-   *
-   * @param {HTMLElement} ref Ref to the top-level button element.
-   */
-  setRef = (ref) => {
-    if (!this.state.ref) {
-      this.setState({ ref });
-    }
-  };
-
-  /**
    * Set the hover background color when moving the mouse into the button.
    */
   handleMouseEnter = () => this.setState({ buttonState: STATE_HOVER });
@@ -107,15 +95,7 @@ class Button extends Component {
   /**
    * Blur the button element and set the idle color when the mouse leaves the button.
    */
-  handleMouseOut = () => {
-    const { ref } = this.state;
-
-    if (ref) {
-      ref.blur();
-    }
-
-    this.setState({ buttonState: STATE_IDLE });
-  };
+  handleMouseOut = () => this.setState({ buttonState: STATE_IDLE });
 
   /**
    * Set the active color when the button is depressed.
@@ -156,7 +136,6 @@ class Button extends Component {
 
     return (
       <button
-        ref={this.setRef}
         onClick={onClick}
         style={style}
         onMouseEnter={this.handleMouseEnter}
