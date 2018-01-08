@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.1.1
+
+### Changed
+
+* `Button` no longer automatically blurs on `mouseout` events
+* Fixed regression introduced in `Modal` where it would not expand to full height when the viewport height is too small
+
+### Removed
+
+* `react-elemental` no longer depends on `react-icons` and `radium`
+
 ## v1.1.0
 
 ### Added
