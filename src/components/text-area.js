@@ -1,16 +1,27 @@
 import React from 'react';
 import Color from 'color';
-import Radium from 'radium';
 import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { secondaryFontStyle } from 'styles/font';
+import compose from 'util/compose';
+import withToggleState from 'util/with-toggle-state';
 
 /**
  * Styled textarea element for blobs of text input.
  */
-const TextArea = ({ error, style: overrides, ...proxyProps }) => {
+const TextArea = ({
+  error,
+  handleMouseOver,
+  handleMouseOut,
+  handleFocus,
+  handleBlur,
+  isHover,
+  isFocus,
+  style: overrides,
+  ...proxyProps
+}) => {
   const hoverRed = new Color(colors.red).lighten(0.7).string();
   const idleColor = error ? colors.redLight : colors.gray10;
   const hoverColor = error ? hoverRed : colors.gray20;
@@ -23,10 +34,10 @@ const TextArea = ({ error, style: overrides, ...proxyProps }) => {
     padding: '10px',
     transition: 'border 0.15s ease',
     ...secondaryFontStyle('kilo', 'gray80', false),
-    ':hover': {
+    ...isHover && {
       border: `1px solid ${hoverColor}`,
     },
-    ':focus': {
+    ...isFocus && {
       border: `1px solid ${focusColor}`,
     },
     ...overrides,
@@ -36,6 +47,10 @@ const TextArea = ({ error, style: overrides, ...proxyProps }) => {
     <div>
       <textarea
         style={style}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...proxyProps}
       />
 
@@ -53,6 +68,13 @@ const TextArea = ({ error, style: overrides, ...proxyProps }) => {
 TextArea.propTypes = {
   error: PropTypes.string,
   style: PropTypes.object,
+  // HOC props
+  handleMouseOver: PropTypes.func.isRequired,
+  handleMouseOut: PropTypes.func.isRequired,
+  handleFocus: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  isHover: PropTypes.bool.isRequired,
+  isFocus: PropTypes.bool.isRequired,
 };
 
 TextArea.defaultProps = {
@@ -60,4 +82,7 @@ TextArea.defaultProps = {
   style: {},
 };
 
-export default Radium(TextArea);
+export default compose(
+  withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
+  withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
+)(TextArea);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Text from 'components/text';
 import TextArea from 'components/text-area';
 
@@ -13,7 +13,7 @@ describe('Text area', () => {
   });
 
   test('Error message', () => {
-    const textArea = shallow(
+    const textArea = mount(
       <TextArea
         error="error"
       />,
@@ -24,7 +24,7 @@ describe('Text area', () => {
   });
 
   test('Width and height are set via style', () => {
-    const textArea = shallow(
+    const textArea = mount(
       <TextArea
         style={{
           height: '10px',
