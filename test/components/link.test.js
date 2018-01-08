@@ -31,6 +31,8 @@ describe('Link', () => {
     expect(link.find('a').props().style.color).toBe('black');
     link.find('a').simulate('mouseup');
     expect(link.find('a').props().style.color).toBe('currentColor');
+    link.find('a').simulate('mouseout');
+    expect(link.find('a').props().style.borderBottom).toBeUndefined();
   });
 
   test('Plain type', () => {

@@ -131,7 +131,7 @@ class Modal extends Component {
       transform: 'translateX(-50%) translateY(-50%)',
       width,
       zIndex: 100,
-      ...(windowHeight.height < modalHeight) && {
+      ...(windowHeight < modalHeight) && {
         height: '100%',
         overflow: 'auto',
       },
