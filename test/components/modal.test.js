@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Modal from 'components/modal';
 import Clear from 'icons/clear';
 
@@ -23,7 +23,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.childAt(0).childAt(0).simulate('click');
+    modal.find('div').first().childAt(0).simulate('click');
 
     expect(onClick).toBeCalled();
   });
@@ -69,8 +69,8 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.childAt(0).childAt(0).simulate('keydown', { keyCode: 80 });
-    modal.childAt(0).childAt(0).simulate('keydown', { keyCode: 27 });
+    modal.find('div').first().childAt(0).simulate('keydown', { keyCode: 80 });
+    modal.find('div').first().childAt(0).simulate('keydown', { keyCode: 27 });
     expect(onHide).toBeCalled();
   });
 
@@ -90,14 +90,13 @@ describe('Modal', () => {
     const mockRef = {
       focus: jest.fn(),
     };
-    const modal = mount(
+    const modal = shallow(
       <Modal>
         children
       </Modal>,
     );
 
-    modal.setState({ modal: mockRef });
-    modal.instance().componentDidUpdate({}, {});
+    modal.dive().at(0).dive().setState({ modal: mockRef });
 
     expect(mockRef.focus).toBeCalled();
   });
@@ -114,8 +113,8 @@ describe('Modal', () => {
 
     modal.setState({ modal: mockRef, windowWidth: 0, windowHeight: 0 });
 
-    expect(modal.childAt(0).props().style.width).toBe('100%');
-    expect(modal.childAt(0).props().style.height).toBe('100%');
+    expect(modal.find('div').first().props().style.width).toBe('100%');
+    expect(modal.find('div').first().props().style.height).toBe('100%');
 
     modal.unmount();
   });

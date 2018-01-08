@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
 import PropTypes from 'prop-types';
 import Clear from 'icons/clear';
 import { colors } from 'styles/color';
+import compose from 'util/compose';
 import noop from 'util/noop';
+import withToggleState from 'util/with-toggle-state';
 
 const KEY_CODE_ESC = 27;
 
@@ -23,6 +24,13 @@ class Modal extends Component {
     onHide: PropTypes.func,
     style: PropTypes.object,
     children: PropTypes.any,
+    // HOC props
+    handleMouseOver: PropTypes.func.isRequired,
+    handleMouseOut: PropTypes.func.isRequired,
+    handleMouseDown: PropTypes.func.isRequired,
+    handleMouseUp: PropTypes.func.isRequired,
+    isHover: PropTypes.bool.isRequired,
+    isActive: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -83,6 +91,15 @@ class Modal extends Component {
     return func();
   };
 
+  handleMouseOut = () => {
+    const { handleMouseOut, handleMouseUp } = this.props;
+
+    // Also simulate a mouseup event so that the active state is properly reset if the user moves
+    // the mouse outside of the container without releasing the mouse.
+    handleMouseOut();
+    handleMouseUp();
+  };
+
   render() {
     const {
       size,
@@ -90,6 +107,12 @@ class Modal extends Component {
       onHide,
       style: overrides,
       children,
+      handleMouseOver,
+      handleMouseOut,
+      handleMouseDown,
+      handleMouseUp,
+      isHover,
+      isActive,
       ...proxyProps
     } = this.props;
     const { modal, windowWidth, windowHeight } = this.state;
@@ -134,10 +157,10 @@ class Modal extends Component {
       right: '24px',
       top: '24px',
       transition: '0.15s all ease',
-      ':hover': {
+      ...isHover && {
         fill: colors.gray15,
       },
-      ':active': {
+      ...isActive && isHover && {
         fill: colors.gray30,
       },
     };
@@ -160,7 +183,14 @@ class Modal extends Component {
           {...proxyProps}
         >
           {!persistent && (
-            <button style={closeStyle} onClick={onHide}>
+            <button
+              style={closeStyle}
+              onClick={onHide}
+              onMouseOver={handleMouseOver}
+              onMouseOut={this.handleMouseOut}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+            >
               <Clear style={closeIconStyle} />
             </button>
           )}
@@ -172,4 +202,7 @@ class Modal extends Component {
   }
 }
 
-export default Radium(Modal);
+export default compose(
+  withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
+  withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),
+)(Modal);

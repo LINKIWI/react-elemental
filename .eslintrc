@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "@linkiwi/eslint-config"
-  ]
+  "extends": "@linkiwi/eslint-config"
 }
