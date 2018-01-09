@@ -33,7 +33,7 @@
     "@linkiwi/eslint-config": "^1.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.1.2",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-module-resolver": "^3.0.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.12",
