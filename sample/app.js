@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spacing, bootstrap } from 'react-elemental';
+import { Elemental, Spacing } from 'react-elemental';
 import karlaBold from 'react-elemental-fonts/karla-bold';
 import karlaRegular from 'react-elemental-fonts/karla-regular';
 import sourceCodeProMedium from 'react-elemental-fonts/source-code-pro-medium';
@@ -21,36 +21,38 @@ import SampleTextField from './components/text-field';
 import SampleToast from './components/toast';
 import SampleTooltip from './components/tooltip';
 
-bootstrap({
-  primary: {
-    regular: karlaRegular,
-    bold: karlaBold,
-  },
-  secondary: {
-    regular: sourceCodeProRegular,
-    bold: sourceCodeProMedium,
-  },
-});
-
 const App = () => (
-  <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
-    <SampleTabs />
-    <SampleToast />
-    <SampleModal />
-    <SampleTooltip />
-    <SamplePulsator />
-    <SampleSpinner />
-    <SampleLink />
-    <SampleTextArea />
-    <SampleAlert />
-    <SampleCheckbox />
-    <SampleLoadingBar />
-    <SampleTag />
-    <SampleSelectList />
-    <SampleTextField />
-    <SampleButton />
-    <SampleText />
-  </Spacing>
+  <Elemental
+    fontOpts={{
+      primary: {
+        regular: karlaRegular,
+        bold: karlaBold,
+      },
+      secondary: {
+        regular: sourceCodeProRegular,
+        bold: sourceCodeProMedium,
+      },
+    }}
+  >
+    <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+      <SampleTabs />
+      <SampleToast />
+      <SampleModal />
+      <SampleTooltip />
+      <SamplePulsator />
+      <SampleSpinner />
+      <SampleLink />
+      <SampleTextArea />
+      <SampleAlert />
+      <SampleCheckbox />
+      <SampleLoadingBar />
+      <SampleTag />
+      <SampleSelectList />
+      <SampleTextField />
+      <SampleButton />
+      <SampleText />
+    </Spacing>
+  </Elemental>
 );
 
 export default App;

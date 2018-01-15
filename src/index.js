@@ -18,7 +18,8 @@ export TextField from 'components/text-field';
 export Toast from 'components/toast';
 export Tooltip from 'components/tooltip';
 
-// Global bootstrapping/initialization function
+// Global bootstrapping/initialization
+export Elemental from 'elemental';
 export bootstrap from 'bootstrap';
 
 // Style constants

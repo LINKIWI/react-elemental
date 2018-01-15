@@ -22,12 +22,33 @@ use the standard Elemental fonts, see the installation instructions of
 
 ## Usage
 
+React Elemental exports UI components that you can use directly in your `render` function. However, you must first bootstrap (initialize) the library in order to set configuration globals. You can do this either *declaratively* using the provided `Elemental` React component (recommended) or *imperatively* by invoking the exported `bootstrap` function.
+
+#### Using the `Elemental` component
+
+At the top level of your application, instantiate an `Elemental` component and pass the rest of your application as its children. Configuration parameters are specified as props (available options are defined below).
+
 ```javascript
+import React from 'react';
+import { Elemental } from 'react-elemental';
+
+const App = () => (
+  <Elemental {...configOpts}>
+    application children
+  </Elemental>
+);
+
+export default App;
+```
+
+#### Using `bootstrap` directly
+
+As early as possible in your client-side rendering path, invoke the bootstrapping function (available options are defined below).
+
+```javascript
+import React from 'react';
 import { bootstrap } from 'react-elemental';
 
-// As early as possible in your client-side rendering path, invoke the bootstrapping function.
-// This will inject some necessary global CSS into the document head and override default
-// configuration parameters with those you specify.
 bootstrap(...);
 
 const App = () => {
@@ -37,7 +58,10 @@ const App = () => {
 export default App;
 ```
 
+#### Using exported Elemental UI components
+
 ```javascript
+import React from 'react';
 import { Button, Spacing, Text } from 'react-elemental';
 
 const MyComponent = ({ onClick }) => (
@@ -57,12 +81,18 @@ export default MyComponent;
 
 ## Options
 
-You can optionally invoke the bootstrapping/initialization function with objects specifying
-overrides for global constants used by `react-elemental`:
+To optionally specify overrides for global constants, you can pass props to the `Elemental` top-level component, or invoke the bootstrapping function with parameters:
 
 ```javascript
+import React from 'react';
 import { bootstrap } from 'react-elemental';
 
+// Declarative
+<Elemental fontOpts={fontOpts} colorOpts={colorOpts}>
+  children
+</Elemental>
+
+// Imperative
 bootstrap(fontOpts, colorOpts);
 ```
 
