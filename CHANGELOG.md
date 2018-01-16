@@ -2,6 +2,10 @@
 
 ## v1.1.1
 
+### Added
+
+* New `Elemental` component for a declarative abstraction over bootstrapping
+
 ### Changed
 
 * `Button` no longer automatically blurs on `mouseout` events
@@ -10,10 +14,6 @@
 ### Removed
 
 * `react-elemental` no longer depends on `react-icons` and `radium`
-
-### Added
-
-* New `Elemental` component for a declarative abstraction over bootstrapping
 
 ## v1.1.0
 

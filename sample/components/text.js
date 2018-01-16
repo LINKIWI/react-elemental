@@ -6,7 +6,7 @@ const Sizes = ({ secondary = false }) => (
   <div>
     {
       Object.keys(sizes).map((size) => (
-        <Spacing bottom key={size}>
+        <Spacing key={size} bottom>
           <Spacing size="micro" bottom>
             <Text size="kilo" color="gray30" uppercase bold>
               {size}
