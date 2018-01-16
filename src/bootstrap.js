@@ -1,5 +1,6 @@
 import { colors } from 'styles/color';
 import { fonts } from 'styles/font';
+import injectCSS from 'util/inject-css';
 
 const DEFAULT_COLORS = {
   primary: colors.blue,
@@ -32,41 +33,6 @@ const universalSpacing = `
 `;
 
 /**
- * Remove the annoying outline that appears on all depressed buttons in Firefox.
- */
-const buttonOutlines = `
-  button::-moz-focus-inner {
-    border: 0;
-  }
-`;
-
-/**
- * Declare an animation for the Spinner component.
- */
-const spinAnimation = `
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-`;
-
-/**
- * Inject a CSS style declaration into the document head.
- *
- * @param {string} css Valid CSS string.
- */
-const injectCSS = (css) => {
-  const node = document.createElement('style');
-  node.innerHTML = css;
-  document.body.appendChild(node);
-};
-
-/**
  * Bootstrap Elemental. This will inject all necessary global CSS declarations and initialize custom
  * style overrides passed in as options.
  *
@@ -94,8 +60,6 @@ const bootstrap = (fontOpts = {}, colorOpts = {}) => {
   injectCSS(fontFaceStyle('secondary--regular', fonts.secondary.regular));
   injectCSS(fontFaceStyle('secondary--bold', fonts.secondary.bold));
   injectCSS(universalSpacing);
-  injectCSS(buttonOutlines);
-  injectCSS(spinAnimation);
 };
 
 export default bootstrap;

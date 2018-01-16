@@ -11,6 +11,10 @@
 
 * `react-elemental` no longer depends on `react-icons` and `radium`
 
+### Added
+
+* New `Elemental` component for a declarative abstraction over bootstrapping
+
 ## v1.1.0
 
 ### Added

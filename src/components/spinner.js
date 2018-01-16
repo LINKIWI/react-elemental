@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import withCSS from 'util/with-css';
 
 const sizeMap = {
   alpha: '26px',
@@ -51,4 +52,17 @@ Spinner.defaultProps = {
   style: {},
 };
 
-export default Spinner;
+export default withCSS({
+  key: 'spinner',
+  css: `
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  `,
+})(Spinner);

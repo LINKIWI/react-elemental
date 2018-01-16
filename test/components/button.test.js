@@ -20,7 +20,7 @@ describe('Button', () => {
     );
     expect(buttonWithoutText.find(Text).length).toBe(0);
 
-    const buttonWithText = shallow(
+    const buttonWithText = mount(
       <Button text="text" />,
     );
     expect(buttonWithText.find(Text).length).toBe(1);
@@ -30,9 +30,9 @@ describe('Button', () => {
 
   test('Idle and hover background colors', () => {
     const idleColor = '#3eb8f0';
-    const button = mount(
+    const button = shallow(
       <Button color={idleColor} />,
-    );
+    ).find('Button').dive();
 
     expect(button.state().buttonState).toBe('idle');
     expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
@@ -48,9 +48,9 @@ describe('Button', () => {
 
   test('Idle and click/active background colors', () => {
     const idleColor = '#3eb8f0';
-    const button = mount(
+    const button = shallow(
       <Button color={idleColor} />,
-    );
+    ).find('Button').dive();
 
     button.simulate('mousedown');
     expect(button.state().buttonState).toBe('active');
@@ -67,7 +67,7 @@ describe('Button', () => {
 
   test('Styles for secondary button', () => {
     const color = '#3eb8f0';
-    const button = shallow(
+    const button = mount(
       <Button color={color} text="text" secondary />,
     );
 
@@ -77,7 +77,7 @@ describe('Button', () => {
 
   test('Disabled button', () => {
     const color = '#3eb8f0';
-    const button = shallow(
+    const button = mount(
       <Button color={color} disabled />,
     );
 
@@ -88,7 +88,7 @@ describe('Button', () => {
     const sizes = ['gamma', 'alpha', 'beta'];
 
     sizes.forEach((size) => {
-      const button = shallow(
+      const button = mount(
         <Button size={size}>
           children
         </Button>,
@@ -101,7 +101,7 @@ describe('Button', () => {
   test('Color props change', () => {
     const initialColor = '#3eb8f0';
     const nextColor = '#d32f2f';
-    const button = shallow(
+    const button = mount(
       <Button color={initialColor} size="alpha">
         children
       </Button>,
@@ -115,7 +115,7 @@ describe('Button', () => {
   });
 
   test('Appropriately reduced padding for secondary style', () => {
-    const button = shallow(
+    const button = mount(
       <Button size="beta" secondary>
         children
       </Button>,
