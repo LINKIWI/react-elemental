@@ -17,7 +17,7 @@ describe('With CSS HOC', () => {
   });
 
   test('Injection of CSS into document head', () => {
-    const WithCSSHOC = withCSS({ key: 'key-0', css: 'css' })(WrappedComponent);
+    const WithCSSHOC = withCSS({ key: 'key-0', css: () => 'css' })(WrappedComponent);
 
     const instance = shallow(
       <WithCSSHOC />,
@@ -28,7 +28,7 @@ describe('With CSS HOC', () => {
   });
 
   test('Idempotent CSS injection', () => {
-    const WithCSSHOC = withCSS({ key: 'key-1', css: 'css' })(WrappedComponent);
+    const WithCSSHOC = withCSS({ key: 'key-1', css: () => 'css' })(WrappedComponent);
 
     const instance = mount(
       <WithCSSHOC />,
@@ -43,7 +43,7 @@ describe('With CSS HOC', () => {
   });
 
   test('Rendering and props proxy of wrapped component', () => {
-    const WithCSSHOC = withCSS({ key: 'key-2', css: 'css' })(WrappedComponent);
+    const WithCSSHOC = withCSS({ key: 'key-2', css: () => 'css' })(WrappedComponent);
     const mockOnClick = jest.fn();
 
     const instance = shallow(

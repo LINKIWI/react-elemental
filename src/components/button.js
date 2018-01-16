@@ -168,7 +168,7 @@ class Button extends Component {
 
 export default withCSS({
   key: 'button',
-  css: `
+  css: () => `
     button::-moz-focus-inner {
       border: 0;
     }

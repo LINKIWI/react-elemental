@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Text from 'components/text';
 
 describe('Text', () => {
   test('Accepts proxy props', () => {
     const onClick = jest.fn();
-    const text = shallow(
+    const text = mount(
       <Text onClick={onClick}>
         text
       </Text>,
@@ -15,18 +15,18 @@ describe('Text', () => {
   });
 
   test('Standard rendering', () => {
-    const text = shallow(
+    const text = mount(
       <Text>
         text
       </Text>,
     );
 
     expect(text.find('p').length).toBe(1);
-    expect(text.find('p').children().text()).toBe('text');
+    expect(text.find('p').text()).toBe('text');
   });
 
   test('Inline rendering', () => {
-    const text = shallow(
+    const text = mount(
       <Text inline>
         text
       </Text>,
@@ -34,11 +34,11 @@ describe('Text', () => {
 
     expect(text.find('p').length).toBe(0);
     expect(text.find('span').length).toBe(1);
-    expect(text.find('span').children().text()).toBe('text');
+    expect(text.find('span').text()).toBe('text');
   });
 
   test('Uppercase modifier', () => {
-    const text = shallow(
+    const text = mount(
       <Text uppercase>
         text
       </Text>,
@@ -48,14 +48,14 @@ describe('Text', () => {
   });
 
   test('Alignment modifiers', () => {
-    const centerText = shallow(
+    const centerText = mount(
       <Text center>
         text
       </Text>,
     );
     expect(centerText.find('p').props().style.textAlign).toBe('center');
 
-    const rightText = shallow(
+    const rightText = mount(
       <Text right>
         text
       </Text>,
@@ -64,14 +64,14 @@ describe('Text', () => {
   });
 
   test('Primary/secondary font style', () => {
-    const primaryText = shallow(
+    const primaryText = mount(
       <Text>
         text
       </Text>,
     );
     expect(primaryText.find('p').props().style.fontFamily).toBe('primary--regular');
 
-    const secondaryText = shallow(
+    const secondaryText = mount(
       <Text secondary>
         text
       </Text>,

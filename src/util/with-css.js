@@ -11,7 +11,8 @@ const isInjected = {};
  *
  * @param {string} key Unique key for the CSS. It must be unique; it should not clash with keys for
  *                     the CSS of any other components.
- * @param {string} css CSS literal to inject into the document head. Note that it has global scope.
+ * @param {Function} css Thunk for a CSS literal to inject into the document head. Note that all
+ *                       injected CSS has global scope.
  * @returns {Function} HOC factory that takes a component class or function as a parameter and
  *                     returns an HOC wrapping the specified component.
  */
@@ -19,7 +20,7 @@ const withCSS = ({ key, css }) => (WrappedComponent) =>
   class WithCSSHOC extends Component {
     componentWillMount() {
       if (!isInjected[key]) {
-        injectCSS(css);
+        injectCSS(css());
         isInjected[key] = true;
       }
     }

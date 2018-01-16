@@ -54,7 +54,7 @@ Spinner.defaultProps = {
 
 export default withCSS({
   key: 'spinner',
-  css: `
+  css: () => `
     @keyframes spin {
       0% {
         transform: rotate(0deg);
