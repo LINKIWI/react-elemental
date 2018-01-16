@@ -33,3 +33,23 @@ export const secondaryFontStyle = (size, color, bold) => ({
   fontSize: sizes[size] || size,
   color: colors[color] || color,
 });
+
+/**
+ * Generate a font-face CSS declaration.
+ *
+ * @param {string} name Name of the font.
+ * @param {string} src Font src. May be URL or base64-encoded font data.
+ */
+const fontFaceStyle = (name, src) => `
+  @font-face {
+    font-family: '${name}';
+    src: ${src};
+  }
+`;
+
+export const fontCSS = () => [
+  fontFaceStyle('primary--regular', fonts.primary.regular),
+  fontFaceStyle('primary--bold', fonts.primary.bold),
+  fontFaceStyle('secondary--regular', fonts.secondary.regular),
+  fontFaceStyle('secondary--bold', fonts.secondary.bold),
+].join('\n');

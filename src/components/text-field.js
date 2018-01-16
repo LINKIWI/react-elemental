@@ -4,8 +4,9 @@ import Color from 'color';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-import { primaryFontStyle } from 'styles/font';
+import { primaryFontStyle, fontCSS } from 'styles/font';
 import compose from 'util/compose';
+import withCSS from 'util/with-css';
 import withToggleState from 'util/with-toggle-state';
 
 /**
@@ -111,6 +112,7 @@ TextField.defaultProps = {
 };
 
 export default compose(
+  withCSS({ key: 'text', css: fontCSS }),
   withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
   withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
 )(TextField);

@@ -9,19 +9,6 @@ const DEFAULT_COLORS = {
 };
 
 /**
- * Generate a font-face CSS declaration.
- *
- * @param {string} name Name of the font.
- * @param {string} src Font src. May be URL or base64-encoded font data.
- */
-const fontFaceStyle = (name, src) => `
-  @font-face {
-    font-family: '${name}';
-    src: ${src};
-  }
-`;
-
-/**
  * Universal spacing properties to apply to all elements in the document.
  */
 const universalSpacing = `
@@ -55,10 +42,7 @@ const bootstrap = (fontOpts = {}, colorOpts = {}) => {
   colors.primaryLight = bootstrapColors.primaryLight;
   colors.primaryDark = bootstrapColors.primaryDark;
 
-  injectCSS(fontFaceStyle('primary--regular', fonts.primary.regular));
-  injectCSS(fontFaceStyle('primary--bold', fonts.primary.bold));
-  injectCSS(fontFaceStyle('secondary--regular', fonts.secondary.regular));
-  injectCSS(fontFaceStyle('secondary--bold', fonts.secondary.bold));
+  // Injection of universal styles, not specific to any single component
   injectCSS(universalSpacing);
 };
 

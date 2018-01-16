@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { primaryFontStyle, secondaryFontStyle } from 'styles/font';
+import { primaryFontStyle, secondaryFontStyle, fontCSS } from 'styles/font';
+import withCSS from 'util/with-css';
 
 /**
  * Text component with automatic typeface formatting.
@@ -78,4 +79,7 @@ Text.defaultProps = {
   children: null,
 };
 
-export default Text;
+export default withCSS({
+  key: 'text',
+  css: fontCSS,
+})(Text);
