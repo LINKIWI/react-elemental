@@ -32,7 +32,7 @@ describe('Button', () => {
     const idleColor = '#3eb8f0';
     const button = shallow(
       <Button color={idleColor} />,
-    ).find('Button').dive();
+    );
 
     expect(button.state().buttonState).toBe('idle');
     expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
@@ -50,7 +50,7 @@ describe('Button', () => {
     const idleColor = '#3eb8f0';
     const button = shallow(
       <Button color={idleColor} />,
-    ).find('Button').dive();
+    );
 
     button.simulate('mousedown');
     expect(button.state().buttonState).toBe('active');
@@ -121,6 +121,6 @@ describe('Button', () => {
       </Button>,
     );
 
-    expect(button.find('button').props().style.padding).toBe('8px 14px');
+    expect(button.find('button').childAt(0).props().style.padding).toBe('8px 14px');
   });
 });

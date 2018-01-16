@@ -4,7 +4,6 @@ import Color from 'color';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import noop from 'util/noop';
-import withCSS from 'util/with-css';
 
 const COLOR_INTENSITY_RATIO = 0.08;
 
@@ -128,11 +127,13 @@ class Button extends Component {
       borderRadius: 0,
       cursor: 'pointer',
       opacity: disabled ? 0.4 : 1,
-      padding: (secondary ? secondaryPaddingMap : primaryPaddingMap)[size],
       pointerEvents: disabled ? 'none' : 'inherit',
       textDecoration: 'none',
       transition: 'all 0.15s ease-out',
       ...overrides,
+    };
+    const childrenStyle = {
+      padding: (secondary ? secondaryPaddingMap : primaryPaddingMap)[size],
     };
 
     return (
@@ -145,8 +146,8 @@ class Button extends Component {
         onMouseUp={this.handleMouseUp}
         {...proxyProps}
       >
-        {
-          text && (
+        <div style={childrenStyle}>
+          {text && (
             <Text
               size={textSizeMap[size]}
               color={secondary ? color : 'gray5'}
@@ -157,20 +158,13 @@ class Button extends Component {
             >
               {text}
             </Text>
-          )
-        }
+          )}
 
-        {children}
+          {children}
+        </div>
       </button>
     );
   }
 }
 
-export default withCSS({
-  key: 'button',
-  css: () => `
-    button::-moz-focus-inner {
-      border: 0;
-    }
-  `,
-})(Button);
+export default Button;
