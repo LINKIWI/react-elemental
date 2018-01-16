@@ -45,6 +45,17 @@ describe('Checkbox', () => {
     expect(checkbox.childAt(0).props().style.border).toBe(`1px solid ${colors.gray20}`);
   });
 
+  test('Rendering of disabled checkbox', () => {
+    const onChange = jest.fn();
+    const checkbox = shallow(
+      <Checkbox onChange={onChange} disabled />,
+    ).find('Checkbox').dive();
+
+    expect(checkbox.find('button').props().style.cursor).toBe('inherit');
+    checkbox.find('button').simulate('click');
+    expect(onChange.mock.calls.length).toBe(0);
+  });
+
   test('Check change callback for unchecked checkbox', () => {
     const onChange = jest.fn();
     const checkbox = shallow(

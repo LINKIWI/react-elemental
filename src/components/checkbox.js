@@ -74,7 +74,7 @@ class Checkbox extends Component {
       alignItems: 'center',
       background: 'inherit',
       border: 0,
-      cursor: 'pointer',
+      cursor: disabled ? 'inherit' : 'pointer',
       display: 'inline-flex',
       ...overrides,
     };

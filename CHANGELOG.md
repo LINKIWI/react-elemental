@@ -10,6 +10,7 @@
 
 * `Button` no longer automatically blurs on `mouseout` events
 * Fixed regression introduced in `Modal` where it would not expand to full height when the viewport height is too small
+* `Checkbox` no longer uses a pointer hand when it is `disabled`
 
 ### Removed
 
