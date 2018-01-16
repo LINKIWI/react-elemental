@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Tabs from 'components/tabs';
 
 describe('Tabs', () => {
   test('Props proxy', () => {
     const mockOnClick = jest.fn();
-    const tabs = shallow(
+    const tabs = mount(
       <Tabs onClick={mockOnClick} />,
     );
 
@@ -14,7 +14,7 @@ describe('Tabs', () => {
   });
 
   test('Rendering of all options', () => {
-    const tabs = shallow(
+    const tabs = mount(
       <Tabs
         options={[
           { value: 'one', label: 'one' },
@@ -29,7 +29,7 @@ describe('Tabs', () => {
 
   test('Click handler for each tab segment', () => {
     const mockOnChange = jest.fn();
-    const tabs = shallow(
+    const tabs = mount(
       <Tabs
         options={[
           { value: 'one', label: 'one' },

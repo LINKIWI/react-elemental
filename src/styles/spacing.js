@@ -31,3 +31,9 @@ export const marginStyle = (property, size, dimensions) => {
     ].join(' '),
   };
 };
+
+export const buttonOutlinesCSS = () => `
+  button::-moz-focus-inner {
+    border: 0;
+  }
+`;

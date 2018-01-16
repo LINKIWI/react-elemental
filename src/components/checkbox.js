@@ -4,7 +4,9 @@ import Spacing from 'components/spacing';
 import Text from 'components/text';
 import Check from 'icons/check';
 import { colors } from 'styles/color';
+import { buttonOutlinesCSS } from 'styles/spacing';
 import noop from 'util/noop';
+import withCSS from 'util/with-css';
 
 /**
  * Styled checkbox element.
@@ -124,4 +126,7 @@ class Checkbox extends Component {
   }
 }
 
-export default Checkbox;
+export default withCSS({
+  key: 'button',
+  css: buttonOutlinesCSS,
+})(Checkbox);

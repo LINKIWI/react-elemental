@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
+import { buttonOutlinesCSS } from 'styles/spacing';
 import noop from 'util/noop';
+import withCSS from 'util/with-css';
 
 /**
  * Horizontally organized segments of options.
@@ -65,4 +67,7 @@ Tabs.defaultProps = {
   style: {},
 };
 
-export default Tabs;
+export default withCSS({
+  key: 'button',
+  css: buttonOutlinesCSS,
+})(Tabs);

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Color from 'color';
 import Text from 'components/text';
 import { colors } from 'styles/color';
+import { buttonOutlinesCSS } from 'styles/spacing';
 import noop from 'util/noop';
+import withCSS from 'util/with-css';
 
 const COLOR_INTENSITY_RATIO = 0.08;
 
@@ -167,4 +169,7 @@ class Button extends Component {
   }
 }
 
-export default Button;
+export default withCSS({
+  key: 'button',
+  css: buttonOutlinesCSS,
+})(Button);
