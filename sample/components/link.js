@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, Spacing, Text, colors } from 'react-elemental';
 
+const onClick = (evt) => evt.preventDefault();
+
 const SampleLink = () => (
   <div>
     <Spacing size="huge" bottom>
@@ -27,7 +29,7 @@ const SampleLink = () => (
         </Spacing>
 
         <Text color={colors.primary}>
-          <Link href="" activeColor={colors.black}>
+          <Link href="" activeColor={colors.black} onClick={onClick}>
             Links will inherit whatever color is used in the parent Text element.
           </Link>
         </Text>
@@ -41,7 +43,7 @@ const SampleLink = () => (
         </Spacing>
 
         <Text color={colors.primary}>
-          <Link type="plain" href="" activeColor={colors.black}>
+          <Link type="plain" href="" activeColor={colors.black} onClick={onClick}>
             Use plain links to disable the underline on hover
           </Link>
         </Text>
@@ -55,7 +57,7 @@ const SampleLink = () => (
         </Spacing>
 
         <Text color={colors.primary}>
-          <Link type="underline" href="" activeColor={colors.black}>
+          <Link type="underline" href="" activeColor={colors.black} onClick={onClick}>
             Use underline links to always show the underline
           </Link>
         </Text>
