@@ -45,6 +45,16 @@ describe('Checkbox', () => {
     expect(checkbox.childAt(0).props().style.border).toBe(`1px solid ${colors.gray20}`);
   });
 
+  test('Rendering of focused checkbox', () => {
+    const checkbox = shallow(
+      <Checkbox />,
+    ).find('Checkbox').dive();
+
+    checkbox.find('button').simulate('focus');
+
+    expect(checkbox.childAt(0).props().style.border).toBe(`1px solid ${colors.gray20}`);
+  });
+
   test('Rendering of disabled checkbox', () => {
     const onChange = jest.fn();
     const checkbox = shallow(
