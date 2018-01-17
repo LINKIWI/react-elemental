@@ -95,6 +95,8 @@ class Link extends Component {
         onMouseOut={this.handleMouseOut}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
+        onTouchStart={handleMouseDown}
+        onTouchEnd={handleMouseUp}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={this.handleKeyDown}

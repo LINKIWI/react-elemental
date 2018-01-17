@@ -131,6 +131,8 @@ class Button extends Component {
         onMouseLeave={this.handleMouseLeave}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
+        onTouchStart={handleMouseDown}
+        onTouchEnd={handleMouseUp}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={this.handleKeyDown}
