@@ -7,18 +7,16 @@ import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import noop from 'util/noop';
+import {
+  KEY_CODE_ENTER,
+  KEY_CODE_ESC,
+  KEY_CODE_SPACE,
+  KEY_CODE_UP,
+  KEY_CODE_DOWN,
+} from 'util/constants';
 
 // Generic, (hopefully) unique key reserved for the placeholder item in the select list.
 const PLACEHOLDER_VALUE = 'select-list-placeholder-item-value';
-
-// Mapping of keys to event key codes.
-const KEY_CODES = {
-  SPACE: 32,
-  ENTER: 13,
-  ESC: 27,
-  UP: 38,
-  DOWN: 40,
-};
 
 /**
  * Some cleverness is required to make Javascript's modulo operator return a nonnegative number for
@@ -163,11 +161,11 @@ export default class SelectList extends Component {
     };
 
     const keyHandlers = {
-      [KEY_CODES.SPACE]: withDefaultPrevented(selectHandler),
-      [KEY_CODES.ENTER]: withDefaultPrevented(selectHandler),
-      [KEY_CODES.ESC]: withDefaultPrevented(escapeHandler),
-      [KEY_CODES.UP]: withDefaultPrevented(upHandler),
-      [KEY_CODES.DOWN]: withDefaultPrevented(downHandler),
+      [KEY_CODE_SPACE]: withDefaultPrevented(selectHandler),
+      [KEY_CODE_ENTER]: withDefaultPrevented(selectHandler),
+      [KEY_CODE_ESC]: withDefaultPrevented(escapeHandler),
+      [KEY_CODE_UP]: withDefaultPrevented(upHandler),
+      [KEY_CODE_DOWN]: withDefaultPrevented(downHandler),
     };
 
     return (keyHandlers[keyCode] || characterSearchHandler)();
