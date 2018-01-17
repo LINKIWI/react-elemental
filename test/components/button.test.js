@@ -28,41 +28,56 @@ describe('Button', () => {
     expect(buttonWithText.find(Text).props().color).toBe('gray5');
   });
 
-  test('Idle and hover background colors', () => {
-    const idleColor = '#3eb8f0';
-    const button = shallow(
-      <Button color={idleColor} />,
-    ).find('Button').dive();
+  test('Hover style', () => {
+    const button = mount(
+      <Button />,
+    );
 
-    expect(button.state().buttonState).toBe('idle');
-    expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
-
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
     button.simulate('mouseenter');
-    expect(button.state().buttonState).toBe('hover');
-    expect(button.find('button').props().style.backgroundColor).not.toBe(idleColor);
-
-    button.simulate('mouseout');
-    expect(button.state().buttonState).toBe('idle');
-    expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
+    expect(button.find('button').props().style.filter).toBe('brightness(1.05)');
+    button.simulate('mouseleave');
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
   });
 
-  test('Idle and click/active background colors', () => {
-    const idleColor = '#3eb8f0';
-    const button = shallow(
-      <Button color={idleColor} />,
-    ).find('Button').dive();
+  test('Active style', () => {
+    const button = mount(
+      <Button />,
+    );
 
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
     button.simulate('mousedown');
-    expect(button.state().buttonState).toBe('active');
-    expect(button.find('button').props().style.backgroundColor).not.toBe(idleColor);
-
+    expect(button.find('button').props().style.filter).toBe('brightness(0.95)');
     button.simulate('mouseup');
-    expect(button.state().buttonState).toBe('hover');
-    expect(button.find('button').props().style.backgroundColor).not.toBe(idleColor);
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
+  });
 
-    button.simulate('mouseout');
-    expect(button.state().buttonState).toBe('idle');
-    expect(button.find('button').props().style.backgroundColor).toBe(idleColor);
+  test('Hover and active style', () => {
+    const button = mount(
+      <Button />,
+    );
+
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
+    button.simulate('mouseenter');
+    expect(button.find('button').props().style.filter).toBe('brightness(1.05)');
+    button.simulate('mousedown');
+    expect(button.find('button').props().style.filter).toBe('brightness(0.95)');
+    button.simulate('mouseup');
+    expect(button.find('button').props().style.filter).toBe('brightness(1.05)');
+    button.simulate('mouseleave');
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
+  });
+
+  test('Focus style', () => {
+    const button = mount(
+      <Button />,
+    );
+
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
+    button.simulate('focus');
+    expect(button.find('button').props().style.filter).toBe('brightness(1.05)');
+    button.simulate('blur');
+    expect(button.find('button').props().style.filter).toBe('brightness(1)');
   });
 
   test('Styles for secondary button', () => {

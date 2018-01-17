@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Color from 'color';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
-import noop from 'util/noop';
+import compose from 'util/compose';
 import withCSS from 'util/with-css';
-
-const COLOR_INTENSITY_RATIO = 0.08;
-
-const STATE_IDLE = 'idle';
-const STATE_HOVER = 'hover';
-const STATE_ACTIVE = 'active';
+import withToggleState from 'util/with-toggle-state';
 
 // Mapping of button sizes to the corresponding default text size.
 const textSizeMap = {
@@ -45,8 +39,17 @@ class Button extends Component {
     disabled: PropTypes.bool,
     secondary: PropTypes.bool,
     style: PropTypes.object,
-    onClick: PropTypes.func,
     children: PropTypes.any,
+    // HOC props
+    handleMouseEnter: PropTypes.func.isRequired,
+    handleMouseLeave: PropTypes.func.isRequired,
+    handleMouseDown: PropTypes.func.isRequired,
+    handleMouseUp: PropTypes.func.isRequired,
+    handleFocus: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    isHover: PropTypes.bool.isRequired,
+    isActive: PropTypes.bool.isRequired,
+    isFocus: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -56,78 +59,56 @@ class Button extends Component {
     disabled: false,
     secondary: false,
     style: {},
-    onClick: noop,
     children: null,
   };
 
-  constructor(props) {
-    super(props);
+  handleMouseLeave = () => {
+    const { handleMouseLeave, handleMouseUp } = this.props;
 
-    const { color = colors.primary } = props;
-
-    this.state = {
-      buttonState: STATE_IDLE,
-      buttonColors: {
-        [STATE_IDLE]: color,
-        [STATE_HOVER]: new Color(color).lighten(COLOR_INTENSITY_RATIO).string(),
-        [STATE_ACTIVE]: new Color(color).darken(COLOR_INTENSITY_RATIO).string(),
-      },
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // Need to ensure that the idle, hover, and active colors are appropriately updated if the
-    // button's base color changes.
-    if (this.props.color !== nextProps.color) {
-      this.setState({
-        buttonColors: {
-          [STATE_IDLE]: nextProps.color,
-          [STATE_HOVER]: new Color(nextProps.color).lighten(COLOR_INTENSITY_RATIO).string(),
-          [STATE_ACTIVE]: new Color(nextProps.color).darken(COLOR_INTENSITY_RATIO).string(),
-        },
-      });
-    }
-  }
-
-  /**
-   * Set the hover background color when moving the mouse into the button.
-   */
-  handleMouseEnter = () => this.setState({ buttonState: STATE_HOVER });
-
-  /**
-   * Blur the button element and set the idle color when the mouse leaves the button.
-   */
-  handleMouseOut = () => this.setState({ buttonState: STATE_IDLE });
-
-  /**
-   * Set the active color when the button is depressed.
-   */
-  handleMouseDown = () => this.setState({ buttonState: STATE_ACTIVE });
-
-  /**
-   * Set the hover color when the button is released.
-   */
-  handleMouseUp = () => this.setState({ buttonState: STATE_HOVER });
+    handleMouseLeave();
+    handleMouseUp();
+  };
 
   render() {
     const {
-      onClick,
+      color = colors.primary,
       size,
       text,
       disabled,
       secondary,
       style: overrides,
       children,
+      handleMouseEnter,
+      handleMouseLeave,
+      handleMouseDown,
+      handleMouseUp,
+      handleFocus,
+      handleBlur,
+      isHover,
+      isActive,
+      isFocus,
       ...proxyProps
     } = this.props;
-    const { buttonState, buttonColors } = this.state;
 
-    const color = buttonColors[buttonState];
+    const brightness = (() => {
+      if (isActive) {
+        return 0.95;
+      }
+
+      if (isHover || isFocus) {
+        return 1.05;
+      }
+
+      return 1;
+    })();
+
     const style = {
       backgroundColor: secondary ? 'transparent' : color,
       border: secondary ? `2px solid ${color}` : 'none',
       borderRadius: 0,
+      color,
       cursor: 'pointer',
+      filter: `brightness(${brightness})`,
       opacity: disabled ? 0.4 : 1,
       pointerEvents: disabled ? 'none' : 'inherit',
       textDecoration: 'none',
@@ -140,12 +121,13 @@ class Button extends Component {
 
     return (
       <button
-        onClick={onClick}
         style={style}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseOut={this.handleMouseOut}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...proxyProps}
       >
         <div style={childrenStyle}>
@@ -169,7 +151,9 @@ class Button extends Component {
   }
 }
 
-export default withCSS({
-  key: 'button',
-  css: buttonOutlinesCSS,
-})(Button);
+export default compose(
+  withCSS({ key: 'button', css: buttonOutlinesCSS }),
+  withToggleState({ key: 'isHover', enable: 'handleMouseEnter', disable: 'handleMouseLeave' }),
+  withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),
+  withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
+)(Button);

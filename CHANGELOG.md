@@ -8,7 +8,10 @@
 
 ### Changed
 
-* `Button` no longer automatically blurs on `mouseout` events
+* `Button` no longer automatically blurs on `mouseleave` events
+* Unnecessary explicit `Button` prop `onClick` removed
+* `Button` now has a dedicated focus style, identical to the existing hover style
+* Minor tweaks to the hover and active appearance of `Button`
 * Fixed regression introduced in `Modal` where it would not expand to full height when the viewport height is too small
 * `Checkbox` no longer uses a pointer hand when it is `disabled`
 
