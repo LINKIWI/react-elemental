@@ -4,6 +4,7 @@ import Text from 'components/text';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
 import compose from 'util/compose';
+import { KEY_CODE_ENTER } from 'util/constants';
 import withCSS from 'util/with-css';
 import withToggleState from 'util/with-toggle-state';
 
@@ -69,6 +70,10 @@ class Button extends Component {
     handleMouseUp();
   };
 
+  handleKeyDown = ({ keyCode }) => (keyCode === KEY_CODE_ENTER) && this.props.handleMouseDown();
+
+  handleKeyUp = ({ keyCode }) => (keyCode === KEY_CODE_ENTER) && this.props.handleMouseUp();
+
   render() {
     const {
       color = colors.primary,
@@ -128,6 +133,8 @@ class Button extends Component {
         onMouseUp={handleMouseUp}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onKeyDown={this.handleKeyDown}
+        onKeyUp={this.handleKeyUp}
         {...proxyProps}
       >
         <div style={childrenStyle}>

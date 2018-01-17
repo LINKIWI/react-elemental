@@ -80,6 +80,18 @@ describe('Button', () => {
     expect(button.find('button').props().style.filter).toBe('brightness(1)');
   });
 
+  test('Styles on keyboard actions', () => {
+    const button = mount(
+      <Button />,
+    );
+
+    expect(button.find('Button').props().isActive).toBe(false);
+    button.find('button').simulate('keydown', { keyCode: 13 });
+    expect(button.find('Button').props().isActive).toBe(true);
+    button.find('button').simulate('keyup', { keyCode: 13 });
+    expect(button.find('Button').props().isActive).toBe(false);
+  });
+
   test('Styles for secondary button', () => {
     const color = '#3eb8f0';
     const button = mount(
