@@ -14,6 +14,7 @@
 * Minor tweaks to the hover and active appearance of `Button`
 * Fixed regression introduced in `Modal` where it would not expand to full height when the viewport height is too small
 * `Checkbox` no longer uses a pointer hand when it is `disabled`
+* `Link` has dedicated focus and active style when using keyboard for navigation
 
 ### Removed
 

@@ -71,6 +71,34 @@ describe('Link', () => {
     expect(link.find('a').props().style.color).toBe('currentColor');
   });
 
+  test('Focus style', () => {
+    const link = mount(
+      <Link activeColor="black">
+        link
+      </Link>,
+    );
+
+    expect(link.find('Link').props().isFocus).toBe(false);
+    link.find('a').simulate('focus');
+    expect(link.find('Link').props().isFocus).toBe(true);
+    link.find('a').simulate('blur');
+    expect(link.find('Link').props().isFocus).toBe(false);
+  });
+
+  test('Styles on keyboard actions', () => {
+    const link = mount(
+      <Link activeColor="black">
+        link
+      </Link>,
+    );
+
+    expect(link.find('Link').props().isActive).toBe(false);
+    link.find('a').simulate('keydown', { keyCode: 13 });
+    expect(link.find('Link').props().isActive).toBe(true);
+    link.find('a').simulate('keyup', { keyCode: 13 });
+    expect(link.find('Link').props().isActive).toBe(false);
+  });
+
   test('Props proxy', () => {
     const mockOnClick = jest.fn();
     const link = mount(

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'util/compose';
 import withToggleState from 'util/with-toggle-state';
+import { KEY_CODE_ENTER } from 'util/constants';
 
 /**
  * Styled link element.
@@ -18,8 +19,11 @@ class Link extends Component {
     handleMouseOut: PropTypes.func.isRequired,
     handleMouseDown: PropTypes.func.isRequired,
     handleMouseUp: PropTypes.func.isRequired,
+    handleFocus: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
     isHover: PropTypes.bool.isRequired,
     isActive: PropTypes.bool.isRequired,
+    isFocus: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -31,13 +35,18 @@ class Link extends Component {
   };
 
   handleMouseOut = () => {
-    const { handleMouseOut, handleMouseUp } = this.props;
+    const { handleMouseOut, handleMouseUp, handleBlur } = this.props;
 
-    // Also simulate a mouseup event so that the active state is properly reset if the user moves
-    // the mouse outside of the container without releasing the mouse.
+    // Also simulate a mouseup and blur event so that the active state is properly reset if the user
+    // moves the mouse outside of the container without releasing the mouse.
     handleMouseOut();
     handleMouseUp();
+    handleBlur();
   };
+
+  handleKeyDown = ({ keyCode }) => (keyCode === KEY_CODE_ENTER) && this.props.handleMouseDown();
+
+  handleKeyUp = ({ keyCode }) => (keyCode === KEY_CODE_ENTER) && this.props.handleMouseUp();
 
   render() {
     const {
@@ -50,8 +59,11 @@ class Link extends Component {
       handleMouseOut,
       handleMouseDown,
       handleMouseUp,
+      handleFocus,
+      handleBlur,
       isHover,
       isActive,
+      isFocus,
       ...proxyProps
     } = this.props;
 
@@ -61,15 +73,17 @@ class Link extends Component {
       opacity: 0.8,
       textDecoration: 'none',
       transition: '0.15s all ease',
-      ...isHover && {
+      ...(isHover || isFocus) && {
         borderBottom: `${borderSize} solid currentColor`,
         opacity: '1.0',
       },
-      ...isHover && isActive && {
+      ...isActive && {
         borderBottom: `${borderSize} solid currentColor`,
         color: activeColor,
       },
-      ...type === 'underline' && { borderBottom: '2px solid currentColor' },
+      ...type === 'underline' && {
+        borderBottom: '2px solid currentColor',
+      },
       ...overrides,
     };
 
@@ -81,6 +95,10 @@ class Link extends Component {
         onMouseOut={this.handleMouseOut}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={this.handleKeyDown}
+        onKeyUp={this.handleKeyUp}
         {...proxyProps}
       >
         {children}
@@ -92,4 +110,5 @@ class Link extends Component {
 export default compose(
   withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
   withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),
+  withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
 )(Link);
