@@ -72,7 +72,7 @@ class Link extends Component {
       color: 'currentColor',
       opacity: 0.8,
       textDecoration: 'none',
-      transition: '0.15s all ease',
+      transition: '0.1s all ease',
       ...(isHover || isFocus) && {
         borderBottom: `${borderSize} solid currentColor`,
         opacity: '1.0',
