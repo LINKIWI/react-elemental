@@ -59,7 +59,7 @@
     "raf": "^3.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-elemental-fonts": "^0.0.1",
+    "react-elemental-fonts": "^0.0.2",
     "react-test-renderer": "^16.2.0",
     "sinon": "^4.1.6",
     "webpack": "^3.10.0",
