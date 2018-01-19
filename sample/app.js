@@ -1,9 +1,11 @@
 import React from 'react';
 import { Elemental, Spacing } from 'react-elemental';
-import karlaBold from 'react-elemental-fonts/karla-bold';
-import karlaRegular from 'react-elemental-fonts/karla-regular';
-import sourceCodeProMedium from 'react-elemental-fonts/source-code-pro-medium';
-import sourceCodeProRegular from 'react-elemental-fonts/source-code-pro-regular';
+import {
+  karlaBold,
+  karlaRegular,
+  sourceCodeProMedium,
+  sourceCodeProRegular,
+} from 'react-elemental-fonts';
 import SampleAlert from 'components/alert';
 import SampleButton from 'components/button';
 import SampleCheckbox from 'components/checkbox';
