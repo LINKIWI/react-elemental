@@ -21,6 +21,7 @@ const Tabs = ({ options, value: selected, onChange, style: overrides, ...proxyPr
 
   const optionStyle = {
     border: `1px solid ${colors.gray10}`,
+    borderRadius: 0,
     cursor: 'pointer',
     flex: 1,
     textAlign: 'center',
