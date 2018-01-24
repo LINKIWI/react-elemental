@@ -115,6 +115,10 @@ All respected override options are as follows:
 |`primaryLight`|Hex color code string for the desired primary light color.|`'#d6ecf5'`|
 |`primaryDark`|Hex color code string for the desired primary dark color.|`'#036996'`|
 
+## Babel plugin
+
+You may **optionally** include [`babel-plugin-react-elemental`](https://github.com/LINKIWI/babel-plugin-react-elemental) with your project to automatically transform imports so that only the components used by your application are bundled. This reduces the final application bundle size by reducing the library footprint.
+
 ## Development
 
 It is easiest to symbolically link the sample project's `react-elemental` dependency to the root project. Then, auto-transpile on source changes and auto-rebuild the sample project on dependency changes.
