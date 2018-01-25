@@ -3,7 +3,14 @@ node_js:
   - "8"
 install:
   - npm install
+  - cd sample
+  - npm install
+  - cd ..
 script:
   - npm run build
   - npm run lint
   - npm run coveralls
+  - cd sample
+  - npm run build
+  - cd ..
+  - npm run bundlesize
