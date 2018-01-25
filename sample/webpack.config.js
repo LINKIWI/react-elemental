@@ -7,46 +7,80 @@ const webpack = require('webpack');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = {
-  entry: {
-    sample: './entry.js',
+module.exports = [
+  {
+    entry: {
+      sample: './entry.js',
+    },
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      publicPath: '/dist/',
+      filename: '[name].js',
+    },
+    module: {
+      rules: [
+        {
+          test: /.+\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+        },
+        {
+          test: /\.html$/,
+          loader: 'html-loader',
+        },
+      ],
+    },
+    plugins: [
+      new webpack.ProgressPlugin(),
+      isProduction && new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production'),
+        },
+      }),
+      isProduction && new webpack.LoaderOptionsPlugin({
+        minimize: true,
+      }),
+      isProduction && new webpack.optimize.UglifyJsPlugin({
+        comments: false,
+      }),
+      isProduction && new HTMLWebpackPlugin({
+        template: './index.html',
+        title: 'Elemental UI',
+        inlineSource: '.js$',
+      }),
+      isProduction && new HtmlWebpackInlineSourcePlugin(),
+    ].filter(Boolean),
   },
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: '[name].js',
-  },
-  module: {
-    rules: [
-      {
-        test: /.+\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.html$/,
-        loader: 'html-loader',
-      },
+  {
+    entry: {
+      lib: './lib.js',
+    },
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: '[name].js',
+    },
+    module: {
+      rules: [
+        {
+          test: /.+\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
+    plugins: [
+      // Always generate production bundle
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production'),
+        },
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        comments: false,
+      }),
     ],
+    externals: {
+      react: 'React',
+    },
   },
-  plugins: [
-    new webpack.ProgressPlugin(),
-    isProduction && new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    isProduction && new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
-    isProduction && new webpack.optimize.UglifyJsPlugin({
-      comments: false,
-    }),
-    isProduction && new HTMLWebpackPlugin({
-      template: './index.html',
-      title: 'Elemental UI',
-      inlineSource: '.js$',
-    }),
-    isProduction && new HtmlWebpackInlineSourcePlugin(),
-  ].filter(Boolean),
-};
+];
