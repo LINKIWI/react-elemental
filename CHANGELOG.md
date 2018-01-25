@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.2
+
+### Changed
+
+* Fixed inconsistent border radius on `Tabs`
+
 ## v1.1.1
 
 ### Added
