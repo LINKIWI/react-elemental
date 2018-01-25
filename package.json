@@ -27,7 +27,7 @@
     "test"
   ],
   "dependencies": {
-    "color": "^2.0.1",
+    "color": "^3.0.0",
     "prop-types": "^15.5.10"
   },
   "devDependencies": {
