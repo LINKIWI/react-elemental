@@ -9,7 +9,7 @@
 
 See the [official documentation site](https://linkiwi.github.io/react-elemental-docs) for demos, examples, and detailed documentation for each available UI component.
 
-![React Elemental](https://static.kevinlin.info/files/blog/react-elemental/hero.png)
+![React Elemental](https://static.kevinlin.info/blog/react-elemental/hero.png)
 
 ## Installation
 
