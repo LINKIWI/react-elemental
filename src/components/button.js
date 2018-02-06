@@ -115,13 +115,11 @@ class Button extends Component {
       cursor: 'pointer',
       filter: `brightness(${brightness})`,
       opacity: disabled ? 0.4 : 1,
+      padding: (secondary ? secondaryPaddingMap : primaryPaddingMap)[size],
       pointerEvents: disabled ? 'none' : 'inherit',
       textDecoration: 'none',
       transition: 'all 0.15s ease-out',
       ...overrides,
-    };
-    const childrenStyle = {
-      padding: (secondary ? secondaryPaddingMap : primaryPaddingMap)[size],
     };
 
     return (
@@ -139,22 +137,20 @@ class Button extends Component {
         onKeyUp={this.handleKeyUp}
         {...proxyProps}
       >
-        <div style={childrenStyle}>
-          {text && (
-            <Text
-              size={textSizeMap[size]}
-              color={secondary ? color : 'gray5'}
-              style={{ pointerEvents: 'none' }}
-              uppercase
-              bold
-              inline
-            >
-              {text}
-            </Text>
-          )}
+        {text && (
+          <Text
+            size={textSizeMap[size]}
+            color={secondary ? color : 'gray5'}
+            style={{ pointerEvents: 'none' }}
+            uppercase
+            bold
+            inline
+          >
+            {text}
+          </Text>
+        )}
 
-          {children}
-        </div>
+        {children}
       </button>
     );
   }

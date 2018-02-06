@@ -11,6 +11,7 @@
 ### Changed
 
 * Fixed inconsistent border radius on `Tabs`
+* Fixed inability to override padding on `Button`
 
 ## v1.1.1
 

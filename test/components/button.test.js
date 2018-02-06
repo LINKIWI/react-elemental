@@ -148,6 +148,6 @@ describe('Button', () => {
       </Button>,
     );
 
-    expect(button.find('button').childAt(0).props().style.padding).toBe('8px 14px');
+    expect(button.find('button').props().style.padding).toBe('8px 14px');
   });
 });
