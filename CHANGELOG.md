@@ -2,6 +2,12 @@
 
 ## v1.1.2
 
+### Added
+
+* Secondary style on `Tabs`
+* New prop `fit` on `Tabs` to automatically size the widths of each tab item
+* `Tabs` primary style now has a subtle hover effect
+
 ### Changed
 
 * Fixed inconsistent border radius on `Tabs`
