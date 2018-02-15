@@ -51,6 +51,7 @@ const TextField = ({
   };
 
   const secondaryStyle = {
+    backgroundColor: 'transparent',
     borderLeft: 'none',
     borderTop: 'none',
     borderRight: 'none',

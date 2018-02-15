@@ -12,6 +12,7 @@
 
 * Fixed inconsistent border radius on `Tabs`
 * Fixed inability to override padding on `Button`
+* Secondary `TextField` now has a transparent background by default
 
 ## v1.1.1
 
