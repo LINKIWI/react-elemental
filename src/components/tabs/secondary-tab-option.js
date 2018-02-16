@@ -13,15 +13,15 @@ const SecondaryTabOption = ({
   children,
 }) => {
   const secondaryIdleStyle = {
-    borderTop: '3px solid rgba(0, 0, 0, 0)',
+    borderTop: '2.5px solid rgba(0, 0, 0, 0)',
     borderRight: 0,
-    borderBottom: '3px solid rgba(0, 0, 0, 0)',
+    borderBottom: '2.5px solid rgba(0, 0, 0, 0)',
     borderLeft: 0,
     transition: 'border 0.1s ease',
   };
 
   const secondaryActiveStyle = {
-    [isInvert ? 'borderTop' : 'borderBottom']: `3px solid ${colors.primary}`,
+    [isInvert ? 'borderTop' : 'borderBottom']: `2.5px solid ${colors.primary}`,
   };
 
   const style = {

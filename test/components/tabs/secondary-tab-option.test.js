@@ -21,8 +21,8 @@ describe('Secondary tab option', () => {
       />,
     );
 
-    expect(tab.find('button').props().style.borderBottom).toBe('3px solid rgba(0, 0, 0, 0)');
-    expect(tab.find('button').props().style.borderTop).toBe('3px solid rgba(0, 0, 0, 0)');
+    expect(tab.find('button').props().style.borderBottom).toBe('2.5px solid rgba(0, 0, 0, 0)');
+    expect(tab.find('button').props().style.borderTop).toBe('2.5px solid rgba(0, 0, 0, 0)');
   });
 
   test('Active, non-inverted style', () => {
@@ -34,8 +34,8 @@ describe('Secondary tab option', () => {
       />,
     );
 
-    expect(tab.find('button').props().style.borderBottom).toBe(`3px solid ${colors.primary}`);
-    expect(tab.find('button').props().style.borderTop).toBe('3px solid rgba(0, 0, 0, 0)');
+    expect(tab.find('button').props().style.borderBottom).toBe(`2.5px solid ${colors.primary}`);
+    expect(tab.find('button').props().style.borderTop).toBe('2.5px solid rgba(0, 0, 0, 0)');
   });
 
   test('Active, non-inverted style', () => {
@@ -47,8 +47,8 @@ describe('Secondary tab option', () => {
       />,
     );
 
-    expect(tab.find('button').props().style.borderBottom).toBe('3px solid rgba(0, 0, 0, 0)');
-    expect(tab.find('button').props().style.borderTop).toBe(`3px solid ${colors.primary}`);
+    expect(tab.find('button').props().style.borderBottom).toBe('2.5px solid rgba(0, 0, 0, 0)');
+    expect(tab.find('button').props().style.borderTop).toBe(`2.5px solid ${colors.primary}`);
   });
 
   test('Click handler', () => {
