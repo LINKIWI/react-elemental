@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, Label, SelectList, Spacing, Text, TextField } from 'react-elemental';
+import {
+  Button,
+  Label,
+  SelectList,
+  Spacing,
+  Text,
+  TextField,
+} from 'react-elemental';
 
 const SampleTextField = () => (
   <div>
