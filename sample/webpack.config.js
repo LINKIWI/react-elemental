@@ -2,6 +2,7 @@
 
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -9,6 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = [
   {
+    mode: isProduction ? 'production' : 'development',
     entry: {
       sample: './entry.js',
     },
@@ -30,6 +32,20 @@ module.exports = [
         },
       ],
     },
+    optimization: {
+      minimizer: [
+        new UglifyJSPlugin({
+          uglifyOptions: {
+            output: {
+              comments: false,
+            },
+          },
+        }),
+      ],
+    },
+    performance: {
+      hints: false,
+    },
     plugins: [
       new webpack.ProgressPlugin(),
       isProduction && new webpack.DefinePlugin({
@@ -40,9 +56,6 @@ module.exports = [
       isProduction && new webpack.LoaderOptionsPlugin({
         minimize: true,
       }),
-      isProduction && new webpack.optimize.UglifyJsPlugin({
-        comments: false,
-      }),
       isProduction && new HTMLWebpackPlugin({
         template: './index.html',
         title: 'Elemental UI',
@@ -52,6 +65,7 @@ module.exports = [
     ].filter(Boolean),
   },
   {
+    mode: 'production',
     entry: {
       lib: './lib.js',
     },
@@ -68,15 +82,26 @@ module.exports = [
         },
       ],
     },
+    optimization: {
+      minimizer: [
+        new UglifyJSPlugin({
+          uglifyOptions: {
+            output: {
+              comments: false,
+            },
+          },
+        }),
+      ],
+    },
+    performance: {
+      hints: false,
+    },
     plugins: [
       // Always generate production bundle
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
         },
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        comments: false,
       }),
     ],
     externals: {
