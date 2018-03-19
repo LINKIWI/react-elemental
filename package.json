@@ -28,13 +28,13 @@
   ],
   "dependencies": {
     "color": "^3.0.0",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.6.1"
   },
   "devDependencies": {
-    "@linkiwi/eslint-config": "^1.1.1",
+    "@linkiwi/eslint-config": "^1.1.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^8.2.2",
     "babel-plugin-module-resolver": "^3.1.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
     "babel-preset-env": "^1.6.1",
@@ -46,19 +46,19 @@
     "derive-pkg-cli": "^1.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.18.0",
+    "eslint": "^4.19.0",
     "eslint-import-resolver-babel-module": "^4.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.12.1",
-    "eslint-plugin-react": "^7.6.1",
-    "jest": "^22.3.0",
-    "nodemon": "^1.15.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.15.0",
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.2",
+    "nodemon": "^1.17.2",
     "pre-commit": "^1.2.2",
     "raf": "^3.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
-    "sinon": "^4.3.0"
+    "sinon": "^4.4.6"
   },
   "peerDependencies": {
     "react": "^16.2.0"

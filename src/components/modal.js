@@ -4,6 +4,7 @@ import Clear from 'icons/clear';
 import { colors } from 'styles/color';
 import compose from 'util/compose';
 import noop from 'util/noop';
+import omit from 'util/omit';
 import withToggleState from 'util/with-toggle-state';
 
 const KEY_CODE_ESC = 27;
@@ -108,14 +109,15 @@ class Modal extends Component {
       style: overrides,
       children,
       handleMouseOver,
-      handleMouseOut,
       handleMouseDown,
       handleMouseUp,
       isHover,
       isActive,
-      ...proxyProps
+      ...props
     } = this.props;
     const { modal, windowWidth, windowHeight } = this.state;
+
+    const proxyProps = omit(props, ['handleMouseOut']);
 
     if (windowWidth === null || windowHeight === null) {
       return null;

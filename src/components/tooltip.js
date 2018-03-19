@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import omit from 'util/omit';
 
 export const GRACE_TIMEOUT_INTERVAL = 150;
 
@@ -62,16 +63,16 @@ export default class Tooltip extends Component {
   render() {
     const {
       contents,
-      persistent,
       width,
       offset,
-      top,
       bottom,
       children,
       style: overrides,
-      ...proxyProps
+      ...props
     } = this.props;
     const { displayTooltip } = this.state;
+
+    const proxyProps = omit(props, ['persistent', 'top']);
 
     const placementProperty = bottom ? 'top' : 'bottom';
 

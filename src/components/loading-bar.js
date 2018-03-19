@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import omit from 'util/omit';
 
 export const POSITION_LEFT = 0;
 export const POSITION_RIGHT = 100;
@@ -60,11 +61,12 @@ export default class LoadingBar extends Component {
       color = colors.primary,
       thickness,
       duration,
-      delay,
       style: overrides,
-      ...proxyProps
+      ...props
     } = this.props;
     const { position } = this.state;
+
+    const proxyProps = omit(props, ['delay']);
     const offset = position === POSITION_LEFT ? -POSITION_RIGHT : POSITION_LEFT;
 
     const containerStyle = {

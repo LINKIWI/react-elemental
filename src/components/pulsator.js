@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import omit from 'util/omit';
 
 const sizeMap = {
   alpha: '26px',
@@ -89,8 +90,10 @@ export default class Pulsator extends Component {
   };
 
   render() {
-    const { size, style: overrides, inactive, transparent, ...proxyProps } = this.props;
+    const { size, style: overrides, ...props } = this.props;
     const { color } = this.state;
+
+    const proxyProps = omit(props, ['inactive', 'transparent']);
 
     const style = {
       backgroundColor: color,

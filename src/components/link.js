@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'util/compose';
+import omit from 'util/omit';
 import withToggleState from 'util/with-toggle-state';
 import { KEY_CODE_ENTER } from 'util/constants';
 
@@ -56,7 +57,6 @@ class Link extends Component {
       style: overrides,
       children,
       handleMouseOver,
-      handleMouseOut,
       handleMouseDown,
       handleMouseUp,
       handleFocus,
@@ -64,8 +64,10 @@ class Link extends Component {
       isHover,
       isActive,
       isFocus,
-      ...proxyProps
+      ...props
     } = this.props;
+
+    const proxyProps = omit(props, ['handleMouseOut']);
 
     const borderSize = type === 'plain' ? '0' : '2px';
     const style = {

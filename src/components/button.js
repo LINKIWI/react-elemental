@@ -5,6 +5,7 @@ import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
 import compose from 'util/compose';
 import { KEY_CODE_ENTER } from 'util/constants';
+import omit from 'util/omit';
 import withCSS from 'util/with-css';
 import withToggleState from 'util/with-toggle-state';
 
@@ -84,7 +85,6 @@ class Button extends Component {
       style: overrides,
       children,
       handleMouseEnter,
-      handleMouseLeave,
       handleMouseDown,
       handleMouseUp,
       handleFocus,
@@ -92,8 +92,10 @@ class Button extends Component {
       isHover,
       isActive,
       isFocus,
-      ...proxyProps
+      ...props
     } = this.props;
+
+    const proxyProps = omit(props, ['handleMouseLeave']);
 
     const brightness = (() => {
       if (isActive) {
