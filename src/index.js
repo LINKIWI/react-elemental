@@ -2,6 +2,7 @@
 export Alert from 'components/alert';
 export Button from 'components/button';
 export Checkbox from 'components/checkbox';
+export Image from 'components/image';
 export Label from 'components/label';
 export Link from 'components/link';
 export LoadingBar from 'components/loading-bar';
