@@ -9,6 +9,7 @@ import {
 import SampleAlert from 'components/alert';
 import SampleButton from 'components/button';
 import SampleCheckbox from 'components/checkbox';
+import SampleImage from 'components/image';
 import SampleLink from 'components/link';
 import SampleLoadingBar from 'components/loading-bar';
 import SampleModal from 'components/modal';
@@ -37,6 +38,7 @@ const App = () => (
     }}
   >
     <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+      <SampleImage />
       <SampleTabs />
       <SampleToast />
       <SampleModal />
