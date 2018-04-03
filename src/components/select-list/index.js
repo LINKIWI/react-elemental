@@ -14,18 +14,10 @@ import {
   KEY_CODE_UP,
   KEY_CODE_DOWN,
 } from 'util/constants';
+import { modulo } from 'util/number';
 
 // Generic, (hopefully) unique key reserved for the placeholder item in the select list.
 const PLACEHOLDER_VALUE = 'select-list-placeholder-item-value';
-
-/**
- * Some cleverness is required to make Javascript's modulo operator return a nonnegative number for
- * modulo operations on negative integers.
- *
- * @param {number} num Number for which a modulo operation should be performed.
- * @param {number} modulus Modulus integer.
- */
-const modulo = (num, modulus) => ((num % modulus) + modulus) % modulus;
 
 /**
  * Dropdown menu component.
