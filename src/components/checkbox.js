@@ -84,16 +84,16 @@ class Checkbox extends Component {
       backgroundColor,
       border: `1px solid ${borderColor}`,
       display: 'flex',
-      height: '16px',
+      height: '14px',
       justifyContent: 'center',
       opacity: disabled ? 0.5 : 1,
-      width: '16px',
+      width: '14px',
       transition: 'all 0.15s ease',
     };
 
     const checkStyle = {
       fill: colors.gray5,
-      height: '16px',
+      height: '12px',
       opacity: checked ? 1 : 0,
       transition: 'all 0.15s ease',
     };

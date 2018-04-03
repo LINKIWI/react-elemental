@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.0
+
+### Changed
+
+* `Checkbox` is slightly smaller in size
+
 ## v1.1.2
 
 ### Added
