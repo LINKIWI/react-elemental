@@ -69,7 +69,7 @@ export default class SampleRadioGroup extends Component {
               ]}
               value={custom}
               accentColor={colors.green}
-              idleColor={colors.purpleLight}
+              idleColor={colors.greenLight}
               onChange={this.handleChange('custom')}
             />
           </Spacing>
