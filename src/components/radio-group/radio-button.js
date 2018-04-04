@@ -105,6 +105,8 @@ class RadioButton extends Component {
     return (
       <button
         ref={this.button}
+        role="radio"
+        aria-checked={active}
         style={containerStyle}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
