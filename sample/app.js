@@ -14,6 +14,7 @@ import SampleLink from 'components/link';
 import SampleLoadingBar from 'components/loading-bar';
 import SampleModal from 'components/modal';
 import SamplePulsator from 'components/pulsator';
+import SampleRadioGroup from 'components/radio-group';
 import SampleSelectList from 'components/select-list';
 import SampleSpinner from 'components/spinner';
 import SampleTabs from 'components/tabs';
@@ -38,6 +39,7 @@ const App = () => (
     }}
   >
     <Spacing size="huge" style={{ maxWidth: '900px' }} top bottom right left>
+      <SampleRadioGroup />
       <SampleImage />
       <SampleTabs />
       <SampleToast />
