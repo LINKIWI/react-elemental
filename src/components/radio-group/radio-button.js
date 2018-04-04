@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
-import { colors } from 'styles/color';
 import compose from 'util/compose';
 import withToggleState from 'util/with-toggle-state';
 
@@ -14,7 +13,9 @@ class RadioButton extends Component {
     // Whether the button is currently selected.
     active: PropTypes.bool.isRequired,
     // Selection accent color.
-    color: PropTypes.string.isRequired,
+    accentColor: PropTypes.string.isRequired,
+    // Color used when the option is idle (not selected).
+    idleColor: PropTypes.string.isRequired,
     // Whether the button is disabled.
     disabled: PropTypes.bool.isRequired,
     // Label to display next to the radio button.
@@ -49,7 +50,8 @@ class RadioButton extends Component {
   render() {
     const {
       active,
-      color,
+      accentColor,
+      idleColor,
       disabled,
       label,
       isHover,
@@ -60,18 +62,6 @@ class RadioButton extends Component {
       handleBlur,
       ...props
     } = this.props;
-
-    const radioColor = (() => {
-      if (active) {
-        return color;
-      }
-
-      if (isHover) {
-        return colors.gray20;
-      }
-
-      return colors.gray10;
-    })();
 
     const containerStyle = {
       alignItems: 'center',
@@ -94,15 +84,16 @@ class RadioButton extends Component {
     };
 
     const radioStyle = {
-      backgroundColor: radioColor,
+      backgroundColor: active ? accentColor : idleColor,
       borderRadius: '50%',
       height: '100%',
+      opacity: (isHover || active) ? 1 : 0.7,
       transition: 'all 0.15s ease',
       width: '100%',
     };
 
     const radioFocusStyle = {
-      backgroundColor: color,
+      backgroundColor: accentColor,
       borderRadius: '50%',
       height: '30px',
       opacity: isFocus ? 0.15 : 0,

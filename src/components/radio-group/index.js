@@ -26,6 +26,10 @@ export default class RadioGroup extends Component {
     })),
     // The currently selected radio option.
     value: PropTypes.string,
+    // Accent color to use for an active or focused radio button.
+    accentColor: PropTypes.string,
+    // Idle color to use for an inactive radio button.
+    idleColor: PropTypes.string,
     // Callback to invoke when the currently selected radio option is changed.
     onChange: PropTypes.func,
   };
@@ -33,6 +37,8 @@ export default class RadioGroup extends Component {
   static defaultProps = {
     options: [],
     value: null,
+    accentColor: undefined,
+    idleColor: colors.gray10,
     onChange: noop,
   };
 
@@ -95,10 +101,17 @@ export default class RadioGroup extends Component {
   };
 
   render() {
-    const { options, value: selected, onChange } = this.props;
+    const {
+      options,
+      value: selected,
+      onChange,
+      accentColor = colors.primary,
+      idleColor,
+      ...props
+    } = this.props;
 
     return (
-      <div role="radiogroup">
+      <div role="radiogroup" {...props}>
         {options.map(({ value, label, disabled = false }, idx) => {
           const isTabSelectable =
             // Tab selection should jump to the currently selected option, if available.
@@ -109,7 +122,8 @@ export default class RadioGroup extends Component {
           return (
             <Spacing key={value} size="tiny" bottom={idx < options.length - 1}>
               <RadioButton
-                color={colors.primary}
+                accentColor={accentColor}
+                idleColor={idleColor}
                 label={label}
                 active={value === selected}
                 tabIndex={isTabSelectable ? 0 : -1}
