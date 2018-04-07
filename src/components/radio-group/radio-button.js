@@ -32,17 +32,19 @@ class RadioButton extends Component {
     handleBlur: PropTypes.func.isRequired,
   };
 
-  componentDidUpdate(prevProps, prevState, shouldFocus) {
+  componentDidUpdate(prevProps, prevState, { shouldFocus }) {
     if (shouldFocus && this.button.current) {
       this.button.current.focus();
     }
   }
 
   getSnapshotBeforeUpdate(prevProps) {
-    // Focus the element if the component transitions from an inactive to active state.
-    // This mimics the behavior of native browser radio options; the element is automatically
-    // selected (made active) when it gains focus.
-    return !prevProps.active && this.props.active;
+    return {
+      // Focus the element if the component transitions from an inactive to active state.
+      // This mimics the behavior of native browser radio options; the element is automatically
+      // selected (made active) when it gains focus.
+      shouldFocus: !prevProps.active && this.props.active,
+    };
   }
 
   button = React.createRef();
