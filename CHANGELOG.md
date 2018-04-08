@@ -2,6 +2,11 @@
 
 ## v1.2.0
 
+### Added
+
+* `Image` component for displaying external images
+* `RadioGroup` component for radio controls
+
 ### Changed
 
 * `Checkbox` is slightly smaller in size
