@@ -34,6 +34,8 @@ class Image extends Component {
     showIntermediate: PropTypes.bool,
     // Optional style overrides on the container element
     style: PropTypes.object,
+    // Optional style overrides on the image element
+    imgStyle: PropTypes.object,
     // HOC-supplied props
     isHover: PropTypes.bool.isRequired,
     handleMouseEnter: PropTypes.func.isRequired,
@@ -47,6 +49,7 @@ class Image extends Component {
     lazy: false,
     showIntermediate: false,
     style: {},
+    imgStyle: {},
   };
 
   constructor(props) {
@@ -109,7 +112,8 @@ class Image extends Component {
       isHover,
       handleMouseEnter,
       handleMouseLeave,
-      style: overrides,
+      style: containerOverrides,
+      imgStyle: imgOverrides,
       ...props
     } = this.props;
     const { load } = this.state;
@@ -132,6 +136,7 @@ class Image extends Component {
       position: 'relative',
       transition: 'background-color 0.3s ease',
       width,
+      ...containerOverrides,
     };
 
     const annotationStyle = {
@@ -157,7 +162,7 @@ class Image extends Component {
       opacity: (showIntermediate ? isImageMounted : isImageLoaded) ? 1 : 0,
       transition: 'filter 0.3s ease, opacity 0.3s ease',
       width,
-      ...overrides,
+      ...imgOverrides,
     };
 
     return (

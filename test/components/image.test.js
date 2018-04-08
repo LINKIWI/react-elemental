@@ -30,13 +30,15 @@ describe('Image', () => {
       <Image
         {...defaultProps}
         onClick={mockOnClick}
-        style={{ objectFit: 'cover' }}
+        style={{ maxWidth: '100px' }}
+        imgStyle={{ objectFit: 'cover' }}
       />,
     );
 
     expect(mockOnClick).not.toBeCalled();
     image.find('img').simulate('click');
     expect(mockOnClick).toBeCalled();
+    expect(image.find('Image').childAt(0).props().style.maxWidth).toBe('100px');
     expect(image.find('img').props().style.objectFit).toBe('cover');
   });
 
