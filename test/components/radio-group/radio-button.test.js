@@ -10,6 +10,7 @@ describe('Radio button', () => {
     idleColor: 'white',
     disabled: false,
     label: 'label',
+    value: 'value',
   };
 
   test('Rendering of text label', () => {
@@ -22,6 +23,7 @@ describe('Radio button', () => {
 
     expect(radio.find(Text).length).toBe(1);
     expect(radio.find(Text).text()).toBe('text');
+    expect(radio.find('button').prop('aria-labelledby')).toBe('text');
   });
 
   test('Rendering arbitrary node as label', () => {
@@ -36,6 +38,7 @@ describe('Radio button', () => {
 
     expect(radio.find(Text).length).toBe(0);
     expect(radio.find('a').length).toBe(1);
+    expect(radio.find('button').prop('aria-labelledby')).toBe(defaultProps.value);
   });
 
   test('Active style', () => {

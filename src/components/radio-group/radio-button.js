@@ -23,6 +23,8 @@ class RadioButton extends Component {
       PropTypes.string,
       PropTypes.node,
     ]).isRequired,
+    // Unique value assigned to this radio button
+    value: PropTypes.string.isRequired,
     // HOC-supplied props
     isHover: PropTypes.bool.isRequired,
     isFocus: PropTypes.bool.isRequired,
@@ -56,6 +58,7 @@ class RadioButton extends Component {
       idleColor,
       disabled,
       label,
+      value,
       isHover,
       isFocus,
       handleMouseEnter,
@@ -109,7 +112,7 @@ class RadioButton extends Component {
         ref={this.button}
         role="radio"
         aria-checked={active}
-        aria-labelledby={label}
+        aria-labelledby={typeof label === 'string' ? label : value}
         style={containerStyle}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

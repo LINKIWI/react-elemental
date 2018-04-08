@@ -120,5 +120,6 @@ describe('Radio group', () => {
     );
 
     expect(group.find('.radio-render').length).toBe(2);
+    expect(group.find(RadioButton).length).toBe(2);
   });
 });
