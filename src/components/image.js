@@ -6,13 +6,13 @@ import omit from 'util/omit';
 import withToggleState from 'util/with-toggle-state';
 
 // Image is not mounted.
-const LOAD_STATE_IDLE = 'idle';
+export const LOAD_STATE_IDLE = 'idle';
 // Image is currently being fetched/loaded; network request is in progress.
-const LOAD_STATE_FETCH = 'fetch';
+export const LOAD_STATE_FETCH = 'fetch';
 // Image has successfully completely loaded.
-const LOAD_STATE_DONE = 'done';
+export const LOAD_STATE_DONE = 'done';
 // An error was encountered while loading the image.
-const LOAD_STATE_ERROR = 'error';
+export const LOAD_STATE_ERROR = 'error';
 
 /**
  * Wrapper for external images.
