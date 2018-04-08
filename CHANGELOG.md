@@ -10,6 +10,7 @@
 ### Changed
 
 * `Checkbox` is slightly smaller in size
+* Bumped `react` peer dependency version to `^16.3.1`
 
 ## v1.1.2
 
