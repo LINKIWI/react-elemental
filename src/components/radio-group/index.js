@@ -30,6 +30,8 @@ export default class RadioGroup extends Component {
     accentColor: PropTypes.string,
     // Idle color to use for an inactive radio button.
     idleColor: PropTypes.string,
+    // Function that describes how individual radio buttons should be rendered.
+    radioRenderer: PropTypes.func,
     // Callback to invoke when the currently selected radio option is changed.
     onChange: PropTypes.func,
   };
@@ -39,6 +41,11 @@ export default class RadioGroup extends Component {
     value: null,
     accentColor: undefined,
     idleColor: colors.gray10,
+    radioRenderer: (option, idx, options) => (
+      <Spacing key={option.props.value} size="tiny" bottom={idx < options.length - 1}>
+        {option}
+      </Spacing>
+    ),
     onChange: noop,
   };
 
@@ -107,33 +114,35 @@ export default class RadioGroup extends Component {
       onChange,
       accentColor = colors.primary,
       idleColor,
+      radioRenderer,
       ...props
     } = this.props;
 
+    const radioButtons = options.map(({ value, label, disabled = false }, idx) => {
+      const isTabSelectable =
+        // Tab selection should jump to the currently selected option, if available.
+        value === selected ||
+        // Otherwise, if no option is selected, it should jump to the first option.
+        (this.currentSelectedIdx() === -1 && idx === 0);
+
+      return (
+        <RadioButton
+          accentColor={accentColor}
+          idleColor={idleColor}
+          label={label}
+          value={value}
+          active={value === selected}
+          tabIndex={isTabSelectable ? 0 : -1}
+          disabled={disabled}
+          onClick={() => onChange(value)}
+          onKeyDown={this.handleKeyDown}
+        />
+      );
+    });
+
     return (
       <div role="radiogroup" {...props}>
-        {options.map(({ value, label, disabled = false }, idx) => {
-          const isTabSelectable =
-            // Tab selection should jump to the currently selected option, if available.
-            value === selected ||
-            // Otherwise, if no option is selected, it should jump to the first option.
-            (this.currentSelectedIdx() === -1 && idx === 0);
-
-          return (
-            <Spacing key={value} size="tiny" bottom={idx < options.length - 1}>
-              <RadioButton
-                accentColor={accentColor}
-                idleColor={idleColor}
-                label={label}
-                active={value === selected}
-                tabIndex={isTabSelectable ? 0 : -1}
-                disabled={disabled}
-                onClick={() => onChange(value)}
-                onKeyDown={this.handleKeyDown}
-              />
-            </Spacing>
-          );
-        })}
+        {radioButtons.map(radioRenderer)}
       </div>
     );
   }

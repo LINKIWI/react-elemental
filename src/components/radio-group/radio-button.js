@@ -109,6 +109,7 @@ class RadioButton extends Component {
         ref={this.button}
         role="radio"
         aria-checked={active}
+        aria-labelledby={label}
         style={containerStyle}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

@@ -1,20 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { colors, RadioGroup, Spacing, Tag, Text } from 'react-elemental';
-
-const CustomRadioLabel = ({ text }) => (
-  <Spacing size="small" left>
-    <Tag
-      text={text}
-      backgroundColor={colors.gray5}
-      outlineColor={colors.gray40}
-    />
-  </Spacing>
-);
-
-CustomRadioLabel.propTypes = {
-  text: PropTypes.string.isRequired,
-};
 
 export default class SampleRadioGroup extends Component {
   state = {};
@@ -64,12 +49,39 @@ export default class SampleRadioGroup extends Component {
           <Spacing bottom>
             <RadioGroup
               options={[
-                { value: 'hello', label: <CustomRadioLabel text="hello" /> },
-                { value: 'world', label: <CustomRadioLabel text="world" /> },
+                {
+                  value: 'Yes',
+                  label: (
+                    <Spacing size="small" left>
+                      <Tag
+                        text="Yes"
+                        backgroundColor={colors.greenLight}
+                        outlineColor={colors.green}
+                      />
+                    </Spacing>
+                  ),
+                },
+                {
+                  value: 'No',
+                  label: (
+                    <Spacing size="small" left>
+                      <Tag
+                        text="No"
+                        backgroundColor={colors.redLight}
+                        outlineColor={colors.red}
+                      />
+                    </Spacing>
+                  ),
+                },
               ]}
               value={custom}
-              accentColor={colors.green}
-              idleColor={colors.greenLight}
+              accentColor={colors.gray80}
+              style={{ display: 'flex' }}
+              radioRenderer={(option) => (
+                <Spacing key={option.props.value} right>
+                  {option}
+                </Spacing>
+              )}
               onChange={this.handleChange('custom')}
             />
           </Spacing>

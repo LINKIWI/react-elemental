@@ -103,4 +103,22 @@ describe('Radio group', () => {
     group.find(RadioButton).at(2).simulate('click');
     expect(mockOnChange).toBeCalledWith('three');
   });
+
+  test('Custom radio renderer', () => {
+    const group = mount(
+      <RadioGroup
+        options={[
+          { value: 'one', label: 'one' },
+          { value: 'two', label: 'two' },
+        ]}
+        radioRenderer={(option) => (
+          <span className="radio-render">
+            {option}
+          </span>
+        )}
+      />,
+    );
+
+    expect(group.find('.radio-render').length).toBe(2);
+  });
 });

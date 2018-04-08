@@ -8,6 +8,7 @@ import Image, {
 } from 'components/image';
 import Text from 'components/text';
 
+// Java intensifies
 const mockIntersectionObserverFactory = (mockObserve, mockUnobserve) =>
   class MockIntersectionObserver {
     observe = mockObserve;
