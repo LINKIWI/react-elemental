@@ -69,6 +69,10 @@ class Image extends Component {
   }
 
   setRef = (img) => {
+    if (this.img) {
+      return;
+    }
+
     this.img = img;
 
     // Intersection events (idle -> fetch state transitions) are only relevant for lazily loaded

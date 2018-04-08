@@ -18,7 +18,6 @@ const mockIntersectionObserverFactory = (mockObserve, mockUnobserve) =>
     }
   };
 
-
 describe('Image', () => {
   const defaultProps = {
     alt: 'alt',
