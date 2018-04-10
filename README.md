@@ -1,4 +1,4 @@
-# react-elemental
+![react-elemental](https://static.kevinlin.info/blog/react-elemental/banner.png)
 
 [![npm version](https://badge.fury.io/js/react-elemental.svg)](https://badge.fury.io/js/react-elemental)
 [![Build Status](https://travis-ci.org/LINKIWI/react-elemental.svg?branch=master)](https://travis-ci.org/LINKIWI/react-elemental)
