@@ -112,7 +112,7 @@ describe('Radio group', () => {
           { value: 'two', label: 'two' },
         ]}
         radioRenderer={(option) => (
-          <span className="radio-render">
+          <span key={option.props.value} className="radio-render">
             {option}
           </span>
         )}
