@@ -126,6 +126,7 @@ class Button extends Component {
 
     return (
       <button
+        type="button"
         style={style}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
@@ -137,6 +138,7 @@ class Button extends Component {
         onBlur={handleBlur}
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
+        disabled={disabled}
         {...proxyProps}
       >
         {text && (

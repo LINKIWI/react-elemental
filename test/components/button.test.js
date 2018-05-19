@@ -150,4 +150,26 @@ describe('Button', () => {
 
     expect(button.find('button').props().style.padding).toBe('8px 14px');
   });
+
+  test('Semantic type of button', () => {
+    const button = mount(
+      <Button>
+        children
+      </Button>,
+    );
+
+    expect(button.find('button').props().type).toBe('button');
+    button.setProps({ type: 'submit' });
+    expect(button.find('button').props().type).toBe('submit');
+  });
+
+  test('Disabled button has appropriate semantic attribute', () => {
+    const button = mount(
+      <Button disabled>
+        children
+      </Button>,
+    );
+
+    expect(button.find('button').props().disabled).toBe(true);
+  });
 });
