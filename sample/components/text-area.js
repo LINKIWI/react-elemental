@@ -49,6 +49,21 @@ const SampleTextArea = () => (
         }}
       />
     </Spacing>
+
+    <Spacing size="huge" bottom>
+      <Spacing bottom>
+        <Text size="iota" color="gray70" uppercase bold>
+          Secondary style
+        </Text>
+      </Spacing>
+
+      <Label label="Secondary variant" />
+      <TextArea
+        placeholder="The secondary style uses an underline border, similar to a secondary TextField"
+        style={{ width: '600px' }}
+        secondary
+      />
+    </Spacing>
   </div>
 );
 

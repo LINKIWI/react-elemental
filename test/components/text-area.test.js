@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Text from 'components/text';
 import TextArea from 'components/text-area';
+import TextField from 'components/text-field';
 import { colors } from 'styles/color';
 
 describe('Text area', () => {
@@ -11,6 +12,16 @@ describe('Text area', () => {
     );
 
     expect(textArea.find('textarea').props().rows).toBe(40);
+  });
+
+  test('Proxies into TextField with style override', () => {
+    const textArea = mount(
+      <TextArea />,
+    );
+
+    expect(textArea.find(TextField).length).toBe(1);
+    expect(textArea.find(TextField).props().style.transition).toBe('border 0.15s ease');
+    expect(textArea.find(TextField).props().textarea).toBe(true);
   });
 
   test('Error message', () => {
@@ -60,5 +71,21 @@ describe('Text area', () => {
     expect(textArea.find('textarea').props().style.border).toBe(`1px solid ${colors.primary}`);
     textArea.find('textarea').simulate('blur');
     expect(textArea.find('textarea').props().style.border).toBe(`1px solid ${colors.gray10}`);
+  });
+
+  test('Secondary style is proxied to TextField', () => {
+    const textArea = mount(
+      <TextArea secondary />,
+    );
+
+    expect(textArea.find(TextField).props().secondary).toBe(true);
+  });
+
+  test('Unable to unset internal textarea prop on TextField', () => {
+    const textArea = mount(
+      <TextArea textarea={false} />,
+    );
+
+    expect(textArea.find('textarea').length).toBe(1);
   });
 });

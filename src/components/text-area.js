@@ -1,90 +1,42 @@
 import React from 'react';
-import Color from 'color';
 import PropTypes from 'prop-types';
-import Spacing from 'components/spacing';
-import Text from 'components/text';
-import { colors } from 'styles/color';
-import { secondaryFontStyle, fontCSS } from 'styles/font';
-import compose from 'util/compose';
-import withCSS from 'util/with-css';
-import withToggleState from 'util/with-toggle-state';
+import TextField from 'components/text-field';
 
 /**
  * Styled textarea element for blobs of text input.
+ *
+ * This component behaves similarly to TextField, with some minor modifications.
  */
-const TextArea = ({
-  error,
-  handleMouseOver,
-  handleMouseOut,
-  handleFocus,
-  handleBlur,
-  isHover,
-  isFocus,
-  style: overrides,
-  ...proxyProps
-}) => {
-  const hoverRed = new Color(colors.red).lighten(0.7).string();
-  const idleColor = error ? colors.redLight : colors.gray10;
-  const hoverColor = error ? hoverRed : colors.gray20;
-  const focusColor = error ? colors.red : colors.primary;
-
+const TextArea = ({ error, secondary, style: overrides, ...proxyProps }) => {
   const style = {
-    border: `1px solid ${idleColor}`,
-    borderRadius: 0,
-    boxSizing: 'border-box',
-    padding: '10px',
     transition: 'border 0.15s ease',
-    ...secondaryFontStyle('kilo', 'gray80', false),
-    ...isHover && {
-      border: `1px solid ${hoverColor}`,
-    },
-    ...isFocus && {
-      border: `1px solid ${focusColor}`,
-    },
     ...overrides,
   };
 
   return (
-    <div>
-      <textarea
-        style={style}
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        {...proxyProps}
-      />
-
-      {error && (
-        <Spacing size="micro" top>
-          <Text color="red" size="lambda" bold>
-            {error}
-          </Text>
-        </Spacing>
-      )}
-    </div>
+    <TextField
+      error={error}
+      secondary={secondary}
+      style={style}
+      {...proxyProps}
+      textarea
+    />
   );
 };
 
 TextArea.propTypes = {
+  // Error string, if the input contents are invalid. This will use a dedicated error style.
   error: PropTypes.string,
+  // True to use the secondary component variant.
+  secondary: PropTypes.bool,
+  // Optional style overrides.
   style: PropTypes.object,
-  // HOC props
-  handleMouseOver: PropTypes.func.isRequired,
-  handleMouseOut: PropTypes.func.isRequired,
-  handleFocus: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  isHover: PropTypes.bool.isRequired,
-  isFocus: PropTypes.bool.isRequired,
 };
 
 TextArea.defaultProps = {
   error: null,
+  secondary: false,
   style: {},
 };
 
-export default compose(
-  withCSS({ key: 'text', css: fontCSS }),
-  withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
-  withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
-)(TextArea);
+export default TextArea;

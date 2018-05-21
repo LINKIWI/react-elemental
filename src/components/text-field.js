@@ -18,6 +18,8 @@ class TextField extends Component {
     error: PropTypes.string,
     // True to use the secondary component variant.
     secondary: PropTypes.bool,
+    // [INTERNAL] True to render a textarea element rather than an input element.
+    textarea: PropTypes.bool,
     // Optional style overrides.
     style: PropTypes.object,
     // HOC props
@@ -32,6 +34,7 @@ class TextField extends Component {
   static defaultProps = {
     error: null,
     secondary: false,
+    textarea: false,
     style: {},
   };
 
@@ -61,6 +64,7 @@ class TextField extends Component {
     const {
       error,
       secondary,
+      textarea,
       style: overrides,
       handleMouseOver,
       handleMouseOut,
@@ -68,7 +72,7 @@ class TextField extends Component {
       handleBlur,
       isHover,
       isFocus,
-      ...props
+      ...proxyProps
     } = this.props;
 
     const colorSet = (() => {
@@ -124,15 +128,19 @@ class TextField extends Component {
       ...overrides,
     };
 
+    // The styles and properties for TextArea and TextField are exactly identical sans the rendered
+    // HTML element.
+    const Element = textarea ? 'textarea' : 'input';
+
     return (
       <div>
-        <input
+        <Element
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
           onFocus={handleFocus}
           onBlur={handleBlur}
           style={style}
-          {...props}
+          {...proxyProps}
         />
 
         {error && (

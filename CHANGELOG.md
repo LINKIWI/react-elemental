@@ -12,6 +12,8 @@
 * `Checkbox` is slightly smaller in size
 * Default `Button` type to `button`
 * Respect semantic `disabled` attribute on `Button` when disabled
+* `TextArea` defaults to the primary font style, instead of the secondary font style
+* Support a secondary `TextArea` style
 * Fixed secondary `TextField` missing `box-sizing` property
 * Better secondary `TextField` adaptation to dark backgrounds
 * Bumped `react` peer dependency version to `^16.3.1`
