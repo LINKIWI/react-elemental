@@ -32,6 +32,7 @@ const TextField = ({
   const focusColor = error ? colors.red : colors.primary;
 
   const baseStyle = {
+    borderRadius: 0,
     transition: 'all 0.15s ease',
     width: '100%',
     ...primaryFontStyle('kilo', colors.gray80, false),
@@ -39,7 +40,6 @@ const TextField = ({
 
   const primaryStyle = {
     border: `1px solid ${primaryIdleColor}`,
-    borderRadius: 0,
     boxSizing: 'border-box',
     padding: '10px',
     ...isHover && {
