@@ -137,6 +137,7 @@ class Image extends Component {
     const containerStyle = {
       backgroundColor: color,
       height,
+      overflow: 'hidden',
       position: 'relative',
       transition: 'background-color 0.3s ease',
       width,
