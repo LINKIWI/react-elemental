@@ -17,7 +17,7 @@
 * Support a secondary `TextArea` style
 * Fixed secondary `TextField` missing `box-sizing` property
 * Better secondary `TextField` adaptation to dark backgrounds
-* Bumped `react` peer dependency version to `^16.3.1`
+* Bumped `react` peer dependency version to `^16.4.0`
 
 ## v1.1.2
 
