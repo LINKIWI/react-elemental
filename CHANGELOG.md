@@ -10,6 +10,7 @@
 ### Changed
 
 * `Checkbox` is slightly smaller in size
+* `RadioGroup` button is slightly larger in size
 * Default `Button` type to `button`
 * Respect semantic `disabled` attribute on `Button` when disabled
 * `TextArea` defaults to the primary font style, instead of the secondary font style

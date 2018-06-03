@@ -81,11 +81,11 @@ class RadioButton extends Component {
       alignItems: 'center',
       borderRadius: '50%',
       display: 'flex',
-      height: '10px',
+      height: '12px',
       justifyContent: 'center',
       opacity: disabled ? 0.5 : 1,
       transition: 'all 0.15s ease',
-      width: '10px',
+      width: '12px',
     };
 
     const radioStyle = {
