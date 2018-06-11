@@ -59,7 +59,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-test-renderer": "^16.4.0",
-    "sinon": "^5.0.10"
+    "sinon": "^6.0.0"
   },
   "peerDependencies": {
     "react": "^16.4.0"
