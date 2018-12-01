@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.1
+
+### Changed
+
+* `RadioGroup` button no longer becomes horizontally compressed for small widths
+
 ## v1.2.0
 
 ### Added

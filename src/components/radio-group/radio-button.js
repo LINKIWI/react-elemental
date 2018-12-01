@@ -81,6 +81,7 @@ class RadioButton extends Component {
       alignItems: 'center',
       borderRadius: '50%',
       display: 'flex',
+      flexShrink: 0,
       height: '12px',
       justifyContent: 'center',
       opacity: disabled ? 0.5 : 1,
