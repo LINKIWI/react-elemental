@@ -6,6 +6,7 @@
 
 * `Image` hides the alt text after the image has loaded
 * `RadioGroup` button no longer becomes horizontally compressed for small widths
+* `RadioGroup` no longer invokes the change callback for options that are already selected on click
 
 ## v1.2.0
 

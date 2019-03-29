@@ -104,6 +104,24 @@ describe('Radio group', () => {
     expect(mockOnChange).toBeCalledWith('three');
   });
 
+  test('Re-selecting option with mouse event does not trigger change', () => {
+    const mockOnChange = jest.fn();
+    const group = mount(
+      <RadioGroup
+        options={[
+          { value: 'one', label: 'one' },
+          { value: 'two', label: 'two', disabled: true },
+          { value: 'three', label: 'three' },
+        ]}
+        value="three"
+        onChange={mockOnChange}
+      />,
+    );
+
+    group.find(RadioButton).at(2).simulate('click');
+    expect(mockOnChange).not.toBeCalled();
+  });
+
   test('Custom radio renderer', () => {
     const group = mount(
       <RadioGroup

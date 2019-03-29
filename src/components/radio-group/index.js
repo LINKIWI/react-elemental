@@ -127,6 +127,13 @@ class RadioGroup extends Component {
         // Otherwise, if no option is selected, it should jump to the first option.
         (this.currentSelectedIdx() === -1 && idx === 0);
 
+      const handleClick = () => {
+        // Don't invoke the change handler if the radio selection has not actually changed
+        if (value !== selected) {
+          onChange(value);
+        }
+      };
+
       return (
         <RadioButton
           accentColor={accentColor}
@@ -136,7 +143,7 @@ class RadioGroup extends Component {
           active={value === selected}
           tabIndex={isTabSelectable ? 0 : -1}
           disabled={disabled}
-          onClick={() => onChange(value)}
+          onClick={handleClick}
           onKeyDown={this.handleKeyDown}
         />
       );
