@@ -4,6 +4,7 @@
 
 ### Changed
 
+* `Image` hides the alt text after the image has loaded
 * `RadioGroup` button no longer becomes horizontally compressed for small widths
 
 ## v1.2.0

@@ -177,11 +177,13 @@ class Image extends Component {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div style={annotationStyle}>
-          <Text color={altTextColor} size="lambda" bold>
-            {alt}
-          </Text>
-        </div>
+        {!isImageLoaded && (
+          <div style={annotationStyle}>
+            <Text color={altTextColor} size="lambda" bold>
+              {alt}
+            </Text>
+          </div>
+        )}
 
         {isImageMounted && (
           <img

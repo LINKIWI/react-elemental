@@ -51,6 +51,18 @@ describe('Image', () => {
     expect(image.childAt(0).text()).toBe(defaultProps.alt);
   });
 
+  test('Alt text is hidden after image load', () => {
+    const image = mount(
+      <Image {...defaultProps} />,
+    );
+
+    expect(image.find('img').length).toBe(1);
+    expect(image.find('Text').length).toBe(1);
+    expect(image.childAt(0).text()).toBe(defaultProps.alt);
+    image.find('img').simulate('load');
+    expect(image.find('Text').length).toBe(0);
+  });
+
   test('Non-lazy fetch to done state transition', () => {
     const image = shallow(
       <Image {...defaultProps} />,
