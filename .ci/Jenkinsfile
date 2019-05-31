@@ -1,10 +1,16 @@
 pipeline {
     agent {
         docker {
-            image 'docker.internal.kevinlin.info/infra/ci-base:0.1.0'
+            image 'docker.internal.kevinlin.info/infra/ci-base:0.2.3'
             label 'docker-executor'
-            args '-v $EXECUTOR_SSH_DIR:$CONTAINER_SSH_DIR:ro'
         }
+    }
+
+    options {
+        withAWS(
+            endpointUrl: 'https://storage.kevinlin.info',
+            credentials: 'storage-internal',
+        )
     }
 
     stages {
@@ -51,28 +57,48 @@ pipeline {
                 sh 'cd sample/ && npm run build'
             }
         }
-        stage('Deploy') {
+        stage('Release') {
+            environment {
+                MC_HOST_storage = "https://${env.AWS_ACCESS_KEY_ID}:${env.AWS_SECRET_ACCESS_KEY}@${env.AWS_ENDPOINT_URL.substring(8)}"
+                DEPLOY_URL = 'react-elemental.static.kevinlin.info'
+                VERSION_SHA = "${GIT_COMMIT}"
+            }
             steps {
-                sh 'mv sample/dist/index.html /tmp/react-elemental'
-                sh 'git fetch --all'
-                sh 'git checkout gh-pages'
-                sh 'git reset --hard origin/gh-pages'
-                sh 'git clean -fd'
-                sh 'mv /tmp/react-elemental index.html'
-                sh 'cp index.html 404.html'
-                sh 'git add .'
-                sh 'git status'
-                sh "git commit --no-verify -m \"[automatic commit] ${GIT_BRANCH}:${GIT_COMMIT}\" || :"
-                sh 'git remote add github git@github.com:LINKIWI/react-elemental.git'
-                sh 'git push origin HEAD'
-                sh 'git push github HEAD'
+                sh 'mkdir release/'
+                sh "echo ${DEPLOY_URL} > release/CNAME"
+                sh 'cp sample/dist/index.html release/'
+                sh "mc cp -r storage/resources/${env.JOB_NAME}/images/ release/images/"
+                sh 'tar -C release/ -cvzf release.tar.gz ./'
+                s3Upload(
+                    bucket: 'internal',
+                    path: "deploy/${env.JOB_NAME}/${env.GIT_COMMIT}/",
+                    file: 'release.tar.gz',
+                )
             }
         }
-    }
-
-    post {
-        success {
-            archive 'index.html'
+        stage('Deploy') {
+            environment {
+                GITHUB_REMOTE = 'git@github.com:LINKIWI/react-elemental-static.git'
+            }
+            steps {
+                sh 'git fetch --all'
+                sh 'git checkout -f static'
+                sh 'git reset --hard origin/static'
+                sh 'git rm -rf .'
+                sh 'git clean -fxd'
+                s3Download(
+                    bucket: 'internal',
+                    path: "deploy/${env.JOB_NAME}/${env.GIT_COMMIT}/release.tar.gz",
+                    file: 'release.tar.gz',
+                )
+                sh 'tar xvf release.tar.gz'
+                sh 'rm release.tar.gz'
+                sh 'git add -A'
+                sh "git commit --no-verify -m \"[automatic commit] ${GIT_BRANCH}:${GIT_COMMIT}\" || :"
+                sh "git remote add github ${GITHUB_REMOTE}"
+                sh 'git push origin HEAD'
+                sh 'git push github HEAD:master'
+            }
         }
     }
 }
