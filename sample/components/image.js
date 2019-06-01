@@ -20,7 +20,7 @@ const SampleImage = () => (
       </Spacing>
 
       <Image
-        src="https://linkiwi.github.io/react-elemental/images/image/map.jpg"
+        src="/images/image/map.jpg"
         alt="Map of Great Britain"
         color="#b9ad97"
         width="400px"
@@ -43,7 +43,7 @@ const SampleImage = () => (
       </Spacing>
 
       <Image
-        src="https://linkiwi.github.io/react-elemental/images/image/path.jpg"
+        src="/images/image/path.jpg"
         alt="Multi-drone GPS path"
         color="#080808"
         width="600px"
