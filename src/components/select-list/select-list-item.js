@@ -10,10 +10,6 @@ import { colors } from 'styles/color';
 export default class SelectListItem extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
-    width: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]).isRequired,
     isSelected: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
   };
@@ -29,7 +25,7 @@ export default class SelectListItem extends Component {
   handleHoverStateChange = (isHover) => () => this.setState({ isHover });
 
   render() {
-    const { label, width, isSelected, onClick } = this.props;
+    const { label, isSelected, onClick } = this.props;
     const { isHover } = this.state;
 
     const style = {
@@ -37,11 +33,11 @@ export default class SelectListItem extends Component {
       backgroundColor: (isHover || isSelected) ? colors.primaryLight : 'white',
       border: `1px solid ${colors.gray10}`,
       borderTop: 'none',
+      boxSizing: 'border-box',
       cursor: 'pointer',
       display: 'flex',
       padding: '10px',
       transition: 'all 0.15s ease',
-      width,
     };
 
     return (

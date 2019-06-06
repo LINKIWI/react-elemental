@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.2
+
+### Changed
+
+* `SelectList` inherits parent width more naturally, and no longer requires an explicit numeric width be set
+
 ## v1.2.1
 
 ### Changed

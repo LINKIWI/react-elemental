@@ -176,8 +176,20 @@ export default class SelectList extends Component {
     } = this.props;
     const { isExpanded, isFocused, isHovered, selectedOption, highlightedIdx } = this.state;
 
+    const style = {
+      display: 'inline-block',
+      width,
+      ...overrides,
+    };
+
+    const dropdownContainerStyle = {
+      position: 'relative',
+      width: '100%',
+    };
+
     const dropdownElementsStyle = {
       position: 'absolute',
+      width: '100%',
       zIndex: 2,
       ...height && {
         height,
@@ -206,25 +218,21 @@ export default class SelectList extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         tabIndex={0}
-        style={{ display: 'inline-block', ...overrides }}
+        style={style}
         {...proxyProps}
       >
         <SelectListPlaceholder
           label={selectedOption.label}
           color={outlineColor}
           arrowDirection={isExpanded ? 'up' : 'down'}
-          width={width}
           error={error}
           onClick={this.toggleExpand}
           onHoverStateChange={this.handleHoverStateChange}
         />
 
-        <div ref={this.setDropdownRef}>
+        <div ref={this.setDropdownRef} style={dropdownContainerStyle}>
           {isExpanded && (
-            <div
-              style={dropdownElementsStyle}
-              tabIndex={-1}
-            >
+            <div style={dropdownElementsStyle} tabIndex={-1}>
               {options.map((option, idx) => (
                 <SelectListItem
                   key={option.value}

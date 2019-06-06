@@ -12,7 +12,6 @@ const SelectListPlaceholder = (props) => {
   const {
     label,
     color,
-    width,
     arrowDirection,
     onClick,
     onHoverStateChange,
@@ -22,10 +21,10 @@ const SelectListPlaceholder = (props) => {
     alignItems: 'center',
     backgroundColor: 'white',
     border: `1px solid ${color}`,
+    boxSizing: 'border-box',
     cursor: 'pointer',
     display: 'flex',
     padding: '10px',
-    width,
     transition: 'all 0.15s ease',
   };
 
@@ -63,10 +62,6 @@ const SelectListPlaceholder = (props) => {
 SelectListPlaceholder.propTypes = {
   label: PropTypes.string.isRequired,
   color: PropTypes.string,
-  width: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]).isRequired,
   arrowDirection: PropTypes.oneOf(['up', 'down']).isRequired,
   onClick: PropTypes.func.isRequired,
   onHoverStateChange: PropTypes.func.isRequired,
