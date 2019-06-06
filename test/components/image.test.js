@@ -12,6 +12,7 @@ import Text from 'components/text';
 const mockIntersectionObserverFactory = (mockObserve, mockUnobserve) =>
   class MockIntersectionObserver {
     observe = mockObserve;
+
     unobserve = mockUnobserve;
 
     constructor(cb) {

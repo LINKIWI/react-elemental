@@ -1,26 +1,11 @@
 {
-  "env": {
-    "production": {
-      "presets": [
-        ["env", {"modules": false}],
-        "react",
-        "stage-0"
-      ],
-      "plugins": [
-        ["transform-react-remove-prop-types", {"removeImports": true}]
-      ]
-    }
-  },
   "presets": [
-    "env",
-    "react",
-    "stage-0"
+    "@babel/preset-env",
+    "@babel/preset-react"
   ],
   "plugins": [
-    ["module-resolver", {
-      "root": [
-        "./src"
-      ]
-    }]
+    "@babel/plugin-proposal-export-default-from",
+    ["@babel/plugin-proposal-class-properties", {"loose": true}],
+    ["module-resolver", {"root": ["./src"]}]
   ]
 }

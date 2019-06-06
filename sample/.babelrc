@@ -1,14 +1,10 @@
 {
   "presets": [
-    "env",
-    "react",
-    "stage-0"
+    "@babel/preset-env",
+    "@babel/preset-react"
   ],
   "plugins": [
-    ["module-resolver", {
-      "root": [
-        "./"
-      ]
-    }]
+    "@babel/plugin-proposal-class-properties",
+    ["module-resolver", {"root": ["./"]}]
   ]
 }

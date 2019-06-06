@@ -2,8 +2,8 @@
 
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -34,8 +34,10 @@ module.exports = [
     },
     optimization: {
       minimizer: [
-        new UglifyJSPlugin({
-          uglifyOptions: {
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            ecma: 6,
             output: {
               comments: false,
             },
@@ -84,8 +86,10 @@ module.exports = [
     },
     optimization: {
       minimizer: [
-        new UglifyJSPlugin({
-          uglifyOptions: {
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            ecma: 6,
             output: {
               comments: false,
             },
