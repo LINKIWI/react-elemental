@@ -44,7 +44,7 @@ pipeline {
                 }
                 stage('Unit') {
                     steps {
-                        sh 'npm run test'
+                        sh 'npm run cover'
                     }
                 }
             }
