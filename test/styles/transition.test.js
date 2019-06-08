@@ -1,4 +1,4 @@
-import { durations, transitionStyle } from 'styles/transition';
+import { durations, timing, transitionStyle } from 'styles/transition';
 
 describe('Transition', () => {
   test('Durations', () => {
@@ -12,18 +12,33 @@ describe('Transition', () => {
     names.forEach((name) => expect(durations[name]).toBeDefined());
   });
 
+  test('Timing functions', () => {
+    const names = [
+      'default',
+      'ease',
+    ];
+
+    names.forEach((name) => expect(timing[name]).toBeDefined());
+  });
+
   test('Transition style factory', () => {
     expect(transitionStyle()).toEqual({
-      transition: 'all 170ms cubic-bezier(0, .75, .34, 1)',
+      transition: `all ${durations.beta} ${timing.default}`,
     });
     expect(transitionStyle('property')).toEqual({
-      transition: 'property 170ms cubic-bezier(0, .75, .34, 1)',
+      transition: `property ${durations.beta} ${timing.default}`,
     });
     expect(transitionStyle('property', 'alpha')).toEqual({
-      transition: 'property 120ms cubic-bezier(0, .75, .34, 1)',
+      transition: `property ${durations.alpha} ${timing.default}`,
     });
     expect(transitionStyle('property', '2s')).toEqual({
-      transition: 'property 2s cubic-bezier(0, .75, .34, 1)',
+      transition: `property 2s ${timing.default}`,
+    });
+    expect(transitionStyle('property', 'alpha', 'ease')).toEqual({
+      transition: `property ${durations.alpha} ${timing.ease}`,
+    });
+    expect(transitionStyle('property', 'alpha', 'ease-in')).toEqual({
+      transition: `property ${durations.alpha} ease-in`,
     });
   });
 });

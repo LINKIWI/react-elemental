@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 import omit from 'util/omit';
 
 export const POSITION_LEFT = 0;
@@ -80,9 +81,9 @@ export default class LoadingBar extends Component {
     const loadingBarStyle = {
       backgroundColor: color,
       height: thickness,
-      transition: `all ${duration / 1000}s cubic-bezier(.75, 0, .32, .99)`,
       width: '100px',
       marginLeft: `calc(${position}% + ${offset}px)`,
+      ...transitionStyle('all', `${duration}ms`, 'ease'),
     };
 
     return (
