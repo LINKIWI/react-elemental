@@ -22,12 +22,24 @@ const SampleSelectList = () => (
       <Spacing bottom>
         <SelectList
           placeholder="Placeholder"
-          width={200}
           options={[
             { label: 'Some obnoxiously long label name', value: 'first-item' },
             { label: 'Second item', value: 'second-item' },
             { label: 'Third item', value: 'third-item' },
           ]}
+        />
+      </Spacing>
+
+      <Spacing bottom>
+        <Label label="Inverted" />
+        <SelectList
+          placeholder="Placeholder"
+          options={[
+            { label: 'The selection options', value: 'first-item' },
+            { label: 'Expand upwards', value: 'second-item' },
+            { label: 'Rather than downwards', value: 'third-item' },
+          ]}
+          inverted
         />
       </Spacing>
 
@@ -38,19 +50,20 @@ const SampleSelectList = () => (
         />
         <SelectList
           placeholder="Now with customizable width!"
-          width={500}
           options={[
             { label: 'Some obnoxiously long label name', value: 'first-item' },
             { label: 'Second item', value: 'second-item' },
             { label: 'Third item', value: 'third-item' },
           ]}
+          style={{
+            width: '500px',
+          }}
         />
       </Spacing>
 
       <Spacing bottom>
         <Label label="Scrollbar when there are a lot of options" />
         <SelectList
-          width={200}
           height={300}
           options={[
             { label: 'Some obnoxiously long label name', value: 'first-item' },
