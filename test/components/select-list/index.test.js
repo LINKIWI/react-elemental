@@ -38,6 +38,10 @@ describe('Select list', () => {
     );
 
     expect(selectList.find(SelectListPlaceholder).length).toBe(1);
+
+    // In non-inverted state, the placeholder should appear earlier in the DOM than the dropdown.
+    expect(selectList.childAt(0).find(SelectListPlaceholder).length).toBe(1);
+    expect(selectList.childAt(1).find(SelectListPlaceholder).length).toBe(0);
   });
 
   test('SelectListItem rendering for each option', () => {
@@ -152,6 +156,27 @@ describe('Select list', () => {
     expect(selectList.state().isExpanded).toBe(true);
     selectList.find(SelectListPlaceholder).simulate('click');
     expect(selectList.state().isExpanded).toBe(false);
+  });
+
+  test('Inverted display', () => {
+    const props = {
+      ...defaultProps,
+      options: [
+        { label: 'one', value: 'one' },
+      ],
+      inverted: true,
+    };
+
+    const selectList = shallow(
+      <SelectList {...props} />,
+    );
+
+    expect(selectList.find(SelectListPlaceholder).length).toBe(1);
+    selectList.find(SelectListPlaceholder).simulate('click');
+
+    // In inverted state, the placeholder should appear later in the DOM than the dropdown.
+    expect(selectList.childAt(0).find(SelectListPlaceholder).length).toBe(0);
+    expect(selectList.childAt(1).find(SelectListPlaceholder).length).toBe(1);
   });
 
   test('Keyboard handler: space', () => {

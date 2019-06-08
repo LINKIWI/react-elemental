@@ -35,6 +35,7 @@ export default class SelectList extends Component {
     ]),
     height: PropTypes.number,
     error: PropTypes.string,
+    inverted: PropTypes.bool,
     style: PropTypes.object,
     onChange: PropTypes.func,
   };
@@ -45,6 +46,7 @@ export default class SelectList extends Component {
     width: '100%',
     height: null,
     error: null,
+    inverted: false,
     style: {},
     onChange: noop,
   };
@@ -171,6 +173,7 @@ export default class SelectList extends Component {
       width,
       height,
       error,
+      inverted,
       style: overrides,
       ...proxyProps
     } = this.props;
@@ -196,6 +199,9 @@ export default class SelectList extends Component {
         overflowY: 'auto',
         overflowX: 'hidden',
       },
+      ...inverted && {
+        bottom: 0,
+      },
     };
 
     const outlineColor = (() => {
@@ -211,6 +217,25 @@ export default class SelectList extends Component {
       return error ? colors.redLight : colors.gray10;
     })();
 
+    const arrowDirection = (() => {
+      if (inverted) {
+        return isExpanded ? 'down' : 'up';
+      }
+
+      return isExpanded ? 'up' : 'down';
+    })();
+
+    const placeholder = (
+      <SelectListPlaceholder
+        label={selectedOption.label}
+        color={outlineColor}
+        arrowDirection={arrowDirection}
+        error={error}
+        onClick={this.toggleExpand}
+        onHoverStateChange={this.handleHoverStateChange}
+      />
+    );
+
     return (
       <div
         ref={this.setContainerRef}
@@ -221,14 +246,7 @@ export default class SelectList extends Component {
         style={style}
         {...proxyProps}
       >
-        <SelectListPlaceholder
-          label={selectedOption.label}
-          color={outlineColor}
-          arrowDirection={isExpanded ? 'up' : 'down'}
-          error={error}
-          onClick={this.toggleExpand}
-          onHoverStateChange={this.handleHoverStateChange}
-        />
+        {!inverted && placeholder}
 
         <div ref={this.setDropdownRef} style={dropdownContainerStyle}>
           {isExpanded && (
@@ -242,11 +260,14 @@ export default class SelectList extends Component {
                     (highlightedIdx !== null) && modulo(highlightedIdx, options.length) === idx
                   }
                   onClick={this.handleChange(option)}
+                  style={inverted ? { borderBottom: 'none' } : { borderTop: 'none' }}
                 />
               ))}
             </div>
           )}
         </div>
+
+        {inverted && placeholder}
 
         {error && (
           <Spacing size="micro" top>
