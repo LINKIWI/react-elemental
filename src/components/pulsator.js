@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 import omit from 'util/omit';
 
 const sizeMap = {
@@ -101,7 +102,7 @@ export default class Pulsator extends Component {
       display: 'inline-block',
       height: sizeMap[size],
       width: sizeMap[size],
-      transition: 'all 0.2s cubic-bezier(0, 0.67, 0.28, 1)',
+      ...transitionStyle(),
       ...overrides,
     };
 

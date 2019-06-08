@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 import withToggleState from 'util/with-toggle-state';
 
 /**
@@ -19,7 +20,7 @@ const PrimaryTabOption = ({
   const primaryIdleStyle = {
     backgroundColor: isHover ? 'rgba(253, 253, 253)' : 'inherit',
     border: `1px solid ${colors.gray10}`,
-    transition: 'background-color 0.1s ease',
+    ...transitionStyle('background-color'),
   };
 
   const primaryActiveStyle = {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Clear from 'icons/clear';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 import compose from 'util/compose';
 import noop from 'util/noop';
 import omit from 'util/omit';
@@ -158,7 +159,7 @@ class Modal extends Component {
       position: 'absolute',
       right: '24px',
       top: '24px',
-      transition: '0.15s all ease',
+      ...transitionStyle(),
       ...isHover && {
         fill: colors.gray15,
       },

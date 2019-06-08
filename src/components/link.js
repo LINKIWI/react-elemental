@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { transitionStyle } from 'styles/transition';
 import compose from 'util/compose';
 import omit from 'util/omit';
 import withToggleState from 'util/with-toggle-state';
@@ -74,7 +75,7 @@ class Link extends Component {
       color: 'currentColor',
       opacity: 0.8,
       textDecoration: 'none',
-      transition: '0.1s all ease',
+      ...transitionStyle('all', 'alpha'),
       ...(isHover || isFocus) && {
         borderBottom: `${borderSize} solid currentColor`,
         opacity: '1.0',

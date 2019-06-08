@@ -5,6 +5,7 @@ import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { primaryFontStyle, fontCSS } from 'styles/font';
+import { transitionStyle } from 'styles/transition';
 import compose from 'util/compose';
 import withCSS from 'util/with-css';
 import withToggleState from 'util/with-toggle-state';
@@ -91,8 +92,8 @@ class TextField extends Component {
     const baseStyle = {
       borderRadius: 0,
       boxSizing: 'border-box',
-      transition: 'all 0.15s ease',
       width: '100%',
+      ...transitionStyle(),
       ...primaryFontStyle('kilo', colors.gray80, false),
     };
 

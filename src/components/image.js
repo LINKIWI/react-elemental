@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Color from 'color';
 import PropTypes from 'prop-types';
 import Text from 'components/text';
+import { transitionStyle } from 'styles/transition';
 import omit from 'util/omit';
 import withToggleState from 'util/with-toggle-state';
 
@@ -139,8 +140,8 @@ class Image extends Component {
       height,
       overflow: 'hidden',
       position: 'relative',
-      transition: 'background-color 0.3s ease',
       width,
+      ...transitionStyle('background-color', 'gamma'),
       ...containerOverrides,
     };
 
@@ -155,8 +156,8 @@ class Image extends Component {
       padding: '10%',
       position: 'absolute',
       top: 0,
-      transition: 'opacity 0.15s ease',
       width: '100%',
+      ...transitionStyle('opacity'),
     };
 
     const imgStyle = {
@@ -165,7 +166,10 @@ class Image extends Component {
       filter: `blur(${isImageLoaded ? 0 : 3}px)`,
       height,
       opacity: (showIntermediate ? isImageMounted : isImageLoaded) ? 1 : 0,
-      transition: 'filter 0.3s ease, opacity 0.3s ease',
+      transition: [
+        transitionStyle('filter', 'gamma').transition,
+        transitionStyle('opacity', 'gamma').transition,
+      ].join(', '),
       width,
       ...imgOverrides,
     };

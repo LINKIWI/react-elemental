@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 
 /**
  * Dropdown menu in an expanded SelectList.
@@ -38,7 +39,7 @@ export default class SelectListItem extends Component {
       cursor: 'pointer',
       display: 'flex',
       padding: '10px',
-      transition: 'all 0.15s ease',
+      ...transitionStyle(),
       ...overrides,
     };
 

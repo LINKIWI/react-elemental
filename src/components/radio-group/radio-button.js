@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
+import { transitionStyle } from 'styles/transition';
 import compose from 'util/compose';
 import withToggleState from 'util/with-toggle-state';
 
@@ -85,8 +86,8 @@ class RadioButton extends Component {
       height: '12px',
       justifyContent: 'center',
       opacity: disabled ? 0.5 : 1,
-      transition: 'all 0.15s ease',
       width: '12px',
+      ...transitionStyle(),
     };
 
     const radioStyle = {
@@ -94,8 +95,8 @@ class RadioButton extends Component {
       borderRadius: '50%',
       height: '100%',
       opacity: (isHover || active) ? 1 : 0.7,
-      transition: 'all 0.15s ease',
       width: '100%',
+      ...transitionStyle(),
     };
 
     const radioFocusStyle = {
@@ -104,8 +105,8 @@ class RadioButton extends Component {
       height: '30px',
       opacity: isFocus ? 0.15 : 0,
       position: 'absolute',
-      transition: 'all 0.15s ease',
       width: '30px',
+      ...transitionStyle(),
     };
 
     return (

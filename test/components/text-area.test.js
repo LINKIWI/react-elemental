@@ -4,6 +4,7 @@ import Text from 'components/text';
 import TextArea from 'components/text-area';
 import TextField from 'components/text-field';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 
 describe('Text area', () => {
   test('Accepts proxy props', () => {
@@ -20,7 +21,7 @@ describe('Text area', () => {
     );
 
     expect(textArea.find(TextField).length).toBe(1);
-    expect(textArea.find(TextField).props().style.transition).toBe('border 0.15s ease');
+    expect(textArea.find(TextField).props().style).toEqual(transitionStyle('border'));
     expect(textArea.find(TextField).props().textarea).toBe(true);
   });
 

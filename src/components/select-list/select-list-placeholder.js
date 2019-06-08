@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 
 /**
  * SelectList placeholder item. This is the SelectList item that is always rendered, regardless of
@@ -25,18 +26,18 @@ const SelectListPlaceholder = (props) => {
     cursor: 'pointer',
     display: 'flex',
     padding: '10px',
-    transition: 'all 0.15s ease',
+    ...transitionStyle(),
   };
 
   const arrowStyle = {
     alignSelf: 'center',
     marginLeft: 'auto',
     transform: `${arrowDirection === 'up' ? 'rotate(180deg)' : 'rotate(0deg)'}`,
-    transition: 'all 0.2s ease',
     userSelect: 'none',
     MozUserSelect: 'none',
     WebkitUserSelect: 'none',
     MsUserSelect: 'none',
+    ...transitionStyle(),
   };
 
   return (

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { spacing } from 'styles/spacing';
+import { transitionStyle } from 'styles/transition';
 import Clear from 'icons/clear';
 import noop from 'util/noop';
 
@@ -40,7 +41,7 @@ const Tag = ({
     border: `1px solid ${outlineColor}`,
     display: 'inline-flex',
     padding: paddingMap[size],
-    transition: 'all 0.15s ease',
+    ...transitionStyle(),
     ...overrides,
   };
 
@@ -52,7 +53,7 @@ const Tag = ({
   };
 
   const textStyle = {
-    transition: 'all 0.15s ease',
+    ...transitionStyle(),
   };
 
   return (

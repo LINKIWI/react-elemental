@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 import omit from 'util/omit';
 
 export const GRACE_TIMEOUT_INTERVAL = 150;
@@ -87,10 +88,10 @@ export default class Tooltip extends Component {
       opacity: displayTooltip ? 0.95 : 0,
       padding: '7px 15px',
       position: 'absolute',
-      transition: 'all 0.1s ease',
       visibility: displayTooltip ? 'inherit' : 'hidden',
       width,
       [placementProperty]: 'calc(100% + 5px)',
+      ...transitionStyle(),
       ...overrides,
     };
 

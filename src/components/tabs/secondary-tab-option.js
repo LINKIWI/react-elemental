@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { colors } from 'styles/color';
+import { transitionStyle } from 'styles/transition';
 
 /**
  * Single tab option for the secondary style.
@@ -17,7 +18,7 @@ const SecondaryTabOption = ({
     borderRight: 0,
     borderBottom: '2.5px solid rgba(0, 0, 0, 0)',
     borderLeft: 0,
-    transition: 'border 0.1s ease',
+    ...transitionStyle('border'),
   };
 
   const secondaryActiveStyle = {

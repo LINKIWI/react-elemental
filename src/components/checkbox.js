@@ -5,6 +5,7 @@ import Text from 'components/text';
 import Check from 'icons/check';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
+import { transitionStyle } from 'styles/transition';
 import noop from 'util/noop';
 import withCSS from 'util/with-css';
 
@@ -88,14 +89,14 @@ class Checkbox extends Component {
       justifyContent: 'center',
       opacity: disabled ? 0.5 : 1,
       width: '14px',
-      transition: 'all 0.15s ease',
+      ...transitionStyle(),
     };
 
     const checkStyle = {
       fill: colors.gray5,
       height: '12px',
       opacity: checked ? 1 : 0,
-      transition: 'all 0.15s ease',
+      ...transitionStyle(),
     };
 
     return (

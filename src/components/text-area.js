@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'components/text-field';
+import { transitionStyle } from 'styles/transition';
 
 /**
  * Styled textarea element for blobs of text input.
@@ -9,7 +10,7 @@ import TextField from 'components/text-field';
  */
 const TextArea = ({ error, secondary, style: overrides, ...proxyProps }) => {
   const style = {
-    transition: 'border 0.15s ease',
+    ...transitionStyle('border'),
     ...overrides,
   };
 

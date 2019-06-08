@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
+import { transitionStyle } from 'styles/transition';
 import compose from 'util/compose';
 import { KEY_CODE_ENTER } from 'util/constants';
 import omit from 'util/omit';
@@ -120,7 +121,7 @@ class Button extends Component {
       padding: (secondary ? secondaryPaddingMap : primaryPaddingMap)[size],
       pointerEvents: disabled ? 'none' : 'inherit',
       textDecoration: 'none',
-      transition: 'all 0.15s ease-out',
+      ...transitionStyle(),
       ...overrides,
     };
 
