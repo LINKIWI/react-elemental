@@ -40,6 +40,7 @@ const Tag = ({
     border: `1px solid ${outlineColor}`,
     display: 'inline-flex',
     padding: paddingMap[size],
+    transition: 'all 0.15s ease',
     ...overrides,
   };
 
@@ -50,9 +51,20 @@ const Tag = ({
     marginLeft: spacing.tiny,
   };
 
+  const textStyle = {
+    transition: 'all 0.15s ease',
+  };
+
   return (
     <div style={style} {...proxyProps}>
-      <Text size={textSizeMap[size]} color={outlineColor} uppercase bold inline>
+      <Text
+        color={outlineColor}
+        size={textSizeMap[size]}
+        style={textStyle}
+        uppercase
+        bold
+        inline
+      >
         {text}
       </Text>
 
