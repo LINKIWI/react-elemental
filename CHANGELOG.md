@@ -4,6 +4,7 @@
 
 ### Changed
 
+* `Modal` no longer shows a close icon when non-persistent (this is now abstracted out to the client)
 * `SelectList` inherits parent width more naturally, and no longer requires an explicit numeric width be set
 * `SelectList` supports `inverted` prop, to expand the selection options upwards rather than downwards
 * `Tag` enables transitions, for consistency with other components

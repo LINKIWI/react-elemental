@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Clear from 'icons/clear';
 import { colors } from 'styles/color';
-import { transitionStyle } from 'styles/transition';
-import compose from 'util/compose';
 import noop from 'util/noop';
 import omit from 'util/omit';
-import withToggleState from 'util/with-toggle-state';
 
 const KEY_CODE_ESC = 27;
 
@@ -26,13 +22,6 @@ class Modal extends Component {
     onHide: PropTypes.func,
     style: PropTypes.object,
     children: PropTypes.any,
-    // HOC props
-    handleMouseOver: PropTypes.func.isRequired,
-    handleMouseOut: PropTypes.func.isRequired,
-    handleMouseDown: PropTypes.func.isRequired,
-    handleMouseUp: PropTypes.func.isRequired,
-    isHover: PropTypes.bool.isRequired,
-    isActive: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -93,32 +82,16 @@ class Modal extends Component {
     return func();
   };
 
-  handleMouseOut = () => {
-    const { handleMouseOut, handleMouseUp } = this.props;
-
-    // Also simulate a mouseup event so that the active state is properly reset if the user moves
-    // the mouse outside of the container without releasing the mouse.
-    handleMouseOut();
-    handleMouseUp();
-  };
-
   render() {
     const {
       size,
-      persistent,
-      onHide,
       style: overrides,
       children,
-      handleMouseOver,
-      handleMouseDown,
-      handleMouseUp,
-      isHover,
-      isActive,
       ...props
     } = this.props;
     const { modal, windowWidth, windowHeight } = this.state;
 
-    const proxyProps = omit(props, ['handleMouseOut']);
+    const proxyProps = omit(props, ['persistent', 'onHide', 'handleMouseOut']);
 
     if (windowWidth === null || windowHeight === null) {
       return null;
@@ -151,28 +124,6 @@ class Modal extends Component {
       zIndex: 99,
     };
 
-    const closeStyle = {
-      background: 'inherit',
-      border: 0,
-      fill: colors.gray20,
-      cursor: 'pointer',
-      position: 'absolute',
-      right: '24px',
-      top: '24px',
-      ...transitionStyle(),
-      ...isHover && {
-        fill: colors.gray15,
-      },
-      ...isActive && isHover && {
-        fill: colors.gray30,
-      },
-    };
-
-    const closeIconStyle = {
-      height: '32px',
-      width: '32px',
-    };
-
     return (
       <div
         style={backdropStyle}
@@ -185,19 +136,6 @@ class Modal extends Component {
           tabIndex={0}
           {...proxyProps}
         >
-          {!persistent && (
-            <button
-              style={closeStyle}
-              onClick={onHide}
-              onMouseOver={handleMouseOver}
-              onMouseOut={this.handleMouseOut}
-              onMouseDown={handleMouseDown}
-              onMouseUp={handleMouseUp}
-            >
-              <Clear style={closeIconStyle} />
-            </button>
-          )}
-
           {children}
         </div>
       </div>
@@ -205,7 +143,4 @@ class Modal extends Component {
   }
 }
 
-export default compose(
-  withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
-  withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),
-)(Modal);
+export default Modal;

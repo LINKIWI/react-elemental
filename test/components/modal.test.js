@@ -1,8 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Modal from 'components/modal';
-import Clear from 'icons/clear';
-import { colors } from 'styles/color';
 
 describe('Modal', () => {
   test('Rendering hierarchy', () => {
@@ -12,7 +10,6 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    expect(modal.find(Clear).length).toBe(1);
     expect(modal.at(0).at(0).text()).toBe('children');
   });
 
@@ -41,7 +38,6 @@ describe('Modal', () => {
     modal.childAt(0).simulate('keydown', { keyCode: 27 });
 
     expect(onHide.mock.calls.length).toBe(0);
-    expect(modal.find(Clear).length).toBe(0);
   });
 
   test('Exiting out of modal via backdrop click', () => {
@@ -75,36 +71,20 @@ describe('Modal', () => {
     expect(onHide).toBeCalled();
   });
 
-  test('Exiting out of modal via close button', () => {
-    const onHide = jest.fn();
-    const modal = mount(
-      <Modal onHide={onHide}>
-        children
-      </Modal>,
-    );
-
-    modal.find(Clear).simulate('click');
-    expect(onHide).toBeCalled();
-
-    modal.unmount();
-  });
-
-  test('Hover and active style on close button', () => {
-    const modal = mount(
+  test('Idempotent ref', () => {
+    const mockRef = {
+      focus: jest.fn(),
+    };
+    const modal = shallow(
       <Modal>
         children
       </Modal>,
     );
 
-    expect(modal.find('button').props().style.fill).toBe(colors.gray20);
-    modal.find(Clear).simulate('mouseover');
-    expect(modal.find('button').props().style.fill).toBe(colors.gray15);
-    modal.find(Clear).simulate('mousedown');
-    expect(modal.find('button').props().style.fill).toBe(colors.gray30);
-    modal.find(Clear).simulate('mouseup');
-    expect(modal.find('button').props().style.fill).toBe(colors.gray15);
-    modal.find(Clear).simulate('mouseout');
-    expect(modal.find('button').props().style.fill).toBe(colors.gray20);
+    modal.setState({ modal: mockRef });
+    expect(modal.state('modal')).toBe(mockRef);
+    modal.instance().setRef('ignore');
+    expect(modal.state('modal')).toBe(mockRef);
   });
 
   test('Focus after setting ref', () => {
@@ -117,7 +97,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    modal.dive().at(0).dive().setState({ modal: mockRef });
+    modal.setState({ modal: mockRef });
 
     expect(mockRef.focus).toBeCalled();
   });
@@ -132,15 +112,14 @@ describe('Modal', () => {
         children
       </Modal>,
     );
-    const wrappedModal = modal.dive().at(0).dive();
 
-    wrappedModal.setState({ modal: mockRef, windowWidth: 0, windowHeight: 0 });
+    modal.setState({ modal: mockRef, windowWidth: 0, windowHeight: 0 });
 
     // Backdrop container
-    expect(wrappedModal.at(0).props().style.width).toBe('100%');
-    expect(wrappedModal.at(0).props().style.height).toBe('100%');
+    expect(modal.at(0).props().style.width).toBe('100%');
+    expect(modal.at(0).props().style.height).toBe('100%');
     // Modal itself
-    expect(wrappedModal.childAt(0).props().style.width).toBe('100%');
+    expect(modal.childAt(0).props().style.width).toBe('100%');
 
     modal.unmount();
   });
@@ -155,10 +134,9 @@ describe('Modal', () => {
         children
       </Modal>,
     );
-    const wrappedModal = modal.dive().at(0).dive();
 
-    wrappedModal.setState({ modal: mockRef, windowWidth: 1000, windowHeight: 1000 });
+    modal.setState({ modal: mockRef, windowWidth: 1000, windowHeight: 1000 });
 
-    expect(wrappedModal.childAt(0).props().style.width).toBe('600px');
+    expect(modal.childAt(0).props().style.width).toBe('600px');
   });
 });
