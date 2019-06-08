@@ -28,3 +28,4 @@ export bootstrap from 'bootstrap';
 export { colors } from 'styles/color';
 export { sizes } from 'styles/font';
 export { spacing } from 'styles/spacing';
+export { durations, timing } from 'styles/transition';
