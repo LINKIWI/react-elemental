@@ -1,5 +1,5 @@
-import React from 'react';
-import { mount, shallow } from 'enzyme';
+import React, { createRef } from 'react';
+import { mount } from 'enzyme';
 import Button from 'components/button';
 import Text from 'components/text';
 
@@ -15,7 +15,7 @@ describe('Button', () => {
   });
 
   test('Optional text props', () => {
-    const buttonWithoutText = shallow(
+    const buttonWithoutText = mount(
       <Button />,
     );
     expect(buttonWithoutText.find(Text).length).toBe(0);
@@ -171,5 +171,15 @@ describe('Button', () => {
     );
 
     expect(button.find('button').props().disabled).toBe(true);
+  });
+
+  test('Ref forwarding to underlying button', () => {
+    const ref = createRef();
+    const button = mount(
+      <Button ref={ref} />,
+    );
+
+    expect(button.find('button').length).toBe(1);
+    expect(ref.current).toBeDefined();
   });
 });

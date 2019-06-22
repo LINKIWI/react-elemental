@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
@@ -53,6 +54,10 @@ class Button extends Component {
     isHover: PropTypes.bool.isRequired,
     isActive: PropTypes.bool.isRequired,
     isFocus: PropTypes.bool.isRequired,
+    forwardedRef: PropTypes.oneOfType([
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+      PropTypes.func,
+    ]),
   };
 
   static defaultProps = {
@@ -63,6 +68,7 @@ class Button extends Component {
     secondary: false,
     style: {},
     children: null,
+    forwardedRef: null,
   };
 
   handleMouseLeave = () => {
@@ -93,6 +99,7 @@ class Button extends Component {
       isHover,
       isActive,
       isFocus,
+      forwardedRef,
       ...props
     } = this.props;
 
@@ -127,6 +134,7 @@ class Button extends Component {
 
     return (
       <button
+        ref={forwardedRef}
         type="button"
         style={style}
         onMouseEnter={handleMouseEnter}
@@ -162,6 +170,7 @@ class Button extends Component {
 }
 
 export default compose(
+  withForwardedRef,
   withCSS({ key: 'button', css: buttonOutlinesCSS }),
   withToggleState({ key: 'isHover', enable: 'handleMouseEnter', disable: 'handleMouseLeave' }),
   withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),

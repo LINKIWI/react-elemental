@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "clean": "rm -rf dist && rm -rf lib",
-    "build": "babel src/ -d lib/",
+    "build": "babel --verbose src/ -d lib/",
     "build:watch": "npm run build -- --watch",
     "lint": "eslint src test sample",
     "test": "jest",
@@ -26,6 +26,7 @@
     "test"
   ],
   "dependencies": {
+    "@linkiwi/hoc": "^0.0.2",
     "color": "^3.1.2",
     "prop-types": "^15.7.2"
   },
