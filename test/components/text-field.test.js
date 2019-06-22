@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { mount } from 'enzyme';
 import Text from 'components/text';
 import TextField from 'components/text-field';
@@ -62,5 +62,15 @@ describe('Text field', () => {
     expect(textField.find('input').props().style.border).not.toEqual(primaryIdleColor);
     textField.find('input').simulate('blur');
     expect(textField.find('input').props().style.border).toEqual(primaryIdleColor);
+  });
+
+  test('Ref forwarding to underlying input', () => {
+    const ref = createRef();
+    const textField = mount(
+      <TextField ref={ref} />,
+    );
+
+    expect(textField.find('input').length).toBe(1);
+    expect(ref.current).toBeDefined();
   });
 });

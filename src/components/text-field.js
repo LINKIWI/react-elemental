@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Color from 'color';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
@@ -30,6 +31,10 @@ class TextField extends Component {
     handleBlur: PropTypes.func.isRequired,
     isHover: PropTypes.bool.isRequired,
     isFocus: PropTypes.bool.isRequired,
+    forwardedRef: PropTypes.oneOfType([
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+      PropTypes.func,
+    ]),
   };
 
   static defaultProps = {
@@ -37,6 +42,7 @@ class TextField extends Component {
     secondary: false,
     textarea: false,
     style: {},
+    forwardedRef: null,
   };
 
   constructor(props) {
@@ -73,6 +79,7 @@ class TextField extends Component {
       handleBlur,
       isHover,
       isFocus,
+      forwardedRef,
       ...proxyProps
     } = this.props;
 
@@ -131,18 +138,23 @@ class TextField extends Component {
 
     // The styles and properties for TextArea and TextField are exactly identical sans the rendered
     // HTML element.
-    const Element = textarea ? 'textarea' : 'input';
+    const elementProps = {
+      ref: forwardedRef,
+      onMouseOver: handleMouseOver,
+      onMouseOut: handleMouseOut,
+      onFocus: handleFocus,
+      onBlur: handleBlur,
+      style,
+      ...proxyProps,
+    };
 
     return (
       <div>
-        <Element
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          style={style}
-          {...proxyProps}
-        />
+        {textarea ? (
+          <textarea {...elementProps} />
+        ) : (
+          <input {...elementProps} />
+        )}
 
         {error && (
           <Spacing size="micro" top>
@@ -157,6 +169,7 @@ class TextField extends Component {
 }
 
 export default compose(
+  withForwardedRef,
   withCSS({ key: 'text', css: fontCSS }),
   withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
   withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
