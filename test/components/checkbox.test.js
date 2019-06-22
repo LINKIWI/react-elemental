@@ -1,5 +1,5 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React, { createRef } from 'react';
+import { mount } from 'enzyme';
 import Checkbox from 'components/checkbox';
 import Text from 'components/text';
 import Check from 'icons/check';
@@ -8,19 +8,19 @@ import { colors } from 'styles/color';
 describe('Checkbox', () => {
   test('Accepts proxy props', () => {
     const onClick = jest.fn();
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox
         onClick={onClick}
       />,
-    ).find('Checkbox').dive();
+    );
 
     expect(checkbox.find('button').props().onClick).toBe(onClick);
   });
 
   test('Standard rendering', () => {
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox label="label" />,
-    ).find('Checkbox').dive();
+    );
 
     expect(checkbox.find(Check).length).toBe(1);
     expect(checkbox.find(Text).length).toBe(1);
@@ -28,38 +28,40 @@ describe('Checkbox', () => {
   });
 
   test('Rendering of checked checkbox', () => {
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox />,
-    ).find('Checkbox').dive();
+    );
 
     expect(checkbox.find(Check).props().style.opacity).toBe(0);
   });
 
   test('Rendering of hovered checkbox', () => {
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox />,
-    ).find('Checkbox').dive();
+    );
 
     checkbox.find('button').simulate('mouseenter');
 
-    expect(checkbox.childAt(0).props().style.border).toBe(`1px solid ${colors.gray20}`);
+    expect(checkbox.find('button').childAt(0).props().style.border)
+      .toBe(`1px solid ${colors.gray20}`);
   });
 
   test('Rendering of focused checkbox', () => {
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox />,
-    ).find('Checkbox').dive();
+    );
 
     checkbox.find('button').simulate('focus');
 
-    expect(checkbox.childAt(0).props().style.border).toBe(`1px solid ${colors.gray20}`);
+    expect(checkbox.find('button').childAt(0).props().style.border)
+      .toBe(`1px solid ${colors.gray20}`);
   });
 
   test('Rendering of disabled checkbox', () => {
     const onChange = jest.fn();
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox onChange={onChange} disabled />,
-    ).find('Checkbox').dive();
+    );
 
     expect(checkbox.find('button').props().style.cursor).toBe('inherit');
     checkbox.find('button').simulate('click');
@@ -68,9 +70,9 @@ describe('Checkbox', () => {
 
   test('Check change callback for unchecked checkbox', () => {
     const onChange = jest.fn();
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox onChange={onChange} />,
-    ).find('Checkbox').dive();
+    );
 
     expect(onChange.mock.calls.length).toBe(0);
     checkbox.at(0).simulate('click');
@@ -79,9 +81,9 @@ describe('Checkbox', () => {
 
   test('Uncheck change callback for checked checkbox', () => {
     const onChange = jest.fn();
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox onChange={onChange} checked />,
-    ).find('Checkbox').dive();
+    );
 
     expect(onChange.mock.calls.length).toBe(0);
     checkbox.at(0).simulate('click');
@@ -90,12 +92,22 @@ describe('Checkbox', () => {
 
   test('Disabled checkbox', () => {
     const onChange = jest.fn();
-    const checkbox = shallow(
+    const checkbox = mount(
       <Checkbox onChange={onChange} disabled />,
     );
 
     expect(onChange.mock.calls.length).toBe(0);
     checkbox.at(0).simulate('click');
     expect(onChange.mock.calls.length).toBe(0);
+  });
+
+  test('Ref forwarding to underlying button', () => {
+    const ref = createRef();
+    const checkbox = mount(
+      <Checkbox ref={ref} />,
+    );
+
+    expect(checkbox.find('button').length).toBe(1);
+    expect(ref.current).toBeDefined();
   });
 });

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import Check from 'icons/check';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
 import { transitionStyle } from 'styles/transition';
+import compose from 'util/compose';
 import noop from 'util/noop';
 import withCSS from 'util/with-css';
 
@@ -20,6 +22,10 @@ class Checkbox extends Component {
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
     children: PropTypes.node,
+    forwardedRef: PropTypes.oneOfType([
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+      PropTypes.func,
+    ]),
   };
 
   static defaultProps = {
@@ -29,6 +35,7 @@ class Checkbox extends Component {
     disabled: false,
     onChange: noop,
     children: null,
+    forwardedRef: null,
   };
 
   state = { isHover: false, isFocus: false };
@@ -50,6 +57,7 @@ class Checkbox extends Component {
       style: overrides,
       disabled,
       children,
+      forwardedRef,
       ...proxyProps
     } = this.props;
     const { isHover, isFocus } = this.state;
@@ -101,6 +109,9 @@ class Checkbox extends Component {
 
     return (
       <button
+        ref={forwardedRef}
+        role="checkbox"
+        aria-checked={checked}
         style={containerStyle}
         onClick={this.handleClick}
         onMouseEnter={this.handleHoverChange(true)}
@@ -127,7 +138,10 @@ class Checkbox extends Component {
   }
 }
 
-export default withCSS({
-  key: 'button',
-  css: buttonOutlinesCSS,
-})(Checkbox);
+export default compose(
+  withForwardedRef,
+  withCSS({
+    key: 'button',
+    css: buttonOutlinesCSS,
+  }),
+)(Checkbox);
