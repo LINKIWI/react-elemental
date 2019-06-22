@@ -1,5 +1,6 @@
 import { colors } from 'styles/color';
-import { fonts } from 'styles/font';
+import { fonts, fontCSS } from 'styles/font';
+import { buttonOutlinesCSS } from 'styles/spacing';
 import injectCSS from 'util/inject-css';
 
 const DEFAULT_COLORS = {
@@ -42,8 +43,10 @@ const bootstrap = (fontOpts = {}, colorOpts = {}) => {
   colors.primaryLight = bootstrapColors.primaryLight;
   colors.primaryDark = bootstrapColors.primaryDark;
 
-  // Injection of universal styles, not specific to any single component
+  // Global injection of all styles
   injectCSS(universalSpacing);
+  injectCSS(buttonOutlinesCSS());
+  injectCSS(fontCSS());
 };
 
 export default bootstrap;

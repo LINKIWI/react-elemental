@@ -10,6 +10,7 @@
 * `Tag` enables transitions, for consistency with other components
 * Support ref forwarding to the underlying native DOM element for `Button`, `Checkbox`, `Image`, `Link`, `TextArea`, `TextField`
 * Standardize transitions across all components with custom easing function
+* Styles are now injected at bootstrap time, rather than at dependent component mount time
 
 ## v1.2.1
 
