@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
+import { withToggleState } from '@linkiwi/hoc';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
@@ -8,54 +9,61 @@ import { transitionStyle } from 'styles/transition';
 /**
  * Dropdown menu in an expanded SelectList.
  */
-export default class SelectListItem extends Component {
-  static propTypes = {
-    label: PropTypes.string.isRequired,
-    isSelected: PropTypes.bool,
-    onClick: PropTypes.func.isRequired,
-    style: PropTypes.object,
+const SelectListItem = ({
+  label,
+  isSelected,
+  onClick,
+  style: overrides,
+  isHover,
+  handleMouseEnter,
+  handleMouseLeave,
+}) => {
+  const style = {
+    alignItems: 'center',
+    backgroundColor: (isHover || isSelected) ? colors.primaryLight : 'white',
+    border: `1px solid ${colors.gray10}`,
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    display: 'flex',
+    padding: '10px',
+    ...transitionStyle(),
+    ...overrides,
   };
 
-  static defaultProps = {
-    isSelected: false,
-    style: {},
-  };
+  return (
+    <div
+      style={style}
+      onClick={onClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Spacing size="small" padding right>
+        <Text size="kilo" style={{ display: 'block' }} inline>
+          {label}
+        </Text>
+      </Spacing>
+    </div>
+  );
+};
 
-  state = {
-    isHover: false,
-  };
+SelectListItem.propTypes = {
+  label: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  // HOC props
+  isHover: PropTypes.bool.isRequired,
+  handleMouseEnter: PropTypes.func.isRequired,
+  handleMouseLeave: PropTypes.func.isRequired,
+};
 
-  handleHoverStateChange = (isHover) => () => this.setState({ isHover });
+SelectListItem.defaultProps = {
+  isSelected: false,
+  style: {},
+};
 
-  render() {
-    const { label, isSelected, onClick, style: overrides } = this.props;
-    const { isHover } = this.state;
-
-    const style = {
-      alignItems: 'center',
-      backgroundColor: (isHover || isSelected) ? colors.primaryLight : 'white',
-      border: `1px solid ${colors.gray10}`,
-      boxSizing: 'border-box',
-      cursor: 'pointer',
-      display: 'flex',
-      padding: '10px',
-      ...transitionStyle(),
-      ...overrides,
-    };
-
-    return (
-      <div
-        style={style}
-        onClick={onClick}
-        onMouseEnter={this.handleHoverStateChange(true)}
-        onMouseLeave={this.handleHoverStateChange(false)}
-      >
-        <Spacing size="small" padding right>
-          <Text size="kilo" style={{ display: 'block' }} inline>
-            {label}
-          </Text>
-        </Spacing>
-      </div>
-    );
-  }
-}
+export default withToggleState({
+  key: 'isHover',
+  enable: 'handleMouseEnter',
+  disable: 'handleMouseLeave',
+})(SelectListItem);

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withCSS } from '@linkiwi/hoc';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import PrimaryTabOption from 'components/tabs/primary-tab-option';
 import SecondaryTabOption from 'components/tabs/secondary-tab-option';
 import { buttonOutlinesCSS } from 'styles/spacing';
 import noop from 'util/noop';
-import withCSS from 'util/with-css';
 
 /**
  * Horizontally organized segments of options.
@@ -90,6 +90,6 @@ Tabs.defaultProps = {
 };
 
 export default withCSS({
-  key: 'button',
+  key: () => 'elemental:button',
   css: buttonOutlinesCSS,
 })(Tabs);

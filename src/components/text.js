@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withCSS } from '@linkiwi/hoc';
 import { primaryFontStyle, secondaryFontStyle, fontCSS } from 'styles/font';
-import withCSS from 'util/with-css';
 
 /**
  * Text component with automatic typeface formatting.
@@ -80,6 +80,6 @@ Text.defaultProps = {
 };
 
 export default withCSS({
-  key: 'text',
+  key: () => 'elemental:text',
   css: fontCSS,
 })(Text);

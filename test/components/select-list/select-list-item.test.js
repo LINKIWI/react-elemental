@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import SelectListItem from 'components/select-list/select-list-item';
 import Text from 'components/text';
@@ -11,7 +11,7 @@ describe('Select list item', () => {
   };
 
   test('Basic rendering', () => {
-    const selectListItem = shallow(
+    const selectListItem = mount(
       <SelectListItem {...defaultProps} />,
     );
 
@@ -25,24 +25,24 @@ describe('Select list item', () => {
       onClick,
     };
 
-    const selectListItem = shallow(
+    const selectListItem = mount(
       <SelectListItem {...props} />,
     );
 
     expect(onClick.mock.calls.length).toBe(0);
-    selectListItem.at(0).simulate('click');
+    selectListItem.find('SelectListItem').at(0).simulate('click');
     expect(onClick).toBeCalled();
   });
 
   test('Hover state change', () => {
-    const selectListItem = shallow(
+    const selectListItem = mount(
       <SelectListItem {...defaultProps} />,
     );
 
-    expect(selectListItem.state().isHover).toBe(false);
-    selectListItem.at(0).simulate('mouseenter');
-    expect(selectListItem.state().isHover).toBe(true);
-    selectListItem.at(0).simulate('mouseleave');
-    expect(selectListItem.state().isHover).toBe(false);
+    expect(selectListItem.find('SelectListItem').props().isHover).toBe(false);
+    selectListItem.find('SelectListItem').at(0).simulate('mouseenter');
+    expect(selectListItem.find('SelectListItem').props().isHover).toBe(true);
+    selectListItem.find('SelectListItem').at(0).simulate('mouseleave');
+    expect(selectListItem.find('SelectListItem').props().isHover).toBe(false);
   });
 });

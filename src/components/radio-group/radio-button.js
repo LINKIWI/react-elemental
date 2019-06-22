@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { compose, withToggleState } from '@linkiwi/hoc';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { transitionStyle } from 'styles/transition';
-import compose from 'util/compose';
-import withToggleState from 'util/with-toggle-state';
 
 /**
  * Single radio button option in an externally controlled group of such options.

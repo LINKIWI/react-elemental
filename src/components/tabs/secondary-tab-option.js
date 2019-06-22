@@ -43,7 +43,7 @@ SecondaryTabOption.propTypes = {
   baseStyle: PropTypes.object.isRequired,
   // Boolean indicating if the option is currently selected (active)
   isSelected: PropTypes.bool.isRequired,
-  // Boolean indciating whether the active highlight style is inverted
+  // Boolean indicating whether the active highlight style is inverted
   isInvert: PropTypes.bool.isRequired,
   // Click callback handler
   onClick: PropTypes.func.isRequired,

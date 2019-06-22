@@ -1,12 +1,10 @@
 import Color from 'color';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
+import { compose, withForwardedRef, withToggleState } from '@linkiwi/hoc';
 import Text from 'components/text';
 import { transitionStyle } from 'styles/transition';
-import compose from 'util/compose';
 import omit from 'util/omit';
-import withToggleState from 'util/with-toggle-state';
 
 // Image is not mounted.
 export const LOAD_STATE_IDLE = 'idle';

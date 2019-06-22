@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withCSS } from '@linkiwi/hoc';
 import { colors } from 'styles/color';
-import withCSS from 'util/with-css';
 
 const sizeMap = {
   alpha: '26px',
@@ -53,7 +53,7 @@ Spinner.defaultProps = {
 };
 
 export default withCSS({
-  key: 'spinner',
+  key: () => 'elemental:spinner',
   css: () => `
     @keyframes spin {
       0% {

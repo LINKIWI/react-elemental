@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withCSS } from '@linkiwi/hoc';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import Clear from 'icons/clear';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
 import noop from 'util/noop';
-import withCSS from 'util/with-css';
 
 // Mapping of alert types to their corresponding background and text colors
 const typeColorMap = {
@@ -116,6 +116,6 @@ Alert.defaultProps = {
 };
 
 export default withCSS({
-  key: 'button',
+  key: () => 'elemental:button',
   css: buttonOutlinesCSS,
 })(Alert);

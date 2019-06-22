@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { withCSS } from '@linkiwi/hoc';
 import RadioButton from 'components/radio-group/radio-button';
 import Spacing from 'components/spacing';
 import { colors } from 'styles/color';
@@ -7,7 +8,6 @@ import { buttonOutlinesCSS } from 'styles/spacing';
 import { KEY_CODE_UP, KEY_CODE_DOWN, KEY_CODE_LEFT, KEY_CODE_RIGHT } from 'util/constants';
 import noop from 'util/noop';
 import { modulo } from 'util/number';
-import withCSS from 'util/with-css';
 
 /**
  * Group of individually selectable radio buttons.
@@ -158,6 +158,6 @@ class RadioGroup extends Component {
 }
 
 export default withCSS({
-  key: 'button',
+  key: () => 'elemental:button',
   css: buttonOutlinesCSS,
 })(RadioGroup);

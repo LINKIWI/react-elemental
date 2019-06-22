@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
+import { withForwardedRef } from '@linkiwi/hoc';
 import TextField from 'components/text-field';
 import { transitionStyle } from 'styles/transition';
 

@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
+import { compose, withCSS, withForwardedRef, withToggleState } from '@linkiwi/hoc';
 import Text from 'components/text';
 import { colors } from 'styles/color';
 import { buttonOutlinesCSS } from 'styles/spacing';
 import { transitionStyle } from 'styles/transition';
-import compose from 'util/compose';
 import { KEY_CODE_ENTER } from 'util/constants';
 import omit from 'util/omit';
-import withCSS from 'util/with-css';
-import withToggleState from 'util/with-toggle-state';
 
 // Mapping of button sizes to the corresponding default text size.
 const textSizeMap = {
@@ -171,7 +168,7 @@ class Button extends Component {
 
 export default compose(
   withForwardedRef,
-  withCSS({ key: 'button', css: buttonOutlinesCSS }),
+  withCSS({ key: () => 'elemental:button', css: buttonOutlinesCSS }),
   withToggleState({ key: 'isHover', enable: 'handleMouseEnter', disable: 'handleMouseLeave' }),
   withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),
   withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),

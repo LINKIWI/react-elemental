@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withToggleState } from '@linkiwi/hoc';
 import { colors } from 'styles/color';
 import { transitionStyle } from 'styles/transition';
-import withToggleState from 'util/with-toggle-state';
 
 /**
  * Single tab option for the primary style.
