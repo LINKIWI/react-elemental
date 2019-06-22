@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { compose, withCSS, withForwardedRef } from '@linkiwi/hoc';
+import { withForwardedRef } from '@linkiwi/hoc';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import Check from 'icons/check';
 import { colors } from 'styles/color';
-import { buttonOutlinesCSS } from 'styles/spacing';
 import { transitionStyle } from 'styles/transition';
 import noop from 'util/noop';
 
@@ -136,10 +135,4 @@ class Checkbox extends Component {
   }
 }
 
-export default compose(
-  withForwardedRef,
-  withCSS({
-    key: () => 'elemental:button',
-    css: buttonOutlinesCSS,
-  }),
-)(Checkbox);
+export default withForwardedRef(Checkbox);

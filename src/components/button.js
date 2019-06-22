@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { compose, withCSS, withForwardedRef, withToggleState } from '@linkiwi/hoc';
+import { compose, withForwardedRef, withToggleState } from '@linkiwi/hoc';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-import { buttonOutlinesCSS } from 'styles/spacing';
 import { transitionStyle } from 'styles/transition';
 import { KEY_CODE_ENTER } from 'util/constants';
 import omit from 'util/omit';
@@ -168,7 +167,6 @@ class Button extends Component {
 
 export default compose(
   withForwardedRef,
-  withCSS({ key: () => 'elemental:button', css: buttonOutlinesCSS }),
   withToggleState({ key: 'isHover', enable: 'handleMouseEnter', disable: 'handleMouseLeave' }),
   withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),
   withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),

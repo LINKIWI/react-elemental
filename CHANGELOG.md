@@ -14,6 +14,7 @@
 * `SelectList` supports `inverted` prop, to expand the selection options upwards rather than downwards
 * `Tag` enables transitions, for consistency with other components
 * Standardize transitions across all components with custom easing function
+* Styles are now injected at bootstrap time, rather than at dependent component mount time
 
 ## v1.2.1
 

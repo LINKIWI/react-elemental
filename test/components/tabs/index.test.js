@@ -99,6 +99,6 @@ describe('Tabs', () => {
       />,
     );
 
-    expect(tabs.childAt(0).childAt(0).props().style.justifyContent).toBe('inherit');
+    expect(tabs.childAt(0).props().style.justifyContent).toBe('inherit');
   });
 });

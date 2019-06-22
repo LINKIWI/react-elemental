@@ -26,7 +26,7 @@ describe('Alert', () => {
         title="title"
         message="message"
       />,
-    ).find('Alert').dive();
+    );
 
     expect(alert.find(Text).length).toBe(2);
   });
@@ -39,7 +39,7 @@ describe('Alert', () => {
         title="title"
         message="message"
       />,
-    ).find('Alert').dive();
+    );
 
     expect(alert.find({ size: 'kilo' }).length).toBe(2);
     expect(alert.find({ style: { padding: '10px 15px' } }).length).toBe(1);
@@ -55,7 +55,7 @@ describe('Alert', () => {
         onDismiss={onDismiss}
         dismissible
       />,
-    ).find('Alert').dive();
+    );
 
     const dismissIcon = alert.find('button').at(0);
     expect(dismissIcon.props().onClick).toBeTruthy();
@@ -81,7 +81,7 @@ describe('Alert', () => {
           title="title"
           message="message"
         />,
-      ).find('Alert').dive();
+      );
 
       expect(alert.at(0).props().style.backgroundColor).toBe(variants[variant]);
     });

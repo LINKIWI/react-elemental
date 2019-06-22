@@ -1,11 +1,11 @@
 import Color from 'color';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { compose, withCSS, withForwardedRef, withToggleState } from '@linkiwi/hoc';
+import { compose, withForwardedRef, withToggleState } from '@linkiwi/hoc';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { colors } from 'styles/color';
-import { primaryFontStyle, fontCSS } from 'styles/font';
+import { primaryFontStyle } from 'styles/font';
 import { transitionStyle } from 'styles/transition';
 
 /**
@@ -167,7 +167,6 @@ class TextField extends Component {
 
 export default compose(
   withForwardedRef,
-  withCSS({ key: () => 'elemental:text', css: fontCSS }),
   withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
   withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
 )(TextField);
