@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { mount } from 'enzyme';
 import Text from 'components/text';
 import TextArea from 'components/text-area';
@@ -88,5 +88,15 @@ describe('Text area', () => {
     );
 
     expect(textArea.find('textarea').length).toBe(1);
+  });
+
+  test('Ref forwarding to underlying textarea', () => {
+    const ref = createRef();
+    const textArea = mount(
+      <TextArea ref={ref} />,
+    );
+
+    expect(textArea.find('textarea').length).toBe(1);
+    expect(ref.current).toBeDefined();
   });
 });

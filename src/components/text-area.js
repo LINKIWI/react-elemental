@@ -1,5 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
 import TextField from 'components/text-field';
 import { transitionStyle } from 'styles/transition';
 
@@ -8,7 +9,7 @@ import { transitionStyle } from 'styles/transition';
  *
  * This component behaves similarly to TextField, with some minor modifications.
  */
-const TextArea = ({ error, secondary, style: overrides, ...proxyProps }) => {
+const TextArea = ({ error, secondary, style: overrides, forwardedRef, ...proxyProps }) => {
   const style = {
     ...transitionStyle('border'),
     ...overrides,
@@ -16,6 +17,7 @@ const TextArea = ({ error, secondary, style: overrides, ...proxyProps }) => {
 
   return (
     <TextField
+      ref={forwardedRef}
       error={error}
       secondary={secondary}
       style={style}
@@ -32,12 +34,18 @@ TextArea.propTypes = {
   secondary: PropTypes.bool,
   // Optional style overrides.
   style: PropTypes.object,
+  // HOC props
+  forwardedRef: PropTypes.oneOfType([
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    PropTypes.func,
+  ]),
 };
 
 TextArea.defaultProps = {
   error: null,
   secondary: false,
   style: {},
+  forwardedRef: null,
 };
 
-export default TextArea;
+export default withForwardedRef(TextArea);
