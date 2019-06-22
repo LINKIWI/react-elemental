@@ -255,7 +255,6 @@ export default class SelectList extends Component {
                 <SelectListItem
                   key={option.value}
                   label={option.label}
-                  width={width}
                   isSelected={
                     (highlightedIdx !== null) && modulo(highlightedIdx, options.length) === idx
                   }
