@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow, mount } from 'enzyme';
+import React from 'react';
 import RadioGroup from 'components/radio-group';
 import RadioButton from 'components/radio-group/radio-button';
 import {

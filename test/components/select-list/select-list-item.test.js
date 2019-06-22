@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import React from 'react';
 import SelectListItem from 'components/select-list/select-list-item';
 import Text from 'components/text';
 

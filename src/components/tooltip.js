@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { colors } from 'styles/color';
 import { transitionStyle } from 'styles/transition';
 import omit from 'util/omit';

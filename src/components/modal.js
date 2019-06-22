@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { colors } from 'styles/color';
 import noop from 'util/noop';
 import omit from 'util/omit';

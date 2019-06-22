@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount } from 'enzyme';
+import React from 'react';
 import Tabs from 'components/tabs';
 import PrimaryTabOption from 'components/tabs/primary-tab-option';
 import SecondaryTabOption from 'components/tabs/secondary-tab-option';

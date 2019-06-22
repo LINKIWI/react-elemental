@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount } from 'enzyme';
+import React from 'react';
 import RadioButton from 'components/radio-group/radio-button';
 import Text from 'components/text';
 

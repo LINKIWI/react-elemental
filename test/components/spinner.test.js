@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount } from 'enzyme';
+import React from 'react';
 import Spinner from 'components/spinner';
 import { colors } from 'styles/color';
 

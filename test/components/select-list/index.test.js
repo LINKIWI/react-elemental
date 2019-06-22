@@ -1,7 +1,7 @@
-import React from 'react';
 import Color from 'color';
-import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
+import React from 'react';
+import sinon from 'sinon';
 import SelectList from 'components/select-list';
 import SelectListItem from 'components/select-list/select-list-item';
 import SelectListPlaceholder from 'components/select-list/select-list-placeholder';

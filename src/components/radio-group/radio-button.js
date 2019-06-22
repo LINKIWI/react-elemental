@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Spacing from 'components/spacing';
 import Text from 'components/text';
 import { transitionStyle } from 'styles/transition';

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Color from 'color';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import SelectListItem from 'components/select-list/select-list-item';
 import SelectListPlaceholder from 'components/select-list/select-list-placeholder';
 import Spacing from 'components/spacing';

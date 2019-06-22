@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount } from 'enzyme';
+import React from 'react';
 import sinon from 'sinon';
 
 import Tooltip, { GRACE_TIMEOUT_INTERVAL } from 'components/tooltip';

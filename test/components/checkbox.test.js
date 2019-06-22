@@ -1,5 +1,5 @@
-import React, { createRef } from 'react';
 import { mount } from 'enzyme';
+import React, { createRef } from 'react';
 import Checkbox from 'components/checkbox';
 import Text from 'components/text';
 import Check from 'icons/check';

@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount } from 'enzyme';
+import React from 'react';
 import PrimaryTabOption from 'components/tabs/primary-tab-option';
 import { colors } from 'styles/color';
 

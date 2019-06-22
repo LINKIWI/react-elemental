@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import RadioButton from 'components/radio-group/radio-button';
 import Spacing from 'components/spacing';
 import { colors } from 'styles/color';

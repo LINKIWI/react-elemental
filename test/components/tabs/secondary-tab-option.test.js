@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import React from 'react';
 import SecondaryTabOption from 'components/tabs/secondary-tab-option';
 import { colors } from 'styles/color';
 

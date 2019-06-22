@@ -1,6 +1,6 @@
+import { shallow } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
-import { shallow } from 'enzyme';
 import LoadingBar, { POSITION_LEFT, POSITION_RIGHT } from 'components/loading-bar';
 
 describe('Loading bar', () => {

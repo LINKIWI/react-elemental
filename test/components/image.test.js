@@ -1,5 +1,5 @@
-import React, { createRef } from 'react';
 import { mount } from 'enzyme';
+import React, { createRef } from 'react';
 import Image, {
   LOAD_STATE_IDLE,
   LOAD_STATE_FETCH,

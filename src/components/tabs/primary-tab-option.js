@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { colors } from 'styles/color';
 import { transitionStyle } from 'styles/transition';
 import withToggleState from 'util/with-toggle-state';

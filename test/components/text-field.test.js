@@ -1,5 +1,5 @@
-import React, { createRef } from 'react';
 import { mount } from 'enzyme';
+import React, { createRef } from 'react';
 import Text from 'components/text';
 import TextField from 'components/text-field';
 

@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount, shallow } from 'enzyme';
+import React from 'react';
 import Text from 'components/text';
 import Tag from 'components/tag';
 import Clear from 'icons/clear';

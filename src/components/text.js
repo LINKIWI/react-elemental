@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { primaryFontStyle, secondaryFontStyle, fontCSS } from 'styles/font';
 import withCSS from 'util/with-css';
 
