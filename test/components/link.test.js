@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { mount } from 'enzyme';
 import Link from 'components/link';
 
@@ -107,5 +107,15 @@ describe('Link', () => {
 
     link.simulate('click');
     expect(mockOnClick).toBeCalled();
+  });
+
+  test('Ref forwarding to underlying anchor', () => {
+    const ref = createRef();
+    const checkbox = mount(
+      <Link ref={ref} />,
+    );
+
+    expect(checkbox.find('a').length).toBe(1);
+    expect(ref.current).toBeDefined();
   });
 });

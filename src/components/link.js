@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
 import { transitionStyle } from 'styles/transition';
 import compose from 'util/compose';
 import omit from 'util/omit';
@@ -26,6 +27,10 @@ class Link extends Component {
     isHover: PropTypes.bool.isRequired,
     isActive: PropTypes.bool.isRequired,
     isFocus: PropTypes.bool.isRequired,
+    forwardedRef: PropTypes.oneOfType([
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+      PropTypes.func,
+    ]),
   };
 
   static defaultProps = {
@@ -34,6 +39,7 @@ class Link extends Component {
     activeColor: 'currentColor',
     style: {},
     children: null,
+    forwardedRef: null,
   };
 
   handleMouseOut = () => {
@@ -65,6 +71,7 @@ class Link extends Component {
       isHover,
       isActive,
       isFocus,
+      forwardedRef,
       ...props
     } = this.props;
 
@@ -92,6 +99,7 @@ class Link extends Component {
 
     return (
       <a
+        ref={forwardedRef}
         href={href}
         style={style}
         onMouseOver={handleMouseOver}
@@ -113,6 +121,7 @@ class Link extends Component {
 }
 
 export default compose(
+  withForwardedRef,
   withToggleState({ key: 'isHover', enable: 'handleMouseOver', disable: 'handleMouseOut' }),
   withToggleState({ key: 'isActive', enable: 'handleMouseDown', disable: 'handleMouseUp' }),
   withToggleState({ key: 'isFocus', enable: 'handleFocus', disable: 'handleBlur' }),
