@@ -1,5 +1,5 @@
-import React from 'react';
-import { shallow, mount } from 'enzyme';
+import React, { createRef } from 'react';
+import { mount } from 'enzyme';
 import Image, {
   LOAD_STATE_IDLE,
   LOAD_STATE_FETCH,
@@ -65,26 +65,27 @@ describe('Image', () => {
   });
 
   test('Non-lazy fetch to done state transition', () => {
-    const image = shallow(
+    const image = mount(
       <Image {...defaultProps} />,
-    ).find('Image').dive();
+    );
 
-    expect(image.state('load')).toBe(LOAD_STATE_FETCH);
+    expect(image.find('Image').state().load).toBe(LOAD_STATE_FETCH);
     expect(image.find('img').props().style.opacity).toBe(0);
     image.find('img').simulate('load');
-    expect(image.state('load')).toBe(LOAD_STATE_DONE);
+    expect(image.find('Image').state().load).toBe(LOAD_STATE_DONE);
     expect(image.find('img').props().style.opacity).toBe(1);
   });
 
   test('Non-lazy fetch to error state transition', () => {
-    const image = shallow(
+    const image = mount(
       <Image {...defaultProps} />,
-    ).find('Image').dive();
+    );
 
-    expect(image.state('load')).toBe(LOAD_STATE_FETCH);
+    expect(image.find('Image').state('load')).toBe(LOAD_STATE_FETCH);
     image.find('img').simulate('error');
-    expect(image.state('load')).toBe(LOAD_STATE_ERROR);
-    expect(image.childAt(0).props().style.opacity).toBe(1);  // Annotation should be visible
+    expect(image.find('Image').state('load')).toBe(LOAD_STATE_ERROR);
+    // Annotation should be visible
+    expect(image.find('Image').childAt(0).childAt(0).props().style.opacity).toBe(1);
   });
 
   test('Lazy idle to fetch state transition with intersection observer', () => {
@@ -92,20 +93,20 @@ describe('Image', () => {
     const mockUnobserve = jest.fn();
 
     window.IntersectionObserver = mockIntersectionObserverFactory(mockObserve, mockUnobserve);
-    const image = mount(shallow(
+    const image = mount(
       <Image
         {...defaultProps}
         lazy
       />,
-    ).get(0));
+    );
 
     expect(mockObserve).toBeCalled();
     expect(mockUnobserve).not.toBeCalled();
-    expect(image.state('load')).toBe(LOAD_STATE_IDLE);
-    image.instance().observer.cb([{ isIntersecting: false }]);
-    expect(image.state('load')).toBe(LOAD_STATE_IDLE);
-    image.instance().observer.cb([{ isIntersecting: true }]);
-    expect(image.state('load')).toBe(LOAD_STATE_FETCH);
+    expect(image.find('Image').state('load')).toBe(LOAD_STATE_IDLE);
+    image.find('Image').instance().observer.cb([{ isIntersecting: false }]);
+    expect(image.find('Image').state('load')).toBe(LOAD_STATE_IDLE);
+    image.find('Image').instance().observer.cb([{ isIntersecting: true }]);
+    expect(image.find('Image').state('load')).toBe(LOAD_STATE_FETCH);
 
     image.unmount();
     expect(mockUnobserve).toBeCalled();
@@ -114,29 +115,29 @@ describe('Image', () => {
   });
 
   test('Lazy idle to fetch state transition without intersection observer', () => {
-    const image = mount(shallow(
+    const image = mount(
       <Image
         {...defaultProps}
         lazy
       />,
-    ).get(0));
+    );
 
     // Lazy load without an intersection observer should be equivalent to a non-lazy load
-    expect(image.state('load')).toBe(LOAD_STATE_FETCH);
+    expect(image.find('Image').state('load')).toBe(LOAD_STATE_FETCH);
 
     image.unmount();
   });
 
   test('Intermediate style', () => {
-    const image = shallow(
+    const image = mount(
       <Image
         {...defaultProps}
         showIntermediate
       />,
-    ).find('Image').dive();
+    );
 
     // Image should always be visible regardless of load state
-    expect(image.state('load')).toBe(LOAD_STATE_FETCH);
+    expect(image.find('Image').state('load')).toBe(LOAD_STATE_FETCH);
     expect(image.find('img').props().style.opacity).toBe(1);
   });
 
@@ -172,5 +173,18 @@ describe('Image', () => {
     );
 
     expect(image.find(Text).props().color).toBe('rgba(0, 0, 0, 0.3)');
+  });
+
+  test('Ref forwarding to underlying img', () => {
+    const ref = createRef();
+    const image = mount(
+      <Image
+        {...defaultProps}
+        ref={ref}
+      />,
+    );
+
+    expect(image.find('img').length).toBe(1);
+    expect(ref.current).toBeDefined();
   });
 });

@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
 import Color from 'color';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import withForwardedRef from '@linkiwi/hoc/hoc/with-forwarded-ref';
 import Text from 'components/text';
 import { transitionStyle } from 'styles/transition';
+import compose from 'util/compose';
 import omit from 'util/omit';
 import withToggleState from 'util/with-toggle-state';
 
@@ -41,6 +43,10 @@ class Image extends Component {
     isHover: PropTypes.bool.isRequired,
     handleMouseEnter: PropTypes.func.isRequired,
     handleMouseLeave: PropTypes.func.isRequired,
+    forwardedRef: PropTypes.oneOfType([
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+      PropTypes.func,
+    ]),
   };
 
   static defaultProps = {
@@ -51,6 +57,7 @@ class Image extends Component {
     showIntermediate: false,
     style: {},
     imgStyle: {},
+    forwardedRef: null,
   };
 
   constructor(props) {
@@ -119,6 +126,7 @@ class Image extends Component {
       handleMouseLeave,
       style: containerOverrides,
       imgStyle: imgOverrides,
+      forwardedRef,
       ...props
     } = this.props;
     const { load } = this.state;
@@ -191,6 +199,7 @@ class Image extends Component {
 
         {isImageMounted && (
           <img
+            ref={forwardedRef}
             alt={alt}
             style={imgStyle}
             onError={this.handleImageError}
@@ -203,8 +212,11 @@ class Image extends Component {
   }
 }
 
-export default withToggleState({
-  key: 'isHover',
-  enable: 'handleMouseEnter',
-  disable: 'handleMouseLeave',
-})(Image);
+export default compose(
+  withForwardedRef,
+  withToggleState({
+    key: 'isHover',
+    enable: 'handleMouseEnter',
+    disable: 'handleMouseLeave',
+  }),
+)(Image);
