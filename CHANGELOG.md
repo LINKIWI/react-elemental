@@ -2,13 +2,17 @@
 
 ## v1.2.2
 
+### Added
+
+* Support ref forwarding to the underlying native DOM element for `Button`, `Checkbox`, `Image`, `Link`, `TextArea`, `TextField`
+* `durations` and `timing` as newly exported transition constants
+
 ### Changed
 
 * `Modal` no longer shows a close icon when non-persistent (this is now abstracted out to the client)
 * `SelectList` inherits parent width more naturally, and no longer requires an explicit numeric width be set
 * `SelectList` supports `inverted` prop, to expand the selection options upwards rather than downwards
 * `Tag` enables transitions, for consistency with other components
-* Support ref forwarding to the underlying native DOM element for `Button`, `Checkbox`, `Image`, `Link`, `TextArea`, `TextField`
 * Standardize transitions across all components with custom easing function
 
 ## v1.2.1

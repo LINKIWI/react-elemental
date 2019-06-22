@@ -21,7 +21,7 @@ const Spinner = ({
 }) => (
   <div
     style={{
-      animation: `spin ${duration}s linear infinite`,
+      animation: `elemental-spinner ${duration}s linear infinite`,
       border: `${thickness}px solid ${ringColor}`,
       borderTop: `${thickness}px solid ${accentColor}`,
       borderRadius: '50%',
@@ -55,7 +55,7 @@ Spinner.defaultProps = {
 export default withCSS({
   key: () => 'elemental:spinner',
   css: () => `
-    @keyframes spin {
+    @keyframes elemental-spinner {
       0% {
         transform: rotate(0deg);
       }
