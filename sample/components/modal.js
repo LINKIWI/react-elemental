@@ -78,7 +78,7 @@ export default class SampleModal extends Component {
                   size="alpha"
                   onHide={this.setVisibility('alpha', false)}
                 >
-                  {<ModalContents />}
+                  <ModalContents />
                 </Modal>
               )
             }
@@ -101,7 +101,7 @@ export default class SampleModal extends Component {
                   size="beta"
                   onHide={this.setVisibility('beta', false)}
                 >
-                  {<ModalContents />}
+                  <ModalContents />
                 </Modal>
               )
             }
@@ -124,7 +124,7 @@ export default class SampleModal extends Component {
                   size="gamma"
                   onHide={this.setVisibility('gamma', false)}
                 >
-                  {<ModalContents />}
+                  <ModalContents />
                 </Modal>
               )
             }
@@ -152,7 +152,7 @@ export default class SampleModal extends Component {
             {
               persistent && (
                 <Modal persistent>
-                  {<ModalContents />}
+                  <ModalContents />
                 </Modal>
               )
             }

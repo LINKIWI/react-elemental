@@ -10,9 +10,10 @@ const gray = {
     const calcGrayRGB = (percentage) => 255 - Math.round(255 * (percentage / 100));
     const grayShade = calcGrayRGB(shadePercent);
 
-    return Object.assign({}, grayShades, {
+    return {
+      ...grayShades,
       [`gray${shadePercent}`]: `rgb(${grayShade}, ${grayShade}, ${grayShade})`,
-    });
+    };
   }, {}),
 };
 
