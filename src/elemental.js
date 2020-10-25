@@ -33,7 +33,7 @@ export default class Elemental extends Component {
     colorOpts: {},
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { fontOpts, colorOpts } = this.props;
 
     // Idempotent bootstrapping by caching initialization state in a global key
