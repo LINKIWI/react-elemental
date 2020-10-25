@@ -55,22 +55,23 @@ export default class Pulsator extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { color = colors.primary } = nextProps;
+  componentDidUpdate(prevProps) {
+    const { color = colors.primary, inactive } = this.props;
+    const { color: prevColor = colors.primary, inactive: prevInactive } = prevProps;
 
-    if (this.props.inactive && !nextProps.inactive) {
-      this.setState({ color: this.idleColor });
+    // Transition: inactive -> active
+    if (prevInactive && !inactive) {
       this.startPulsation();
     }
 
-    if (!this.props.inactive && nextProps.inactive) {
-      // If turning off pulsation, we should also reset the color back to the prop-specified color.
-      this.setState({ color });
-      clearInterval(this.interval);
+    // Transition: active -> inactive
+    if (!prevInactive && inactive) {
+      this.stopPulsation();
     }
 
-    if (this.props.color !== color) {
-      this.setState({ color });
+    // Color changes should be effected immediately
+    if (prevColor !== color) {
+      this.setState({ color });  // eslint-disable-line react/no-did-update-set-state
     }
   }
 
@@ -79,7 +80,16 @@ export default class Pulsator extends Component {
   }
 
   startPulsation = () => {
+    this.setState({ color: this.idleColor });
     this.interval = setInterval(this.tick, PULSATION_INTERVAL);
+  };
+
+  stopPulsation = () => {
+    const { color = colors.primary } = this.props;
+
+    // If turning off pulsation, we should also reset the color back to the prop-specified color.
+    this.setState({ color });
+    clearInterval(this.interval);
   };
 
   tick = () => {

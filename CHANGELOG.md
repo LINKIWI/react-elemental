@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.3
+
+### Changed
+
+* Forward compatibility with breaking changes introduced in React 17
+
 ## v1.2.2
 
 ### Added
