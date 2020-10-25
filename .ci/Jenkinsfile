@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'docker.internal.kevinlin.info/infra/ci-base:0.2.3'
+            image 'docker.internal.kevinlin.info/infra/ci-base:0.3.0'
             label 'docker-executor'
         }
     }
@@ -15,19 +15,8 @@ pipeline {
 
     stages {
         stage('Install') {
-            parallel {
-                stage('Library') {
-                    steps {
-                        sh 'npm-s3 install'
-                    }
-                }
-                stage('Sample') {
-                    steps {
-                        sh 'cd sample/ && npm-s3 install'
-                        sh 'rm -rf sample/node_modules/react-elemental'
-                        sh 'ln -s ../.. sample/node_modules/react-elemental'
-                    }
-                }
+            steps {
+                sh 'npm-s3 install'
             }
         }
         stage('Test') {
@@ -49,26 +38,17 @@ pipeline {
                 }
             }
         }
-        stage('Site') {
-            environment {
-                NODE_ENV = 'production'
-            }
+        stage('Build') {
             steps {
-                sh 'cd sample/ && npm run build'
+                sh 'npm run prepublish'
+                sh 'cd lib/ && npm pack'
             }
         }
         stage('Release') {
-            environment {
-                MC_HOST_storage = "https://${env.AWS_ACCESS_KEY_ID}:${env.AWS_SECRET_ACCESS_KEY}@${env.AWS_ENDPOINT_URL.substring(8)}"
-                DEPLOY_URL = 'react-elemental.static.kevinlin.info'
-                VERSION_SHA = "${GIT_COMMIT}"
-            }
             steps {
-                sh 'mkdir release/'
-                sh "echo ${DEPLOY_URL} > release/CNAME"
-                sh 'cp sample/dist/index.html release/'
-                sh "mc cp -r storage/resources/${env.JOB_NAME}/images/ release/images/"
-                sh 'tar -C release/ -cvzf release.tar.gz ./'
+                sh "mkdir -p releases/${env.GIT_COMMIT}/"
+                sh "cp -v lib/*.tgz releases/${env.GIT_COMMIT}/package.tgz"
+                sh 'tar -cvzf release.tar.gz releases/'
                 s3Upload(
                     bucket: 'internal',
                     path: "deploy/${env.JOB_NAME}/${env.GIT_COMMIT}/",
@@ -77,27 +57,19 @@ pipeline {
             }
         }
         stage('Deploy') {
-            environment {
-                GITHUB_REMOTE = 'git@github.com:LINKIWI/react-elemental-static.git'
-            }
             steps {
-                sh 'git fetch --all'
-                sh 'git checkout -f static'
-                sh 'git reset --hard origin/static'
-                sh 'git rm -rf .'
-                sh 'git clean -fxd'
-                s3Download(
-                    bucket: 'internal',
-                    path: "deploy/${env.JOB_NAME}/${env.GIT_COMMIT}/release.tar.gz",
-                    file: 'release.tar.gz',
+                build(
+                    job: 'task--static-deploy',
+                    parameters: [
+                        string(name: 'RELEASE_ARTIFACT', value: "${env.JOB_NAME}"),
+                        string(name: 'RELEASE_VERSION', value: "${env.GIT_COMMIT}"),
+                        string(name: 'DOMAIN', value: 'react-elemental.static.kevinlin.info'),
+                        string(name: 'GIT_REMOTE_INTERNAL', value: "${env.GIT_URL}"),
+                        string(name: 'GIT_REMOTE_GITHUB', value: 'git@github.com:LINKIWI/react-elemental-static.git'),
+                        booleanParam(name: 'CLEAN_DEPLOY', value: false),
+                    ],
+                    wait: true,
                 )
-                sh 'tar xvf release.tar.gz'
-                sh 'rm release.tar.gz'
-                sh 'git add -A'
-                sh "git commit --no-verify -m \"[automatic commit] ${GIT_BRANCH}:${GIT_COMMIT}\" || :"
-                sh "git remote add github ${GITHUB_REMOTE}"
-                sh 'git push origin HEAD'
-                sh 'git push github HEAD:master'
             }
         }
     }
