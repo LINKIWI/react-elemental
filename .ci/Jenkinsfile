@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'docker.internal.kevinlin.info/infra/ci-base:0.3.0'
+            image 'docker.internal.kevinlin.info/infra/ci-base:0.3.5'
             label 'docker-executor'
         }
     }
@@ -46,9 +46,8 @@ pipeline {
         }
         stage('Release') {
             steps {
-                sh "mkdir -p releases/${env.GIT_COMMIT}/"
-                sh "cp -v lib/*.tgz releases/${env.GIT_COMMIT}/package.tgz"
-                sh 'tar -cvzf release.tar.gz releases/'
+                sh 'mv -v lib/*.tgz release.tgz'
+                sh 'tar -cvzf release.tar.gz release.tgz'
                 s3Upload(
                     bucket: 'internal',
                     path: "deploy/${env.JOB_NAME}/${env.GIT_COMMIT}/",
@@ -59,14 +58,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 build(
-                    job: 'task--static-deploy',
+                    job: 'task--js-library',
                     parameters: [
-                        string(name: 'RELEASE_ARTIFACT', value: "${env.JOB_NAME}"),
-                        string(name: 'RELEASE_VERSION', value: "${env.GIT_COMMIT}"),
-                        string(name: 'DOMAIN', value: 'react-elemental.static.kevinlin.info'),
-                        string(name: 'GIT_REMOTE_INTERNAL', value: "${env.GIT_URL}"),
-                        string(name: 'GIT_REMOTE_GITHUB', value: 'git@github.com:LINKIWI/react-elemental-static.git'),
-                        booleanParam(name: 'CLEAN_DEPLOY', value: false),
+                        string(name: 'RELEASE_ARTIFACT', value: env.JOB_NAME),
+                        string(name: 'RELEASE_VERSION', value: env.GIT_COMMIT),
+                        string(name: 'PACKAGE_NAME', value: env.JOB_NAME),
+                        string(name: 'PACKAGE_VERSION', value: env.GIT_COMMIT),
                     ],
                     wait: true,
                 )
