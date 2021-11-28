@@ -147,7 +147,7 @@ class Image extends Component {
       overflow: 'hidden',
       position: 'relative',
       width,
-      ...transitionStyle('background-color', 'gamma'),
+      ...transitionStyle('background-color', 'epsilon'),
       ...containerOverrides,
     };
 
@@ -173,8 +173,8 @@ class Image extends Component {
       height,
       opacity: (showIntermediate ? isImageMounted : isImageLoaded) ? 1 : 0,
       transition: [
-        transitionStyle('filter', 'gamma').transition,
-        transitionStyle('opacity', 'gamma').transition,
+        transitionStyle('filter', 'epsilon').transition,
+        transitionStyle('opacity', 'epsilon').transition,
       ].join(', '),
       width,
       ...imgOverrides,

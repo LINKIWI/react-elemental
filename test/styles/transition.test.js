@@ -7,6 +7,7 @@ describe('Transition', () => {
       'beta',
       'gamma',
       'epsilon',
+      'iota',
     ];
 
     names.forEach((name) => expect(durations[name]).toBeDefined());
@@ -23,10 +24,10 @@ describe('Transition', () => {
 
   test('Transition style factory', () => {
     expect(transitionStyle()).toEqual({
-      transition: `all ${durations.beta} ${timing.default}`,
+      transition: `all ${durations.gamma} ${timing.default}`,
     });
     expect(transitionStyle('property')).toEqual({
-      transition: `property ${durations.beta} ${timing.default}`,
+      transition: `property ${durations.gamma} ${timing.default}`,
     });
     expect(transitionStyle('property', 'alpha')).toEqual({
       transition: `property ${durations.alpha} ${timing.default}`,

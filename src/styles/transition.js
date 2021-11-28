@@ -1,8 +1,9 @@
 export const durations = {
-  alpha: '120ms',
-  beta: '170ms',
-  gamma: '220ms',
-  epsilon: '270ms',
+  alpha: '80ms',
+  beta: '120ms',
+  gamma: '170ms',
+  epsilon: '220ms',
+  iota: '270ms',
 };
 
 export const timing = {
@@ -21,7 +22,7 @@ export const timing = {
  */
 export const transitionStyle = (
   property = 'all',
-  duration = 'beta',
+  duration = 'gamma',
   timingFunc = 'default',
 ) => ({
   transition: [
