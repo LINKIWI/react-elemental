@@ -77,6 +77,7 @@ class Link extends Component {
 
     const borderSize = type === 'plain' ? '0' : '2px';
     const style = {
+      borderBottom: '0 solid currentColor',
       color: 'currentColor',
       opacity: 0.8,
       textDecoration: 'none',

@@ -22,7 +22,7 @@ describe('Link', () => {
       </Link>,
     );
 
-    expect(link.find('a').props().style.borderBottom).toBeUndefined();
+    expect(link.find('a').props().style.borderBottom).toBe('0 solid currentColor');
     expect(link.find('a').props().style.color).toBe('currentColor');
     link.find('a').simulate('mouseover');
     expect(link.find('a').props().style.borderBottom).toBe('2px solid currentColor');
@@ -32,7 +32,7 @@ describe('Link', () => {
     link.find('a').simulate('mouseup');
     expect(link.find('a').props().style.color).toBe('currentColor');
     link.find('a').simulate('mouseout');
-    expect(link.find('a').props().style.borderBottom).toBeUndefined();
+    expect(link.find('a').props().style.borderBottom).toBe('0 solid currentColor');
   });
 
   test('Plain type', () => {
@@ -42,7 +42,7 @@ describe('Link', () => {
       </Link>,
     );
 
-    expect(link.find('a').props().style.borderBottom).toBeUndefined();
+    expect(link.find('a').props().style.borderBottom).toBe('0 solid currentColor');
     expect(link.find('a').props().style.color).toBe('currentColor');
     link.find('a').simulate('mouseover');
     expect(link.find('a').props().style.borderBottom).toBe('0 solid currentColor');
