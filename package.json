@@ -1,6 +1,6 @@
 {
   "name": "react-elemental",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Flat UI library for React",
   "main": "lib/index.js",
   "scripts": {
