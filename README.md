@@ -1,10 +1,5 @@
 ![react-elemental](https://static.kevinlin.info/blog/react-elemental/banner.png)
 
-[![npm version](https://badge.fury.io/js/react-elemental.svg)](https://badge.fury.io/js/react-elemental)
-[![Build Status](https://travis-ci.org/LINKIWI/react-elemental.svg?branch=master)](https://travis-ci.org/LINKIWI/react-elemental)
-[![Coverage Status](https://coveralls.io/repos/github/LINKIWI/react-elemental/badge.svg?branch=master)](https://coveralls.io/github/LINKIWI/react-elemental?branch=master)
-[![Dependencies](https://david-dm.org/LINKIWI/react-elemental.svg)](https://david-dm.org/LINKIWI/react-elemental)
-
 **React Elemental** is a modern, flat UI library built for React. It is built for maximum development velocity: there is no CSS to import and no additional parameters to add to your Webpack configuration. React Elemental has first-class support for ES6/JSX and works effortlessly with SSR.
 
 See the [official documentation site](https://react-elemental-docs.static.kevinlin.info) for demos, examples, and detailed documentation for each available UI component.
@@ -14,13 +9,8 @@ See the [official documentation site](https://react-elemental-docs.static.kevinl
 ## Installation
 
 ```bash
-$ npm install --save react-elemental
+$ npm install --save https://lib.kevinlin.info/react-elemental/<commit hash>/release.tgz
 ```
-
-Note that the Elemental fonts are not bundled directly with the component library. This cuts down
-the size of `react-elemental` and allows you to inject fonts of your choosing into the library. To
-use the standard Elemental fonts, see the installation instructions of
-[`react-elemental-fonts`](https://www.npmjs.com/package/react-elemental-fonts).
 
 ## Usage
 
